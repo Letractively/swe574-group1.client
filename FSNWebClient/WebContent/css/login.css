@@ -1,0 +1,43 @@
+* {margin:0;padding:0}
+/* mac hide \*/
+html,body{
+	height:100%;width:100%;
+}
+/* end hide */
+body { 
+	font-size:62.5%;
+	font-family: arial,verdana,sans-serif;
+	color:#000000;
+	background: url(../images/bg-body.jpg) no-repeat top center #668CBB;
+	text-align:center;
+	min-height:468px;/* for good browsers*/
+	min-width:552px;/* for good browsers*/
+}
+#outer{
+	font-size:1.2em;
+	height:100%;
+	width:100%;
+	display:table;
+	vertical-align:middle;
+}
+#container {
+	text-align: center;
+	position:relative;
+	vertical-align:middle;
+	display:table-cell;
+	height: 468px;
+}	
+#inner {
+	width: 300px;
+	text-align: left;
+	margin-left:auto;
+	margin-right:auto;
+	background-color: #FFFFFF;
+	padding:10px;
+	border-bottom:2px solid #93CCFF;
+	border-top:2px solid #F46806;
+}
+
+#inner form table tr td{
+	padding:5px;
+}

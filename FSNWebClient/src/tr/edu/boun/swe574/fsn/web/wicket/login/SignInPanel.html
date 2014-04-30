@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:wicket="http://wicket.apache.org">
+<body>
+	<wicket:panel>
+		<br />
+		<div wicket:id="feedBackPanel"></div>
+		<form wicket:id="signInForm" id="LoginFrm">
+			<table width="340px" border="0" cellpadding="0" cellspacing="5">
+				<tr>
+					<td colspan="2">	
+						<div style="text-align:center; font-size: 17px;">Login to:</div>			
+						<div style="text-align:center; font-size: 28px; padding-top:5px; padding-bottom: 20px;">
+							Food Social Network <br />
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td width="150px"><span  style="font-size: 14px;" class="textHeader">E-mail :</span></td>
+					<td width="190px"><label for="username"></label> <input
+						wicket:id="username" name="username" type="text" 
+						id="textf1" value="Username" /></td>
+				</tr>
+				<tr>
+					<td width="50px"><span  style="font-size: 14px;" class="textHeader">Password :</span></td>
+					<td width="240px"><input wicket:id="password" type="password"
+						id="password" value="password" /></td>
+				</tr>
+			</table>
+
+			<table width="340px" border="0" cellpadding="0" cellspacing="5">
+
+				<tr>
+					<td width="190px"></td>
+
+					<td width="50px"><a class="btn blue done" id="loginBt"
+						style="cursor: pointer;" wicket:id="loginLink"> <i></i> <span>
+								<i></i> <span></span> login </span> </a>
+					</td>
+
+					<td width="100px"><a class="btn red done" id="resetBt"
+						style="cursor: pointer;" wicket:id="resetLink"> <i></i> <span>
+								<i></i> <span></span> reset </span> </a>
+					</td>
+
+				</tr>
+			</table>
+		</form>
+		<br/><br/>
+		<form wicket:id="cuForm" id="cuserForm">
+			<table width="340px" border="0" cellpadding="0" cellspacing="5">
+				<tr>
+
+					<td align="left" style="font-size: 16px;">
+								Register by hitting <a  wicket:id="lnkCreateUser" style="color:#0000FF; font-size: 18px;">here</a>, if you have not registered yet...
+							
+					</td>
+
+				</tr>
+			</table>
+		</form>
+	</wicket:panel>
+</body>
+</html>
