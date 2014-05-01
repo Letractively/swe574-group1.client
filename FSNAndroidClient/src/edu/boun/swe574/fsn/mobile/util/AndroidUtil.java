@@ -1,4 +1,4 @@
-package com.boun.swe.fsn.util;
+package edu.boun.swe574.fsn.mobile.util;
 
 import android.app.Activity;
 import android.view.View;

@@ -1,11 +1,10 @@
-package com.boun.swe.fsn.task.async;
+package edu.boun.swe574.fsn.mobile.task.async;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
-
-import com.boun.swe.fsn.task.ITaskListener;
-import com.boun.swe.fsn.task.TaskResultType;
+import edu.boun.swe574.fsn.mobile.task.ITaskListener;
+import edu.boun.swe574.fsn.mobile.task.TaskResultType;
 
 public class LoginTask<T extends Activity & ITaskListener> extends AsyncTask<String, Void, Boolean> {
 

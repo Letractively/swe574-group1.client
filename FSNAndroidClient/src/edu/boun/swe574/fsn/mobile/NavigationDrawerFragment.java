@@ -1,4 +1,4 @@
-package com.boun.swe.fsn;
+package edu.boun.swe574.fsn.mobile;
 
 import com.boun.swe.foodsocialnetwork.R;
 

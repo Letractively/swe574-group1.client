@@ -1,4 +1,4 @@
-package com.boun.swe.fsn;
+package edu.boun.swe574.fsn.mobile;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -15,7 +15,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.boun.swe.foodsocialnetwork.R;
-import com.boun.swe.fsn.context.FSNUserContext;
+
+import edu.boun.swe574.fsn.mobile.context.FSNUserContext;
 
 public class MainActivity extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 

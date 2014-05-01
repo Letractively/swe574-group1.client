@@ -1,4 +1,4 @@
-package com.boun.swe.fsn.task;
+package edu.boun.swe574.fsn.mobile.task;
 
 
 public interface ITaskListener {

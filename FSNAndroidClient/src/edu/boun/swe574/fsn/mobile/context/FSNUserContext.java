@@ -1,4 +1,4 @@
-package com.boun.swe.fsn.context;
+package edu.boun.swe574.fsn.mobile.context;
 
 import android.content.Context;
 import android.content.SharedPreferences;

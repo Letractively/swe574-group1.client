@@ -1,4 +1,4 @@
-package com.boun.swe.fsn;
+package edu.boun.swe574.fsn.mobile;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,11 +9,12 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.boun.swe.foodsocialnetwork.R;
-import com.boun.swe.fsn.context.FSNUserContext;
-import com.boun.swe.fsn.task.ITaskListener;
-import com.boun.swe.fsn.task.TaskResultType;
-import com.boun.swe.fsn.task.async.LoginTask;
-import com.boun.swe.fsn.util.AndroidUtil;
+
+import edu.boun.swe574.fsn.mobile.context.FSNUserContext;
+import edu.boun.swe574.fsn.mobile.task.ITaskListener;
+import edu.boun.swe574.fsn.mobile.task.TaskResultType;
+import edu.boun.swe574.fsn.mobile.task.async.LoginTask;
+import edu.boun.swe574.fsn.mobile.util.AndroidUtil;
 
 public class LoginActivity extends Activity implements ITaskListener {
 	/****************************************** LIFECYLCE **********************************************/

@@ -1,4 +1,4 @@
-package com.boun.swe.fsn.util;
+package edu.boun.swe574.fsn.mobile.util;
 
 /**
  * Miscellaneous {@link String} utility methods. This class is based on code from Spring
