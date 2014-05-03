@@ -1,5 +1,8 @@
 package edu.boun.swe574.fsn.mobile.util;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 /**
  * Miscellaneous {@link String} utility methods. This class is based on code from Spring
  */
@@ -334,5 +337,24 @@ public abstract class StringUtil {
 		}
 		return buf.toString();
 	}
+	
+    public static String toMD5(String data) {
+        try {
+            MessageDigest m = MessageDigest.getInstance("MD5");
+            m.update(data.getBytes(), 0, data.length());
+            byte messageDigest[] = m.digest();
+            StringBuilder hexString = new StringBuilder();
+            for (int i = 0; i < messageDigest.length; i++) {
+                String hex = Integer.toHexString(0xff & messageDigest[i]);
+                if (hex.length() == 1) {
+                    hexString.append('0');
+                }
+                hexString.append(hex);
+            }
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException ex) {
+            return null;
+        }
+    }
 
 }

@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import edu.boun.swe574.fsn.mobile.task.ITaskListener;
 import edu.boun.swe574.fsn.mobile.task.TaskResultType;
+import edu.boun.swe574.fsn.mobile.util.StringUtil;
 
 public class LoginTask<T extends Activity & ITaskListener> extends AsyncTask<String, Void, Boolean> {
 
@@ -31,19 +32,21 @@ public class LoginTask<T extends Activity & ITaskListener> extends AsyncTask<Str
 
 	@Override
 	protected Boolean doInBackground(String... args) {
-		try {
-			if (args != null && args.length == 2) {
-				if (args[0] != null && !args[0].isEmpty()) {
-					if (args[1] != null && args[1].length() == 3) {
-						Thread.sleep(3000); // TODO do the real authorization
-						return true;
-					}
-				}
+		if (args != null && args.length == 2) {
+			if (StringUtil.hasText(args[0]) && StringUtil.hasText(args[1])) {
+				String email = args[0];
+				// String password = StringUtil.toMD5(args[1]);
+				String password = args[1];
+				// LoginResponse response = FSNAuthService.login(email, password);
+				// if (response != null && response.getResultCode() == 0 && StringUtil.hasText(response.getToken())) {
+				// FSNUserContext.getInstance(this.executor).setEmail(email);
+				// FSNUserContext.getInstance(this.executor).setLoggedIn(true);
+				// FSNUserContext.getInstance(this.executor).setToken(response.getToken());
+				// }
+				return true;
 			}
-			return false;
-		} catch (InterruptedException e) {
-			return false;
 		}
+		return false;
 	}
 
 	@Override

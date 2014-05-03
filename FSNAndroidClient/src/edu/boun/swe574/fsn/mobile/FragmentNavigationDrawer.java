@@ -26,7 +26,7 @@ import android.widget.Toast;
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer. See the <a href="https://developer.android.com/design/patterns/navigation-drawer.html#Interaction"> design guidelines</a> for a complete explanation of the behaviors implemented here.
  */
-public class NavigationDrawerFragment extends Fragment {
+public class FragmentNavigationDrawer extends Fragment {
 
 	/**
 	 * Remember the position of the selected item.
@@ -47,22 +47,16 @@ public class NavigationDrawerFragment extends Fragment {
 	 * Helper component that ties the action bar to the navigation drawer.
 	 */
 	private ActionBarDrawerToggle mDrawerToggle;
-
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerListView;
 	private View mFragmentContainerView;
-
 	private int mCurrentSelectedPosition = 0;
 	private boolean mFromSavedInstanceState;
 	private boolean mUserLearnedDrawer;
 
-	public NavigationDrawerFragment() {
-	}
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		// Read in the flag indicating whether or not the user has demonstrated awareness of the
 		// drawer. See PREF_USER_LEARNED_DRAWER for details.
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
@@ -158,8 +152,7 @@ public class NavigationDrawerFragment extends Fragment {
 							// The user manually opened the drawer; store this flag to prevent auto-showing
 							// the navigation drawer automatically in the future.
 							mUserLearnedDrawer = true;
-							SharedPreferences sp = PreferenceManager
-									.getDefaultSharedPreferences(getActivity());
+							SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
 							sp.edit().putBoolean(PREF_USER_LEARNED_DRAWER, true).apply();
 						}
 
