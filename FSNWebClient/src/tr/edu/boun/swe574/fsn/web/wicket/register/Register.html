@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:wicket="http://wicket.apache.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Register</title>
+<link href="css/femtoapp.css" rel="stylesheet" type="text/css" />
+<link href="css/buttonElements.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="script/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="script/jquery-jconfirmaction.js"></script>
+<script type="text/javascript" src="script/jquery-tooltip.js"></script>
+<script type="text/javascript" src="script/jquery-cookie.js"></script>
+<script type="text/javascript" src="script/login.js"></script>
+</head>
+<body>
+	<div id="mainContainer">
+		<div id="loginContainer">
+			<table width="360" border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td width="12"><img src="images/solUst.png" width="12"
+						height="12" />
+					</td>
+					<td width="336" bgcolor="#FFFFFF"></td>
+					<td width="12"><img src="images/sagUst.png" width="12"
+						height="12" />
+					</td>
+				</tr>
+			</table>
+			<div id="loginForm">
+				
+				<br />
+				
+					<div wicket:id="feedBackPanel"></div>
+		<form wicket:id="form" id="LoginFrm">
+			<table width="340px" border="0" cellpadding="0" cellspacing="5" align="center">
+				<tr>
+					<td colspan="2">
+					<div style="text-align:center; font-size: 17px;">Register with:</div>				
+					<div style="text-align:center; font-size: 28px; padding-top:5px; padding-bottom: 20px;">
+					
+					<span align="center"><a href="" wicket:id="lnkHome">Food Social Network</a></span>
+					<br />
+				</div></td>
+				</tr>
+				<tr>
+					<td colspan="2">				<div style="text-align:center; font-size: 18px; padding-top:0px; padding-bottom: 00px;">
+					
+					<span align="center"></span>
+					
+				</div></td>
+				</tr>
+				<tr>
+					<td width="150px"><span style="font-size: 14px;"  class="textHeader">First Name:</span></td>
+					<td width="190px"> <input
+						wicket:id="txtFirstName" name="firstName" type="text" 
+						id="textf1" value="firstName" maxlength="100"/></td>
+				</tr>
+				<tr>
+					<td width="150px"><span style="font-size: 14px;" class="textHeader">Last Name:</span></td>
+					<td width="190px"><input
+						wicket:id="txtLastName" name="lastName" type="text" 
+						id="textf1" value="lastName" maxlength="100"/></td>
+				</tr>
+				<tr>
+					<td width="150px"><span style="font-size: 14px;" class="textHeader">E-mail:</span></td>
+					<td width="190px"><label for="username"></label> <input
+						wicket:id="txtEmail" name="username" type="text" 
+						id="textf1" value="Username" maxlength="100"/></td>
+				</tr>
+				<tr>
+					<td width="50px"><span style="font-size: 14px;" class="textHeader">Password :</span></td>
+					<td width="240px"><input wicket:id="txtPassword" type="password"
+						 id="password" value="password" maxlength="10" /></td>
+				</tr>
+				<tr>
+					<td width="50px"><span style="font-size: 14px;" class="textHeader">Password Again :</span></td>
+					<td width="240px"><input wicket:id="txtPasswordAgain" type="password"
+						 id="passwordAgain" value="passwordAgain" maxlength="10" /></td>
+				</tr>
+			</table>
+
+
+			<table width="340px" border="0" cellpadding="0" cellspacing="5" align="center">
+
+				<tr>
+					<td width="190px"></td>
+
+
+					<td width="50px"><a class="btn blue done" id="loginBt"
+						style="cursor: pointer;" wicket:id="lnkCreate"> <i></i> <span>
+								<i></i> <span></span> Register </span> </a>
+					</td>
+
+					<td width="100px"><a class="btn red done" id="resetBt"
+						style="cursor: pointer;" wicket:id="lnkReset"> <i></i> <span>
+								<i></i> <span></span> reset </span> </a>
+					</td>
+
+				</tr>
+			</table>
+		</form>
+		<br />
+		
+		<form wicket:id="cuForm" id="cuserForm">
+			<table width="340px" border="0" cellpadding="0" cellspacing="5">
+				<tr>
+
+					<td align="left" style="font-size: 16px;">
+								Proceed with signing into the platform by hitting <a  wicket:id="lnkLogin" style="color:#0000FF; font-size: 18px;">here</a>...
+							
+					</td>
+
+				</tr>
+			</table>
+		</form>
+		
+		
+				
+				<div id="clear"></div>
+			</div>
+			<div id="clear"></div>
+			<table width="360" border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td width="12"><img src="images/solAlt.png" width="12"
+						height="12" />
+					</td>
+					<td width="336" bgcolor="#FFFFFF"></td>
+					<td width="12"><img src="images/sagAlt.png" width="12"
+						height="12" />
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</body>
+</html>
+
+

@@ -1,0 +1,165 @@
+.formTable td{
+	vertical-align: middle;
+	height:20px;
+	padding:2px;
+	font-weight: bold;
+	vertical-align: top;
+}
+
+.formTable th{
+	text-align:center;
+}
+
+input.text, input.file, textarea.textarea, select.select{
+	margin:0;
+	color:#333;
+}
+input.text, textarea.textarea, .firefox select.select{
+	border-top:1px solid #7c7c7c;
+	border-left:1px solid #c3c3c3;
+	border-right:1px solid #c3c3c3;
+	border-bottom:1px solid #ddd;
+}
+input.text, input.file{
+	padding:2px 0 2px 0;
+}
+input.checkbox, input.radio{
+	display:block;
+	width:13px;
+	height:13px;
+}
+textarea.textarea{
+	font-family:"Lucida Grande", Tahoma, Arial, sans-serif;
+	font-size:1.2em;
+}
+select.select{
+	font-family:"Lucida Grande", Tahoma, Arial, sans-serif;
+	margin:1px 0;
+	padding:1px 0 0 0;
+}
+select.select[class]{
+	margin:0;
+	padding:1px 0 1px 0;
+}
+*:first-child+html select.select[class]{
+	margin:1px 0;
+}
+.safari select.select{
+	margin-bottom:1px;
+	font-size:120% !important;
+}
+input.btTxt{
+	padding:0 7px;
+	width:auto;
+	overflow:visible;
+}
+/* ----- TEXT DIRECTION ----- */
+.rtl input.text, 
+.rtl textarea.textarea, .rtl select.select, .rtl p.instruct, 
+.rtl .section h3, .rtl .section p, .rtl input.btTxt{
+	direction:rtl;
+}
+input.small, select.small,textarea.small{
+	width:25%;
+}
+input.medium, select.medium,textarea.medium{
+	width:50%;
+}
+input.large, select.large,textarea.large{
+	width:100%;
+}
+textarea.hsmall{
+	height:5.5em;
+}
+textarea.hmedium{
+	height:10em;
+}
+textarea.hlarge{
+	height:20em;
+}
+
+/* Wicket Auto Complete */
+div.wicket-aa {
+	font-family: "Lucida Grande","Lucida Sans Unicode",Tahoma,Verdana;
+	font-size: 12px;
+	background-color: white;
+	border-width: 1px;
+	border-color: #cccccc;
+	border-style: solid;
+	padding: 2px;
+	margin: 1px 0 0 0;
+	text-align:left;
+}
+
+div.wicket-aa ul { 
+	list-style:none; padding: 2px; margin:0; 
+}
+
+div.wicket-aa ul li.selected { 
+	background-color: #FF9950; padding: 2px; margin:0; 
+}
+
+.content_red {
+	color:red;
+}
+
+/* Misc */
+.down-arr { 
+	background-color: white;
+	background-image: url(../images/down_arrow.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 32px;
+	height: 32px;
+}
+
+.up-arr {
+	background-color: white;
+	background-image: url(../images/up_arrow.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 32px;
+	height: 32px;
+}
+
+.priority-tbl tr td {
+	font-size: 12px;
+	vertical-align:middle;
+}
+
+.content-div {
+	width:100%;
+	min-height:500px;
+	height:100%;
+	padding-bottom:10px;
+}
+
+.table-td-left {
+	width:15%;
+}
+
+.table-td-right {
+	width:85%;
+}
+
+.datatable-state-td {
+	width:100px;
+}
+
+.datatable-date-td {
+	width:50px;
+}
+
+.datatable-customerType-td {
+	width:80px;
+}
+
+.datatable-marketingQuestionType-td {
+	width:200px;
+	text-align:center;
+}
+
+.datatable-marketingQuestion-td {
+	width:200px;
+	text-align:center;
+}

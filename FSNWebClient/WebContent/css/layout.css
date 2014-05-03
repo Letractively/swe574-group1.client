@@ -1,0 +1,407 @@
+body {
+	font: 12px Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif;
+	background: url(../images/bg-body.jpg) no-repeat top center #668CBB;
+	color: #333333;
+	font-size: 11px;
+	padding: 0 0 40px;
+	margin-top: 10px;
+}
+
+/* common class
+----------------------------------------------- */
+.kapsul:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+
+.kapsul {
+	display: inline-block;
+}
+/*IE-mac de bu bolumu sakla \ */
+* html .kapsul {
+	height: 1%;
+}
+
+.kapsul {
+	display: block;
+}
+/* IE-mac bu bolumu saklam artik */
+.miniCombobox {
+	font-size: 12px;
+}
+
+.rankTdField {
+	width: 100px;
+	text-align: center;
+}
+
+/* anchors
+----------------------------------------------- */
+a,.myLink {
+	color: #000;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+a:hover,.myLink:hover {
+	color: #333;
+}
+
+/* 960 grid system container background
+----------------------------------------------- */
+#container {
+	background: #fff;
+	border-top: 0px solid #F46806;
+	border-bottom: 0px solid #93CCFF;
+}
+/* headings
+----------------------------------------------- */
+h1 a {
+	font-weight: normal;
+}
+
+fieldset {
+	padding: 10px;
+	border-top: 1px solid #CCCCCC;
+}
+
+fieldset legend {
+	padding: 5px;
+	color: #CC0000;
+	font-size: 1.6em;
+	font-weight: normal;
+}
+
+form table.small {
+	width: 25%;
+}
+
+form table.medium {
+	width: 50%;
+}
+
+form table.large {
+	width: 100%;
+}
+
+table.small {
+	width: 25%;
+}
+
+table.medium {
+	width: 50%;
+}
+
+table.mediumPlus {
+	width: 75%;
+}
+table.large {
+	width: 100%;
+}
+
+table.grey {
+	margin-bottom: 10px;
+}
+
+table.grey thead tr th {
+	background: url(../images/bg-table-head-middle-grey.gif) repeat-x top
+		left;
+	height: 32px;
+	vertical-align: middle;
+	text-align: left;
+	/*text-align:center; */
+	padding-left: 5px;
+}
+
+table.grey thead tr th.leftCol {
+	background: url(../images/bg-table-head-left-grey.gif) no-repeat top
+		left;
+}
+
+table.grey thead tr th.rightCol {
+	background: url(../images/bg-table-head-right-grey.gif) no-repeat top
+		right;
+}
+
+table.grey tbody tr td {
+	border-bottom: 1px solid #e9e9e9;
+	padding: 5px 0px 5px 5px;
+}
+
+table.grey thead tr th.leftColLeftText {
+	background: url(../images/bg-table-head-left-grey.gif) no-repeat top
+		left;
+	text-align: left;
+}
+
+table.grey thead tr th.rightColLeftText {
+	background: url(../images/bg-table-head-right-grey.gif) no-repeat top
+		right;
+	text-align: left;
+}
+
+table.grey thead tr th.colLeftText {
+	text-align: left;
+}
+
+table.grei {
+	margin-bottom: 10px;
+	text-align:center;
+}
+
+table.grei thead tr th {
+	height: 32px;
+	vertical-align: middle;
+	/* text-align: left; */
+	padding-left: 5px;
+}
+
+
+
+table.grei tbody tr td {
+	border-bottom: 1px solid #e9e9e9;
+	padding: 5px 0px 5px 5px;
+}
+
+th.checkbox {
+	width: 32px !important;
+}
+
+th.action {
+	width: 32px !important;
+}
+
+th.xsmall {
+	width: 10%;
+}
+
+th.small {
+	width: 25%;
+}
+
+th.medium {
+	width: 50%;
+}
+
+th.large {
+	width: 75%;
+}
+
+th.xlarge {
+	width: 100%;
+}
+
+td.top {
+	vertical-align: top;
+}
+
+td.middle {
+	vertical-align: middle !important;
+}
+
+td.bottom {
+	vertical-align: text-bottom;
+}
+
+td.left {
+	text-align: left;
+}
+
+td.right {
+	text-align: right;
+}
+
+td.center {
+	text-align: center;
+}
+
+#header {
+	padding: 10px 0px 10px 0px;
+	border-bottom: 2px solid #CCCCCC;
+	margin-bottom: 10px;
+}
+
+#loginPanel {
+	text-align: right;
+}
+
+#top-nav {
+	margin-top: 50px;
+}
+
+#top-nav li {
+	float: left;
+	list-style: none;
+	margin-right: 5px;
+}
+
+#top-nav li a {
+	padding: 10px;
+	background-color: #CCCCCC;
+}
+
+#top-nav li a:hover {
+	color: #FFFFFF;
+}
+
+.buttons {
+	margin-top: 10px;
+	list-style: none;
+}
+
+.buttons li {
+	float: left;
+	margin-right: 15px;
+	list-style: none;
+	list-style-type: : none;
+}
+
+.question {
+	position: absolute;
+	display: inline;
+	text-align: center;
+	width: 174px;
+	height: 78px;
+	font-size: 13px;
+	line-height: 1.5em;
+	background: url('../images/bubble.png') left top no-repeat;
+	padding: 10px 0 0 0;
+	text-shadow: 0px 1px 0px #fff;
+	margin-left: -7em;
+	margin-top: -6em;
+	opacity: 0;
+}
+
+.yes,.cancel {
+	margin-top: .5em;
+	margin-right: .5em;
+	cursor: pointer;
+	display: inline-block;
+	width: 63px;
+	height: 21px;
+	color: #fff;
+	text-shadow: 0px 1px 0px #000;
+	background: url('../images/button.png') left top no-repeat;
+}
+
+.title {
+	font-size: 30px;
+	margin-bottom: 1.5em;
+	font-weight: bold;
+	font-style: italic;
+	text-shadow: 0px 2px 0px #fff;
+}
+
+li.feedbackPanelERROR {
+	background-color: #FFEBE8;
+	border: 1px solid #DD3C10;
+	padding: 10px;
+}
+
+li.feedbackPanelINFO {
+	background-color: #e2ecee;
+	border: 1px solid #9ddae6;
+	padding: 10px;
+}
+
+#sidemenu {
+	background-color: #CCCCCC;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+#sidemenu ul li {
+	padding: 3px 0px 3px 0px;
+	border-bottom: 1px;
+}
+
+#sidemenu ul li a:hover {
+	color: #FFFFFF;
+}
+
+#footer {
+	text-align: right;
+	padding: 10px;
+}
+
+#footer a,#footer a:visited {
+	color: #FFFFFF;
+	padding: 5px;
+}
+
+#footer a:hover {
+	text-decoration: underline;
+}
+
+/******************SIDEBAR MENU*******************************/
+l#menu,ul#menu ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 15em;
+}
+
+ul#menu a {
+	display: block;
+	text-decoration: none;
+}
+
+ul#menu li {
+	margin-top: 1px;
+}
+
+ul#menu li a {
+	background: gray;
+	color: #fff;
+	padding: 0.5em;
+}
+
+ul#menu li a:hover {
+	background: #000;
+}
+
+ul#menu li ul li a {
+	background: #aaa;
+	color: #000;
+	padding-left: 20px;
+}
+
+ul#menu li ul li ul li a {
+	background: #C0CCC0;
+	color: #000;
+	padding-left: 40px;
+}
+
+ul#menu li ul li a:hover {
+	background: #aaa;
+	border-left: 5px #000 solid;
+	padding-left: 15px;
+}
+
+ul#menu li ul li ul li a:hover {
+	background: #aaa;
+	border-left: 5px #000 solid;
+	padding-left: 35px;
+}
+
+#tooltip {
+	position: absolute;
+	border: 1px solid #666;
+	background: #333;
+	color: #FFF;
+	padding: 3px;
+	opacity: 0.9;
+}
+
+#tooltip h3,#tooltip div {
+	text-align: left;
+	margin: 0;
+	font-size: 1.1em;
+}
+
+.myLink {
+	cursor: pointer;
+}
