@@ -16,14 +16,19 @@ import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.validation.validator.EmailAddressValidator;
 import org.apache.wicket.validation.validator.StringValidator;
 
+import tr.edu.boun.swe574.fsn.web.common.Encrypter;
 import tr.edu.boun.swe574.fsn.web.common.FsnRoles;
+import tr.edu.boun.swe574.fsn.web.common.constants.ResultCode;
+import tr.edu.boun.swe574.fsn.web.common.constants.ServiceErrorCode;
 import tr.edu.boun.swe574.fsn.web.common.info.UserInfoForm;
+import tr.edu.boun.swe574.fsn.web.common.ws.WSCaller;
 import tr.edu.boun.swe574.fsn.web.wicket.home.HomePage;
 import tr.edu.boun.swe574.fsn.web.wicket.login.FsnSignInPage;
+import edu.boun.swe574.fsn.common.client.auth.BaseServiceResponse;
 
 @AuthorizeInstantiation(value = {FsnRoles.UNKNOWN})
 public class Register extends WebPage {
-
+	
 	/**
 	 * 
 	 */
@@ -84,13 +89,29 @@ public class Register extends WebPage {
                 String lastName = (String)txtLastName.getModelObject();
                 String password = (String)txtPassword.getModelObject();
                 String passwordAgain = (String)txtPasswordAgain.getModelObject();
-                if(!password.equals(passwordAgain))
-                {
+                
+                if(!password.equals(passwordAgain)) {
                     error("Password values typed must be the same");
                     return;
-                } else
-                {
-                    String msg = (new StringBuilder("User [")).append(email).append("] created successfully.").toString();
+                } else {
+                	
+                	if(logger.isDebugEnabled()) {
+                		logger.debug("A user is registering. Registration info: Email=" + email + ", Name=" + firstName + ", Lastname=" + lastName);
+                	}
+                	
+                	BaseServiceResponse register = WSCaller.getAuthService().register(email, firstName, lastName, Encrypter.generateMD5(password));
+                	
+                	if(logger.isDebugEnabled()) {
+                		logger.debug("Registration response received for user:"  + email + ". ResultCode=" + register.getResultCode() + ", ErrorCode=" + register.getErrorCode());
+                	}
+                	
+                	String msg;
+                	if(register.getResultCode().intValue() == ResultCode.SUCCESS.getCode()) {
+                		msg = (new StringBuilder("User [")).append(email).append("] created successfully.").toString();
+                	} else {
+                		msg = "Registration can not be fulfilled. " + ServiceErrorCode.valueOf(register.getErrorCode()).getDescription();
+                	}
+                    
                     Register.logger.debug(msg);
                     setResponsePage(new Register(msg));
                     return;

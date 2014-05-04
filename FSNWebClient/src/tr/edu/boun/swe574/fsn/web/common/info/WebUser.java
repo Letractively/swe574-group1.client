@@ -11,6 +11,7 @@ public class WebUser implements Serializable {
 	private String email;
     private String firstName;
     private String lastName;
+    private String token;
     
 	public String getEmail() {
 		return email;
@@ -30,6 +31,11 @@ public class WebUser implements Serializable {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-    
+	public String getToken() {
+		return token;
+	}
+	public void setToken(String token) {
+		this.token = token;
+	}
 
 }

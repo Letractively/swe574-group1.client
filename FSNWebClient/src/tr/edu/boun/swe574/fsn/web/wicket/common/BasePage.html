@@ -29,10 +29,10 @@
 			<div>
 				<table width="100%" cellpadding="0" cellspacing="0" border="1">
 					<tr>
-						<td style="text-align: left;font-size: 30px; color: #000066;">Food Social Network</td>
+						<td style="text-align: left;font-size: 30px;">Food Social Network</td>
 						<td style="text-align: right;font-size: 22px;"><span style="font-size: 15px; color: #009900;">Welcome:</span>&nbsp;
-						<span  wicket:id="lblEmail" ></span>&nbsp;<a href="" style="font-size: 12px;" wicket:id="lnkSignOut">LOGOUT</a></td>
-						
+						<span  wicket:id="lblEmail" ></span><!-- &nbsp;<a href="" style="font-size: 12px;" wicket:id="lnkSignOut">LOGOUT</a> -->
+						</td>
 					</tr>
 				</table>
 			</div>
@@ -86,12 +86,20 @@
 					</li>
 					<li id="recommendationTab" wicket:id="recommendationTab">
 							<wicket:link>
-								<a href="uploadFile" wicket:id="lnkSearchForRecipes">
+								<a href="recommend" wicket:id="lnkSearchForRecipes">
 										Search for Recipes
 								</a>
 							</wicket:link>
 								
 					</li>
+					<li id="logoutTab" wicket:id="logoutTab">
+							<wicket:link>
+								<a href="logout" wicket:id="lnkSignOut">
+										Logout
+								</a>
+							</wicket:link>
+								
+					</li>				
 				</ul>
 			</div>
 		</div>

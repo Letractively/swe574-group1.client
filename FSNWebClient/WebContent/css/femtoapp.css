@@ -12,6 +12,40 @@ body {
 	margin: 0px;
 }
 
+.profileTable {
+	border-spacing: 5px;
+    border-collapse: separate;
+    padding-top:13px;
+    /*border:1px solid black;*/
+}
+
+.profileTable td { 
+	/*border:1px solid black;*/
+}
+
+
+.profiletitle h1 {
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    line-height: 99%;
+    margin: 0;
+    text-align:left;
+}
+
+.profileKey {
+    color: #333334;
+    /*font-family: Verdana,Arial,sans-serif;
+    font-size: 13px;*/
+    font: 15px Arial,Helvetica,sans-serif;
+    
+}
+
+
+.profileMsg {
+    font: 15px Arial,Helvetica,sans-serif;
+}
+
 #loginContainer {
 	width: 460px;
 	margin-right: auto;

@@ -1,6 +1,7 @@
 package tr.edu.boun.swe574.fsn.web.common.info;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class UserInfoForm implements Serializable {
 
@@ -13,6 +14,10 @@ public class UserInfoForm implements Serializable {
 	private String lastName;
 	private String password;
 	private String passwordAgain;
+	
+	private String profileMessage;
+	private String location;
+	private Date birthdate;
 	
 	public String getEmail() {
 		return email;
@@ -43,6 +48,24 @@ public class UserInfoForm implements Serializable {
 	}
 	public void setPasswordAgain(String passwordAgain) {
 		this.passwordAgain = passwordAgain;
+	}
+	public String getProfileMessage() {
+		return profileMessage;
+	}
+	public void setProfileMessage(String profileMessage) {
+		this.profileMessage = profileMessage;
+	}
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
+	}
+	public Date getBirthdate() {
+		return birthdate;
+	}
+	public void setBirthdate(Date birthdate) {
+		this.birthdate = birthdate;
 	}
 
 }

@@ -16,6 +16,7 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
 
 import tr.edu.boun.swe574.fsn.web.wicket.FsnSession;
 import tr.edu.boun.swe574.fsn.web.wicket.home.HomePage;
+import tr.edu.boun.swe574.fsn.web.wicket.profile.myProfile.MyProfile;
 
 public class BasePage extends WebPage {
 
@@ -29,10 +30,14 @@ public class BasePage extends WebPage {
     WebMarkupContainer profileTab;
     WebMarkupContainer recipesTab;
     WebMarkupContainer recommendationTab;
-    Label lblEmail;
-    final HashMap vars = new HashMap();
+    WebMarkupContainer logoutTab;
     
-    public Map getVars()
+    Label lblEmail;
+    
+    
+    final HashMap<String, Object> vars = new HashMap<String, Object>();
+    
+    public Map<String, Object> getVars()
     {
         return vars;
     }
@@ -50,10 +55,16 @@ public class BasePage extends WebPage {
         profileTab = new WebMarkupContainer("profileTab");
         recipesTab = new WebMarkupContainer("recipesTab");
         recommendationTab = new WebMarkupContainer("recommendationTab");
+        logoutTab = new WebMarkupContainer("logoutTab");
         
-        Link lnkSignOut = new Link("lnkSignOut") {
+        Link<Object> lnkSignOut = new Link<Object>("lnkSignOut") {
 
-            public void onClick()
+            /**
+			 * 
+			 */
+			private static final long serialVersionUID = -7315514533212418318L;
+
+			public void onClick()
             {
                 String email = FsnSession.getInstance().getUser().getEmail();
                 BasePage.logger.info((new StringBuilder(String.valueOf(email))).append(" clicked logout!").toString());
@@ -63,18 +74,18 @@ public class BasePage extends WebPage {
 
         };
         
-        Link lnkMyProfile = new Link("lnkMyProfile") {
+        Link<Object> lnkMyProfile = new Link<Object>("lnkMyProfile") {
 
             public void onClick()
             {
-                setResponsePage(HomePage.class);
+                setResponsePage(MyProfile.class);
             }
 
             private static final long serialVersionUID = 0x20aa8a6f78c094ccL;
 
         };
         
-        Link lnkSearchForUsers = new Link("lnkSearchForUsers") {
+        Link<Object> lnkSearchForUsers = new Link<Object>("lnkSearchForUsers") {
 
             public void onClick()
             {
@@ -144,6 +155,8 @@ public class BasePage extends WebPage {
             private static final long serialVersionUID = 0x713963667c6fc27aL;
         };
         
+        logoutTab.add(lnkSignOut);
+        
         profileTab.add(new Component[] {
             lnkMyProfile
         });
@@ -180,15 +193,17 @@ public class BasePage extends WebPage {
         add(new Component[] {
             recommendationTab
         });
-        add(new Component[] {
-            lnkSignOut
-        });
+
         add(new Component[] {
             feedbackPanel
         });
+        
+        add(logoutTab);
+        
         MetaDataRoleAuthorizationStrategy.authorize(profileTab, RENDER, "USER");
         MetaDataRoleAuthorizationStrategy.authorize(recipesTab, RENDER, "USER");
         MetaDataRoleAuthorizationStrategy.authorize(recommendationTab, RENDER, "USER");
+        MetaDataRoleAuthorizationStrategy.authorize(logoutTab, RENDER, "USER");
     }
 
     protected boolean isBlank(Collection collection)
