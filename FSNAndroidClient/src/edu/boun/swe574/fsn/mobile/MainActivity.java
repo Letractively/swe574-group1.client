@@ -13,12 +13,12 @@ import com.boun.swe.foodsocialnetwork.R;
 
 import edu.boun.swe574.fsn.mobile.context.FSNUserContext;
 
-public class MainActivity extends Activity implements FragmentNavigationDrawer.NavigationDrawerCallbacks {
+public class MainActivity extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
 	/**
 	 * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
 	 */
-	private FragmentNavigationDrawer fragmentNavigationDrawer;
+	private NavigationDrawerFragment navigationDrawerFragment;
 
 	/**
 	 * Used to store the last screen title. For use in {@link #restoreActionBar()}.
@@ -36,9 +36,9 @@ public class MainActivity extends Activity implements FragmentNavigationDrawer.N
 			if (fsnContext.isLoggedIn()) { // is logged in
 				title = String.valueOf(getTitle());
 				// String userName = fsnContext.getUserEmail();
-				fragmentNavigationDrawer = (FragmentNavigationDrawer) getFragmentManager().findFragmentById(R.id.navigation_drawer);
+				navigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.navigation_drawer);
 				// Set up the drawer.
-				fragmentNavigationDrawer.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
+				navigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
 				return;
 			}
 		}
@@ -49,12 +49,12 @@ public class MainActivity extends Activity implements FragmentNavigationDrawer.N
 	public void onNavigationDrawerItemSelected(int position) {
 		// // update the main content by replacing fragments
 		FragmentManager fragmentManager = getFragmentManager();
-		fragmentManager.beginTransaction().replace(R.id.container, FragmentPlaceHolder.newInstance(position + 1)).commit();
+		fragmentManager.beginTransaction().replace(R.id.container, PlaceHolderFragment.newInstance(position + 1)).commit();
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		if (fragmentNavigationDrawer != null && !fragmentNavigationDrawer.isDrawerOpen()) {
+		if (navigationDrawerFragment != null && !navigationDrawerFragment.isDrawerOpen()) {
 			// Only show items in the action bar relevant to this screen
 			// if the drawer is not showing. Otherwise, let the drawer
 			// decide what to show in the action bar.

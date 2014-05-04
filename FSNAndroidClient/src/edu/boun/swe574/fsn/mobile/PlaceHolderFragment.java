@@ -15,7 +15,7 @@ import edu.boun.swe574.fsn.mobile.context.FSNUserContext;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class FragmentPlaceHolder extends Fragment {
+public class PlaceHolderFragment extends Fragment {
 	/**
 	 * The fragment argument representing the section number for this fragment.
 	 */
@@ -24,8 +24,8 @@ public class FragmentPlaceHolder extends Fragment {
 	/**
 	 * Returns a new instance of this fragment for the given section number.
 	 */
-	public static FragmentPlaceHolder newInstance(int sectionNumber) {
-		FragmentPlaceHolder fragment = new FragmentPlaceHolder();
+	public static PlaceHolderFragment newInstance(int sectionNumber) {
+		PlaceHolderFragment fragment = new PlaceHolderFragment();
 		Bundle args = new Bundle();
 		args.putInt(ARG_SECTION_NUMBER, sectionNumber);
 		fragment.setArguments(args);
@@ -36,7 +36,7 @@ public class FragmentPlaceHolder extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 		TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-		textView.setText(FSNUserContext.getInstance(this.getActivity()).getToken());
+		textView.setText("You are successfully logged in. Token: " + FSNUserContext.getInstance(this.getActivity()).getToken());
 		return rootView;
 	}
 
