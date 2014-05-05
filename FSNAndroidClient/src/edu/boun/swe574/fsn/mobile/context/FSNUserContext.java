@@ -9,6 +9,7 @@ public class FSNUserContext {
 	// Keys
 	private static final String KEY_IS_LOGGED_IN = "KEY_IS_LOGGED_IN";
 	private static final String KEY_EMAIL = "KEY_EMAIL";
+	private static final String KEY_TOKEN = "KEY_TOKEN";
 	// Private statics
 	private static FSNUserContext fsmContext = null;
 	private static String SHARED_PREFERENCES_NAME = "com.boun.swe.foodsocialnetwork.USER_PREFERENCES";
@@ -27,19 +28,33 @@ public class FSNUserContext {
 		return sharedPreferences.getString(KEY_EMAIL, null);
 	}
 
+	public String getToken() {
+		return sharedPreferences.getString(KEY_TOKEN, null);
+	}
+
 	public boolean isLoggedIn() {
 		return sharedPreferences.getBoolean(KEY_IS_LOGGED_IN, false);
 	}
 
 	public void setEmail(String userName) {
-		Editor editor = sharedPreferences.edit();
-		editor.putString(KEY_EMAIL, userName);
-		editor.commit();
+		set(KEY_EMAIL, userName);
 	}
 
 	public void setLoggedIn(boolean loggedIn) {
+		set(KEY_IS_LOGGED_IN, loggedIn);
+	}
+
+	public void setToken(String token) {
+		set(KEY_TOKEN, token);
+	}
+
+	private <T> void set(String key, T value) {
 		Editor editor = sharedPreferences.edit();
-		editor.putBoolean(KEY_IS_LOGGED_IN, loggedIn);
+		if (value instanceof Boolean) {
+			editor.putBoolean(key, (Boolean) value);
+		} else if (value instanceof String) {
+			editor.putString(key, (String) value);
+		}
 		editor.commit();
 	}
 }

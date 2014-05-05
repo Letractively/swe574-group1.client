@@ -2,17 +2,12 @@ package edu.boun.swe574.fsn.mobile;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.boun.swe.foodsocialnetwork.R;
 
@@ -23,12 +18,12 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 	/**
 	 * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
 	 */
-	private NavigationDrawerFragment mNavigationDrawerFragment;
+	private NavigationDrawerFragment navigationDrawerFragment;
 
 	/**
 	 * Used to store the last screen title. For use in {@link #restoreActionBar()}.
 	 */
-	private CharSequence mTitle;
+	private String title;
 
 	/****************************************** LIFECYLCE **********************************************/
 
@@ -39,28 +34,27 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 		FSNUserContext fsnContext = FSNUserContext.getInstance(getApplicationContext());
 		if (fsnContext != null) {
 			if (fsnContext.isLoggedIn()) { // is logged in
-				String userName = fsnContext.getUserEmail();
-				mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.navigation_drawer);
-				mTitle = getTitle();
-
+				title = String.valueOf(getTitle());
+				// String userName = fsnContext.getUserEmail();
+				navigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.navigation_drawer);
 				// Set up the drawer.
-				mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
-			} else {
-				startActivity(new Intent(this, LoginActivity.class));
+				navigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
+				return;
 			}
 		}
+		startActivity(new Intent(this, LoginActivity.class));
 	}
 
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
 		// // update the main content by replacing fragments
 		FragmentManager fragmentManager = getFragmentManager();
-		fragmentManager.beginTransaction().replace(R.id.container, PlaceholderFragment.newInstance(position + 1)).commit();
+		fragmentManager.beginTransaction().replace(R.id.container, PlaceHolderFragment.newInstance(position + 1)).commit();
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		if (mNavigationDrawerFragment != null && !mNavigationDrawerFragment.isDrawerOpen()) {
+		if (navigationDrawerFragment != null && !navigationDrawerFragment.isDrawerOpen()) {
 			// Only show items in the action bar relevant to this screen
 			// if the drawer is not showing. Otherwise, let the drawer
 			// decide what to show in the action bar.
@@ -90,13 +84,13 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 	public void onSectionAttached(int number) {
 		switch (number) {
 		case 1:
-			mTitle = getString(R.string.title_section1);
+			title = getString(R.string.title_section1);
 			break;
 		case 2:
-			mTitle = getString(R.string.title_section2);
+			title = getString(R.string.title_section2);
 			break;
 		case 3:
-			mTitle = getString(R.string.title_section3);
+			title = getString(R.string.title_section3);
 			break;
 		}
 	}
@@ -105,45 +99,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 		ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		actionBar.setDisplayShowTitleEnabled(true);
-		actionBar.setTitle(mTitle);
-	}
-
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
-	public static class PlaceholderFragment extends Fragment {
-		/**
-		 * The fragment argument representing the section number for this fragment.
-		 */
-		private static final String ARG_SECTION_NUMBER = "section_number";
-
-		/**
-		 * Returns a new instance of this fragment for the given section number.
-		 */
-		public static PlaceholderFragment newInstance(int sectionNumber) {
-			PlaceholderFragment fragment = new PlaceholderFragment();
-			Bundle args = new Bundle();
-			args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-			fragment.setArguments(args);
-			return fragment;
-		}
-
-		public PlaceholderFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-			TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-			textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
-			return rootView;
-		}
-
-		@Override
-		public void onAttach(Activity activity) {
-			super.onAttach(activity);
-			((MainActivity) activity).onSectionAttached(getArguments().getInt(ARG_SECTION_NUMBER));
-		}
+		actionBar.setTitle(title);
 	}
 
 }
