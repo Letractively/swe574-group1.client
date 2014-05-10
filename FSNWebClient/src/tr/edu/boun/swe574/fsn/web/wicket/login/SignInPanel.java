@@ -48,11 +48,16 @@ public class SignInPanel extends Panel {
 			super(id);
 			username = new TextField<String>("username",
 					new PropertyModel<String>(properties, "username"));
+			username.setModelObject("myra@hodson.com");
+			
 			add(new Component[] { username });
 			username.setRequired(true);
 			password = new PasswordTextField("password",
 					new PropertyModel<String>(properties, "password"));
 			password.setRequired(true);
+			
+			password.setModelObject("111111");
+			
 			add(new Component[] { password });
 			username.setType(String.class);
 			password.setType(String.class);

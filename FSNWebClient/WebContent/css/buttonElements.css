@@ -18,6 +18,8 @@
 	font-family: Arial Black, Tahoma, Impact;
 	font-size: 12px;
 	text-transform: capitalize;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .btn * {

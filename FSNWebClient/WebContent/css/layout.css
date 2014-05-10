@@ -42,7 +42,7 @@ body {
 ----------------------------------------------- */
 a,.myLink {
 	color: #000;
-	font-weight: bold;
+	/*font-weight: bold;*/
 	text-decoration: none;
 }
 
