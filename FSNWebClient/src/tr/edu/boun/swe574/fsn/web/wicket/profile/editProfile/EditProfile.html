@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+	<wicket:panel>
+	<div id="mainContainer" style="margin-left: auto; margin-right: auto;">
+		<form wicket:id="form">
+		<div wicket:id="feedBackPanel"></div>
+			<table border="0">
+				<tr>
+					<td colspan="2">
+					<div style="text-align:center; font-size: 17px;">Update Profile</div><br/>				
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">				
+					<div style="text-align:center; font-size: 18px; padding-top:0px; padding-bottom: 00px;">
+				</div></td>
+				</tr>
+				<tr>
+					<td ><span style="font-size: 14px;"  class="textHeader">First Name:</span></td>
+					<td> <input
+						wicket:id="name" name="firstName" type="text" 
+						id="textf1" value="firstName" maxlength="100"/></td>
+				</tr>
+				<tr>
+					<td><span style="font-size: 14px;" class="textHeader">Last Name:</span></td>
+					<td><input
+						wicket:id="surname" name="lastName" type="text" 
+						id="textf1" value="lastName" maxlength="100"/></td>
+				</tr>
+				<tr>
+					<td><span style="font-size: 14px;" class="textHeader">Location</span></td>
+					<td><input wicket:id="location" name="location" type="text" id="textf1" value="location" maxlength="100"/>
+					</td>
+				</tr>
+				<tr>
+					<td><span style="font-size: 14px;" class="textHeader">Date of birth:</span></td>
+					<td><input wicket:id="birthday"/></td>
+				</tr>
+				<tr>
+					<td><span style="font-size: 14px;" class="textHeader">Profile message</span></td>
+					<td><textarea wicket:id="profileMessage" rows="5" cols="50"></textarea></td>
+				</tr>
+			</table>
+			
+			<p style="text-align: center">
+				<br/>
+				<a wicket:id="lnkUpdate"><i></i> <span><i></i> <span></span> Update</span> </a>
+				<a wicket:id="lnkCancel"><i></i> <span><i></i> <span></span> Cancel</span></a>
+			</p>
+		</form>
+		
+		</div>
+	</wicket:panel>
+</body>
+</html>

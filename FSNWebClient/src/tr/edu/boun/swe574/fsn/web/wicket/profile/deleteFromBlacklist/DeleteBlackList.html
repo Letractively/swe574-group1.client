@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Delete ingredient from blacklist</title>
+</head>
+<body>
+	<wicket:panel>
+			<div id="mainContainer" class="profileMsg" style="padding-top: 30px; text-align: center;">
+				<form wicket:id="form">
+					<p>Do you want to delete <span class="post-tag" wicket:id="lblIngredientName"></span> from your ingredients blacklist?</p>
+					<p style="text-align: center;">
+					<br/>
+					<table style="margin-left: auto; margin-right: auto">
+						<tr>
+							<td>
+								<a wicket:id="lnkDelete" class="btn blue done" style="margin: auto;"> <i></i> <span>
+								<i></i> <span></span> Yes </span> </a> &nbsp;
+								<a wicket:id="lnkCancel" class="btn red done" style="margin: auto;"><i></i> <span>
+								<i></i> <span></span> Cancel </span></a>
+							</td>
+						</tr>
+					</table>
+					</p>
+				</form>
+				<div wicket:id="feedBackPanel"></div>
+			</div>
+
+	</wicket:panel>
+</body>
+</html>

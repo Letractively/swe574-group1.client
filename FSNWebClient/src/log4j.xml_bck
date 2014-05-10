@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
+
+    <appender name="stdout" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.TTCCLayout"/>
+    </appender>
+
+    <appender name="mnp" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="Threshold" value="DEBUG"/>
+        <param name="File" value="/data/mnp/log/mnp.log"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-5p - %d{ISO8601} %C{1}.%M: %L - [%x] %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="mnpAdapters" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="Threshold" value="DEBUG"/>
+        <param name="File" value="/data/mnp/log/adapter.log"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-5p - %d{ISO8601} %C{1}.%M: %L - [%x] %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="mnpBpm" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="Threshold" value="DEBUG"/>
+        <param name="File" value="/data/mnp/log/bpm.log"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-5p - %d{ISO8601} %C{1}.%M: %L - [%x] %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="mnpCdbm" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="Threshold" value="DEBUG"/>
+        <param name="File" value="/data/mnp/log/cdbm.log"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-5p - %d{ISO8601} %C{1}.%M: %L - [%x] %m%n"/>
+        </layout>
+    </appender>
+
+        <appender name="mnpDsGui" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="Threshold" value="DEBUG"/>
+        <param name="File" value="/data/mnp/log/dsGui.log"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-5p - %d{ISO8601} %C{1}.%M: %L - [%x] %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="mnpMngGui" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="Threshold" value="DEBUG"/>
+        <param name="File" value="/data/mnp/log/mngGui.log"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-5p - %d{ISO8601} %C{1}.%M: %L - [%x] %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="error_out" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="Threshold" value="ERROR"/>
+        <param name="File" value="/data/mnp/log/terror_test.log"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-5p - %d{ISO8601} : %-20t : %C.%M: %L - %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="mnpMdb" class="org.apache.log4j.DailyRollingFileAppender">
+                <param name="Threshold" value="DEBUG" />
+                <param name="File" value="/data/mnp/log/mdb.log" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+                <layout class="org.apache.log4j.PatternLayout">
+                        <param name="ConversionPattern" value="%-5p - %d{ISO8601} %C{1}.%M: %L - [%x] %m%n" />
+                </layout>
+    </appender>
+
+    <logger name="tr.com.argela.azerfon.mnp.adapters">
+        <level value="debug"/>
+        <appender-ref ref="mnpAdapters"/>
+        <appender-ref ref="mnp"/>
+    </logger>
+
+    <logger name="tr.com.argela.azerfon.mnp.bpm">
+        <level value="debug"/>
+        <appender-ref ref="mnpBpm"/>
+        <appender-ref ref="mnp"/>
+    </logger>
+    
+        <logger name="tr.com.argela.azerfon.mnp.cdbm">
+        <level value="debug"/>
+        <appender-ref ref="mnpCdbm"/>
+        <appender-ref ref="mnp"/>
+    </logger>
+
+     <logger name="tr.com.argela.azerfon.mnp.common">
+        <level value="debug"/>
+        <appender-ref ref="mnpCdbm"/>
+        <appender-ref ref="mnpBpm"/>
+        <appender-ref ref="mnpAdapters"/>
+        <appender-ref ref="mnp"/>
+    </logger>
+
+     <logger name="tr.com.argela.azerfon.mnp.db">
+        <level value="debug"/>
+        <appender-ref ref="mnpCdbm"/>
+        <appender-ref ref="mnpBpm"/>
+        <appender-ref ref="mnpAdapters"/>
+        <appender-ref ref="mnp"/>
+    </logger>
+
+     <logger name="tr.com.argela.azerfon.mnp.framework">
+        <level value="debug"/>
+        <appender-ref ref="mnpCdbm"/>
+        <appender-ref ref="mnpBpm"/>
+        <appender-ref ref="mnpAdapters"/>
+        <appender-ref ref="mnp"/>
+    </logger>
+
+    <logger name="tr.com.argela.azerfon.mnp.dealergui">
+        <level value="debug"/>
+        <appender-ref ref="mnpDsGui"/>
+        <appender-ref ref="mnp"/>
+    </logger>
+
+     <logger name="tr.com.argela.azerfon.mnp.mnggui">
+        <level value="debug"/>
+        <appender-ref ref="mnpMngGui"/>
+        <appender-ref ref="mnp"/>
+    </logger>
+
+    <root>
+        <level value="WARN"/>
+        <appender-ref ref="stdout"/>
+    </root>
+</log4j:configuration>
+    

@@ -1,0 +1,46 @@
+<project name="fsn" basedir="." >
+
+
+    <path id="wstools.classpath">
+        <fileset dir="../FSNWebClient/WebContent/WEB-INF/lib/" includes="*.jar"/>
+    </path>
+	
+	<taskdef name="wsgen"
+	    classname="com.sun.tools.ws.ant.WsGen"
+	    classpathref="wstools.classpath" />
+	
+	<taskdef name="wsimport" classname="com.sun.tools.ws.ant.WsImport"  classpathref="wstools.classpath">
+	</taskdef>
+	
+	<target name="generateWsClient">
+		<!--auth service -->
+		<wsimport debug="true"
+	              keep="true"
+  	              destdir="../FSNWebClient/client"
+	              package="edu.boun.swe574.fsn.common.client.auth"
+    			  wsdl ="http://localhost:8080/FSN_SERVER/fsnws_auth?wsdl"
+	    />
+		<!--food service -->
+		<wsimport debug="true"
+	              keep="true"
+  	              destdir="../FSNWebClient/client"
+	              package="edu.boun.swe574.fsn.common.client.food"
+    			  wsdl ="http://localhost:8080/FSN_SERVER/fsnws_food?wsdl"
+	    />
+		<!--network service -->
+		<wsimport debug="true"
+	              keep="true"
+  	              destdir="../FSNWebClient/client"
+	              package="edu.boun.swe574.fsn.common.client.network"
+    			  wsdl ="http://localhost:8080/FSN_SERVER/fsnws_network?wsdl"
+	    />
+		<!--search service -->
+		<wsimport debug="true"
+	              keep="true"
+  	              destdir="../FSNWebClient/client"
+	              package="edu.boun.swe574.fsn.common.client.search"
+    			  wsdl ="http://localhost:8080/FSN_SERVER/fsnws_search?wsdl"
+	    />
+	</target>
+
+</project>
