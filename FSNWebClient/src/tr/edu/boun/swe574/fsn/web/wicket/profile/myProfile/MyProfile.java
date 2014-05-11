@@ -27,6 +27,7 @@ import tr.edu.boun.swe574.fsn.web.wicket.profile.addToBlacklist.AddToBL;
 import tr.edu.boun.swe574.fsn.web.wicket.profile.deleteFromBlacklist.DeleteBlackList;
 import tr.edu.boun.swe574.fsn.web.wicket.profile.deletePhoto.DeletePhoto;
 import tr.edu.boun.swe574.fsn.web.wicket.profile.editProfile.EditProfile;
+import tr.edu.boun.swe574.fsn.web.wicket.profile.updatePhoto.UpdatePhoto;
 import edu.boun.swe574.fsn.common.client.network.GetProfileResponse;
 import edu.boun.swe574.fsn.common.client.network.IngredientInfo;
 
@@ -41,10 +42,12 @@ public class MyProfile extends BasePage {
 	private ModalWindow mwUpdateProfile = null;
 	private ModalWindow mwDeleteFromBL = null;
 	private ModalWindow mwDeletePhoto = null;
+	private ModalWindow mwUpdatePhoto = null;
 	private ModalWindow mwAddToBL = null;
 	private AjaxLink<Object> lnUpdateProfile;
 	private AjaxLink<Object> lnkAddToBL;
 	private AjaxLink<Object> lnkDeletePhoto;
+	private AjaxLink<Object> lnkUpdatePhoto;
 	private final  List<IngredientGroup> blackListCategorized;
 	
 
@@ -154,6 +157,29 @@ public class MyProfile extends BasePage {
 
         });
 		
+		mwUpdatePhoto= new ModalWindow("mwUpdatePhoto");
+		mwUpdatePhoto.setCookieName(null);
+		mwUpdatePhoto.setResizable(false);
+		mwUpdatePhoto.setInitialWidth(500);
+		mwUpdatePhoto.setInitialHeight(200);
+		mwUpdatePhoto.setCssClassName(ModalWindow.CSS_CLASS_GRAY);
+		
+		add(mwUpdatePhoto);
+        
+		mwUpdatePhoto.setWindowClosedCallback(new WindowClosedCallback() {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 2831485330879574995L;
+
+			@Override
+            public void onClose(AjaxRequestTarget arg0) {
+                setResponsePage(MyProfile.class);
+            }
+
+        });
+		
 		mwAddToBL= new ModalWindow("mwAddToBL");
 		mwAddToBL.setCookieName(null);
 		mwAddToBL.setResizable(false);
@@ -228,6 +254,21 @@ public class MyProfile extends BasePage {
         };
 		add(lnkDeletePhoto);
 		
+        lnkUpdatePhoto = new AjaxLink<Object>("lnkUpdatePhoto") {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 6750224937247896572L;
+
+			@Override
+            public void onClick(AjaxRequestTarget arg0) {
+				UpdatePhoto updatePhotoWindow = new UpdatePhoto(mwUpdatePhoto.getContentId(), mwUpdatePhoto);
+				mwUpdatePhoto.setContent(updatePhotoWindow);
+				mwUpdatePhoto.show(arg0);
+            }
+        };
+		add(lnkUpdatePhoto);
 		
 		//blacklist loop
 		Loop loop = new Loop("blackList", blackListCategorized.size()) {
