@@ -31,25 +31,28 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		FSNUserContext fsnContext = FSNUserContext.getInstance(getApplicationContext());
-		if (fsnContext != null) {
-			if (fsnContext.isLoggedIn()) { // is logged in
-				title = String.valueOf(getTitle());
-				// String userName = fsnContext.getUserEmail();
-				navigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.navigation_drawer);
-				// Set up the drawer.
-				navigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
-				return;
-			}
+		if (checkLoggedIn()) { // is logged in
+			title = String.valueOf(getTitle());
+			// String userName = fsnContext.getUserEmail();
+			navigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.navigation_drawer);
+			// Set up the drawer.
+			navigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
+			return;
 		}
-		startActivity(new Intent(this, LoginActivity.class));
 	}
 
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
 		// // update the main content by replacing fragments
-		FragmentManager fragmentManager = getFragmentManager();
-		fragmentManager.beginTransaction().replace(R.id.container, PlaceHolderFragment.newInstance(position + 1)).commit();
+		if (position == 2) {
+			FSNUserContext.getInstance(getApplicationContext()).setLoggedIn(false);
+			FSNUserContext.getInstance(getApplicationContext()).setEmail(null);
+			FSNUserContext.getInstance(getApplicationContext()).setToken(null);
+			checkLoggedIn();
+		} else {
+			FragmentManager fragmentManager = getFragmentManager();
+			fragmentManager.beginTransaction().replace(R.id.container, PlaceHolderFragment.newInstance(position + 1)).commit();
+		}
 	}
 
 	@Override
@@ -80,17 +83,25 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 	/****************************************** ACTIONS ********************************************/
 
 	/****************************************** OTHER ********************************************/
+	private boolean checkLoggedIn() {
+		FSNUserContext fsnContext = FSNUserContext.getInstance(getApplicationContext());
+		if (fsnContext != null && !fsnContext.isLoggedIn()) {
+			startActivity(new Intent(this, LoginActivity.class));
+			return false;
+		}
+		return true;
+	}
 
 	public void onSectionAttached(int number) {
 		switch (number) {
 		case 1:
-			title = getString(R.string.title_section1);
+			title = getString(R.string.title_home);
 			break;
 		case 2:
-			title = getString(R.string.title_section2);
+			title = getString(R.string.title_profile);
 			break;
 		case 3:
-			title = getString(R.string.title_section3);
+			title = getString(R.string.title_logout);
 			break;
 		}
 	}
