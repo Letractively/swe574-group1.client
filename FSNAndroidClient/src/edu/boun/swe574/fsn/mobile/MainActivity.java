@@ -40,6 +40,12 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 			return;
 		}
 	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		checkLoggedIn();
+	}
 
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
