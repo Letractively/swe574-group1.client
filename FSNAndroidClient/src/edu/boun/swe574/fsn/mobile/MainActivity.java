@@ -57,7 +57,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 			checkLoggedIn();
 		} else {
 			FragmentManager fragmentManager = getFragmentManager();
-			fragmentManager.beginTransaction().replace(R.id.container, PlaceHolderFragment.newInstance(position + 1)).commit();
+			fragmentManager.beginTransaction().replace(R.id.container, ProfileFragment.newInstance(position + 1)).commit();
 		}
 	}
 
