@@ -3,7 +3,6 @@ package edu.boun.swe574.fsn.mobile;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentManager;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
@@ -12,8 +11,12 @@ import android.view.MenuItem;
 import com.boun.swe.foodsocialnetwork.R;
 
 import edu.boun.swe574.fsn.mobile.context.FSNUserContext;
+import edu.boun.swe574.fsn.mobile.task.ITaskListener;
+import edu.boun.swe574.fsn.mobile.task.TaskResultType;
+import edu.boun.swe574.fsn.mobile.util.AndroidUtil;
+import edu.boun.swe574.fsn.mobile.ws.response.ResponseGetProfileOfSelf;
 
-public class MainActivity extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+public class MainActivity extends Activity implements ITaskListener, NavigationDrawerFragment.NavigationDrawerCallbacks {
 
 	/**
 	 * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -25,13 +28,15 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 	 */
 	private String title;
 
+	private ProfileFragment profileFragment;
+
 	/****************************************** LIFECYLCE **********************************************/
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		if (checkLoggedIn()) { // is logged in
+		if (AndroidUtil.checkLoggedIn(this)) { // is logged in
 			title = String.valueOf(getTitle());
 			// String userName = fsnContext.getUserEmail();
 			navigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -40,11 +45,11 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 			return;
 		}
 	}
-	
+
 	@Override
 	protected void onResume() {
 		super.onResume();
-		checkLoggedIn();
+		AndroidUtil.checkLoggedIn(this);
 	}
 
 	@Override
@@ -54,10 +59,11 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 			FSNUserContext.getInstance(getApplicationContext()).setLoggedIn(false);
 			FSNUserContext.getInstance(getApplicationContext()).setEmail(null);
 			FSNUserContext.getInstance(getApplicationContext()).setToken(null);
-			checkLoggedIn();
+			AndroidUtil.checkLoggedIn(this);
 		} else {
 			FragmentManager fragmentManager = getFragmentManager();
-			fragmentManager.beginTransaction().replace(R.id.container, ProfileFragment.newInstance(position + 1)).commit();
+			this.profileFragment = ProfileFragment.newInstance(position + 1, true);
+			fragmentManager.beginTransaction().replace(R.id.container, this.profileFragment).commit();
 		}
 	}
 
@@ -89,14 +95,6 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 	/****************************************** ACTIONS ********************************************/
 
 	/****************************************** OTHER ********************************************/
-	private boolean checkLoggedIn() {
-		FSNUserContext fsnContext = FSNUserContext.getInstance(getApplicationContext());
-		if (fsnContext != null && !fsnContext.isLoggedIn()) {
-			startActivity(new Intent(this, LoginActivity.class));
-			return false;
-		}
-		return true;
-	}
 
 	public void onSectionAttached(int number) {
 		switch (number) {
@@ -117,6 +115,13 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		actionBar.setDisplayShowTitleEnabled(true);
 		actionBar.setTitle(title);
+	}
+
+	@Override
+	public <T> void onTaskComplete(TaskResultType type, T result) {
+		if (type == TaskResultType.GET_PROFILE_OF_SELF) {
+			this.profileFragment.onProfileInformationReceived((ResponseGetProfileOfSelf) result);
+		}
 	}
 
 }

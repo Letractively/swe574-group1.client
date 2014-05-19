@@ -1,9 +1,16 @@
 package edu.boun.swe574.fsn.mobile.util;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
 
+import edu.boun.swe574.fsn.mobile.LoginActivity;
+import edu.boun.swe574.fsn.mobile.context.FSNUserContext;
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -18,6 +25,16 @@ public class AndroidUtil {
 		return view != null && view.getText() != null && StringUtil.hasText(view.getText().toString());
 	}
 
+	public static boolean checkLoggedIn(Activity activity) {
+		FSNUserContext fsnContext = FSNUserContext.getInstance(activity.getApplicationContext());
+		if (fsnContext != null && !fsnContext.isLoggedIn()) {
+			activity.startActivity(new Intent(activity, LoginActivity.class));
+			return false;
+		}
+		return true;
+	}
+
+	@SuppressLint("SimpleDateFormat")
 	@SuppressWarnings("unchecked")
 	public static <T> T getSoapObjectProperty(SoapObject object, String propertyPath, Class<T> clas) {
 		Object property = null;
@@ -43,6 +60,8 @@ public class AndroidUtil {
 								value = Long.parseLong(stringValue);
 							} else if (clas == Double.class && StringUtil.hasText(stringValue) && stringValue.matches("[\\d\\.]+")) {
 								value = Double.parseDouble(stringValue);
+							} else if (clas == Date.class) {
+								value = new SimpleDateFormat("yyyy-MM-dd").parse(stringValue);
 							}
 							return (T) value;
 						}

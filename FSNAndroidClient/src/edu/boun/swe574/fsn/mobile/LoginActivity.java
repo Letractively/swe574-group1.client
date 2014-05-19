@@ -49,11 +49,11 @@ public class LoginActivity extends Activity implements ITaskListener {
 	}
 
 	public void onTextViewSignUpClicked(View view) {
-		startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.example.com")));// TODO register page
+		startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://swe.cmpe.boun.edu.tr:8080/FSN_WEB/register")));
 	}
 
 	public void onTextViewHelpClicked(View view) {
-		startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.example.com")));// TODO help page
+		startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://swe.cmpe.boun.edu.tr:8080/FSN_WEB/register")));
 	}
 
 	/****************************************** OTHER ********************************************/
