@@ -2,8 +2,6 @@ package edu.boun.swe574.fsn.mobile.ws.request;
 
 import org.ksoap2.serialization.SoapObject;
 
-import edu.boun.swe574.fsn.mobile.constants.FSNWSConstants;
-
 public class RequestLogIn extends BaseRequest {
 	private String email;
 	private String password;
@@ -30,7 +28,7 @@ public class RequestLogIn extends BaseRequest {
 	}
 
 	public SoapObject toSoapObject() {
-		SoapObject soapRequest = new SoapObject(FSNWSConstants.NAMESPACE, FSNWSConstants.AUTH_SERVICE_OPERATION_NAME_LOGIN);
+		SoapObject soapRequest = super.toSoapObject();
 		soapRequest.addProperty("email", this.email);
 		soapRequest.addProperty("password", this.password);
 		return soapRequest;

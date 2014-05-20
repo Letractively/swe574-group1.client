@@ -44,6 +44,8 @@ public class LoginTask<T extends Activity & ITaskListener> extends AsyncTask<Str
 					FSNUserContext.getInstance(this.executor).setEmail(request.getEmail());
 					FSNUserContext.getInstance(this.executor).setLoggedIn(true);
 					FSNUserContext.getInstance(this.executor).setToken(response.getToken());
+					FSNUserContext.getInstance(this.executor).setUserName(response.getName());
+					FSNUserContext.getInstance(this.executor).setUserSurname(response.getSurname());
 					return true;
 				}
 			}
