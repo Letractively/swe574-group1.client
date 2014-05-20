@@ -22,9 +22,13 @@ import tr.edu.boun.swe574.fsn.web.common.constants.ResultCode;
 import tr.edu.boun.swe574.fsn.web.common.constants.ServiceErrorCode;
 import tr.edu.boun.swe574.fsn.web.common.info.UserInfoForm;
 import tr.edu.boun.swe574.fsn.web.common.ws.WSCaller;
+import tr.edu.boun.swe574.fsn.web.wicket.FsnSession;
 import tr.edu.boun.swe574.fsn.web.wicket.home.HomePage;
 import tr.edu.boun.swe574.fsn.web.wicket.login.FsnSignInPage;
 import edu.boun.swe574.fsn.common.client.auth.BaseServiceResponse;
+import edu.boun.swe574.fsn.common.client.food.GetIngredientsResponse;
+import edu.boun.swe574.fsn.common.client.search.GetRecipeFeedsResponse;
+import edu.boun.swe574.fsn.common.client.search.LongArray;
 
 @AuthorizeInstantiation(value = {FsnRoles.UNKNOWN})
 public class Register extends WebPage {
@@ -100,6 +104,7 @@ public class Register extends WebPage {
                 	}
                 	
                 	BaseServiceResponse register = WSCaller.getAuthService().register(email, firstName, lastName, Encrypter.generateMD5(password));
+                	
                 	
                 	if(logger.isDebugEnabled()) {
                 		logger.debug("Registration response received for user:"  + email + ". ResultCode=" + register.getResultCode() + ", ErrorCode=" + register.getErrorCode());

@@ -7,6 +7,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
+import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
 import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow.WindowClosedCallback;
 import org.apache.wicket.markup.html.basic.Label;
@@ -17,6 +18,7 @@ import org.apache.wicket.request.resource.ContextRelativeResource;
 import org.apache.wicket.request.resource.DynamicImageResource;
 
 import tr.edu.boun.swe574.fsn.web.common.DateUtil;
+import tr.edu.boun.swe574.fsn.web.common.FsnRoles;
 import tr.edu.boun.swe574.fsn.web.common.info.IngredientGroup;
 import tr.edu.boun.swe574.fsn.web.common.info.IngredientInfoForm;
 import tr.edu.boun.swe574.fsn.web.common.info.UserInfoForm;
@@ -31,6 +33,7 @@ import tr.edu.boun.swe574.fsn.web.wicket.profile.updatePhoto.UpdatePhoto;
 import edu.boun.swe574.fsn.common.client.network.GetProfileResponse;
 import edu.boun.swe574.fsn.common.client.network.IngredientInfo;
 
+@AuthorizeInstantiation(value = {FsnRoles.USER})
 public class MyProfile extends BasePage {
 
 	/**
@@ -67,6 +70,7 @@ public class MyProfile extends BasePage {
 		if(dateOfBirth != null) {
 			dateString = DateUtil.getDateString(dateOfBirth.toGregorianCalendar().getTime());
 		}
+		
 		Label lblBirthDate = new Label("lblBirthDate", dateString);
 		
 		DynamicImageResource ds = new DynamicImageResource() {
@@ -93,7 +97,7 @@ public class MyProfile extends BasePage {
 		mwUpdateProfile.setCookieName(null);
 		mwUpdateProfile.setResizable(false);
 		mwUpdateProfile.setInitialWidth(600);
-		mwUpdateProfile.setInitialHeight(500);
+		mwUpdateProfile.setInitialHeight(350);
 		mwUpdateProfile.setCssClassName(ModalWindow.CSS_CLASS_GRAY);
 
         add(mwUpdateProfile);

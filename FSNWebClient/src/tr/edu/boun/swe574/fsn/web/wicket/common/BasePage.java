@@ -17,6 +17,7 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import tr.edu.boun.swe574.fsn.web.wicket.FsnSession;
 import tr.edu.boun.swe574.fsn.web.wicket.home.HomePage;
 import tr.edu.boun.swe574.fsn.web.wicket.profile.myProfile.MyProfile;
+import tr.edu.boun.swe574.fsn.web.wicket.profile.searchUsers.SearchUsers;
 
 public class BasePage extends WebPage {
 
@@ -89,7 +90,7 @@ public class BasePage extends WebPage {
 
             public void onClick()
             {
-            	setResponsePage(HomePage.class);
+            	setResponsePage(SearchUsers.class);
             }
 
             private static final long serialVersionUID = 0x359a985dcf54ffc7L;

@@ -9,17 +9,14 @@
 			<!-- <div style="padding-top:0px;"> -->
 				<table width="100%" align="center" class="profileTable">
 					<tr>
-						<td align="center" style="margin-top: 0px; padding-top:0px;" valign="top">
-								<img wicket:id="search_icon" style="width: 151px;height: 174px;"/><br><br>
-								<a wicket:id="lnkUpdatePhoto">Update</a> / 
-								<a wicket:id="lnkDeletePhoto">Delete</a> photo<br><br>
-								<a wicket:id="lnUpdateProfile">Update Profile</a> <br/><br>
-								<a wicket:id="lnkAddToBL">Add to Blacklist</a> <br/><br>
+						<td align="left" style="margin-top: 0px; padding-top:0px;" valign="top">
+								<img wicket:id="search_icon" style="width: 151px;height: 174px;"/>
+								
 						</td>
-						<td>
+						<td align="left">
 							<div style="padding-left: 10px;">
 								<div class="profiletitle">
-									<h1>Myra Hudson</h1><br/>
+									<h1>Marcelino Sanchez</h1><br/>
 									<span class="profileMsg" >
 										<span wicket:id="lblMessage"></span><br/><br/>
 										<b>Location:</b>&nbsp;<span wicket:id="lblLocation"></span><br/><br/>
@@ -31,9 +28,9 @@
 									<h3>Ingredients Blacklist</h3>
 									<span  class="profileMsg" wicket:id="blackList">
 											<p>
-											<b><span wicket:id="category"/></b><br/>
+											<b><span wicket:id="category"></span></b><br/>
 												<span wicket:id="ingredientsLoop">
-													<a class="post-tag" wicket:id="lnDeleteBL"><span wicket:id="ingredient"></span></a>&nbsp;
+													<span class="post-tag" wicket:id="ingredient"></span>&nbsp;
 												</span>
 											</p>
 									</span>
@@ -44,11 +41,6 @@
 					</tr>
 				</table>
 			</div>
-			<div wicket:id="mwUpdateProfile"></div>
-			<div wicket:id="mwDeleteFromBL"></div>
-			<div wicket:id="mwDeletePhoto"></div>
-			<div wicket:id="mwAddToBL"></div>
-			<div wicket:id="mwUpdatePhoto"></div>
 	</wicket:extend>
 </body>
 </html>
