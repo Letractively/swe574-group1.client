@@ -1,0 +1,29 @@
+<wicket:panel>
+
+	<form wicket:id="form">
+
+		<table border="5">
+			<tr>
+				<td>Amount</td>
+				<td>Unit</td>
+				<td>Food</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><input type="text" wicket:id="amount" maxlength="10" /></td>
+
+				<td><input type="text" wicket:id="unit" maxlength="10" /></td>
+				<td><select wicket:id="tariffType">
+				</select>
+				</td>
+				<td>
+					<!--  
+			<button type="button" wicket:id="btnAdd"> Add </button> 
+			 --> <a wicket:id="btnAdd"> <img src="images/icon-plus.gif"
+						border="0" /> </a></td>
+			</tr>
+
+		</table>
+
+	</form>
+</wicket:panel>
