@@ -1,9 +1,10 @@
 package tr.edu.boun.swe574.fsn.web.wicket.common;
 
-import org.apache.wicket.markup.html.panel.Panel;
+import net.sourceforge.easywicket.web.common.EasyPanel;
+
 import org.apache.wicket.model.IModel;
 
-public abstract class BasePanel extends Panel {
+public abstract class BasePanel extends EasyPanel {
 
     /**
      * 

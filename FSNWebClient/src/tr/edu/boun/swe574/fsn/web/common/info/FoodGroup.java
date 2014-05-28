@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class IngredientGroup implements Serializable {
+public class FoodGroup implements Serializable {
 	
 	private static String SPACE = "&nbsp;";
 	
@@ -16,7 +16,7 @@ public class IngredientGroup implements Serializable {
 	private static final long serialVersionUID = 1614987349878143464L;
 	
 	private String categoryName;
-	private List<IngredientInfoForm> ingredientList;
+	private List<FoodForm> ingredientList;
 	
 	public String getCategoryName() {
 		return categoryName;
@@ -24,32 +24,32 @@ public class IngredientGroup implements Serializable {
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
-	public List<IngredientInfoForm> getIngredientList() {
+	public List<FoodForm> getIngredientList() {
 		return ingredientList;
 	}
-	public void setIngredientList(List<IngredientInfoForm> ingredientList) {
+	public void setIngredientList(List<FoodForm> ingredientList) {
 		this.ingredientList = ingredientList;
 	}
 	
-	public void addToIngredientList(IngredientInfoForm i) {
+	public void addToIngredientList(FoodForm i) {
 		if(ingredientList == null) {
-			ingredientList = new ArrayList<IngredientInfoForm>();
+			ingredientList = new ArrayList<FoodForm>();
 		}
 		ingredientList.add(i);
 	}
 	
-	public static List<IngredientGroup> categorize(List<IngredientInfoForm> ingredientList) {
+	public static List<FoodGroup> categorize(List<FoodForm> ingredientList) {
 
-		List<IngredientGroup> groups = new ArrayList<IngredientGroup>();
+		List<FoodGroup> groups = new ArrayList<FoodGroup>();
 		
-		IngredientGroup group;
+		FoodGroup group;
 		if(ingredientList != null) {
-			Map<String, IngredientGroup> categoryHash = new HashMap<String, IngredientGroup>();
-			for (IngredientInfoForm ingredient : ingredientList) {
+			Map<String, FoodGroup> categoryHash = new HashMap<String, FoodGroup>();
+			for (FoodForm ingredient : ingredientList) {
 				if(categoryHash.containsKey(ingredient.getCategoryName())) {
 					categoryHash.get(ingredient.getCategoryName()).addToIngredientList(ingredient);
 				} else {
-					group = new IngredientGroup();
+					group = new FoodGroup();
 					group.setCategoryName(ingredient.getCategoryName());
 					group.addToIngredientList(ingredient);
 					categoryHash.put(ingredient.getCategoryName(), group);
@@ -60,13 +60,13 @@ public class IngredientGroup implements Serializable {
 		return groups;
 	}
 	
-	public static String makeIngredientString(IngredientGroup group) {
+	public static String makeIngredientString(FoodGroup group) {
 		StringBuilder sb = new StringBuilder();
-		List<IngredientInfoForm> list = group.getIngredientList();
+		List<FoodForm> list = group.getIngredientList();
 		
 		if(list != null) {
-			for (IngredientInfoForm ingredient : list) {
-				sb.append(ingredient.getIngredientName()).append(SPACE);
+			for (FoodForm ingredient : list) {
+				sb.append(ingredient.getFoodName()).append(SPACE);
 			}
 		}
 		return sb.toString();

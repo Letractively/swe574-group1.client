@@ -22,9 +22,11 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *       &lt;sequence>
  *         &lt;element name="dateOfBirth" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="image" type="{http://www.w3.org/2001/XMLSchema}base64Binary" minOccurs="0"/>
- *         &lt;element name="ingredientBlackList" type="{http://ws.backend.fsn.swe574.boun.edu/}ingredientInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="ingredientBlackList" type="{http://ws.backend.fsn.swe574.boun.edu/}foodInfo" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="location" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="profileMessage" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="surname" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/extension>
  *   &lt;/complexContent>
@@ -39,7 +41,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "image",
     "ingredientBlackList",
     "location",
-    "profileMessage"
+    "name",
+    "profileMessage",
+    "surname"
 })
 public class GetProfileResponse
     extends BaseServiceResponse
@@ -48,9 +52,11 @@ public class GetProfileResponse
     protected XMLGregorianCalendar dateOfBirth;
     protected byte[] image;
     @XmlElement(nillable = true)
-    protected List<IngredientInfo> ingredientBlackList;
+    protected List<FoodInfo> ingredientBlackList;
     protected String location;
+    protected String name;
     protected String profileMessage;
+    protected String surname;
 
     /**
      * Gets the value of the dateOfBirth property.
@@ -116,13 +122,13 @@ public class GetProfileResponse
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link IngredientInfo }
+     * {@link FoodInfo }
      * 
      * 
      */
-    public List<IngredientInfo> getIngredientBlackList() {
+    public List<FoodInfo> getIngredientBlackList() {
         if (ingredientBlackList == null) {
-            ingredientBlackList = new ArrayList<IngredientInfo>();
+            ingredientBlackList = new ArrayList<FoodInfo>();
         }
         return this.ingredientBlackList;
     }
@@ -152,6 +158,30 @@ public class GetProfileResponse
     }
 
     /**
+     * Gets the value of the name property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Sets the value of the name property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setName(String value) {
+        this.name = value;
+    }
+
+    /**
      * Gets the value of the profileMessage property.
      * 
      * @return
@@ -173,6 +203,30 @@ public class GetProfileResponse
      */
     public void setProfileMessage(String value) {
         this.profileMessage = value;
+    }
+
+    /**
+     * Gets the value of the surname property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getSurname() {
+        return surname;
+    }
+
+    /**
+     * Sets the value of the surname property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setSurname(String value) {
+        this.surname = value;
     }
 
 }

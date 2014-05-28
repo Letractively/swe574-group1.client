@@ -30,6 +30,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetProfileResponse }
+     * 
+     */
+    public GetProfileResponse createGetProfileResponse() {
+        return new GetProfileResponse();
+    }
+
+    /**
+     * Create an instance of {@link FoodInfo }
+     * 
+     */
+    public FoodInfo createFoodInfo() {
+        return new FoodInfo();
+    }
+
+    /**
      * Create an instance of {@link IngredientInfo }
      * 
      */
@@ -38,11 +54,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link SearchForUsersResponse }
+     * Create an instance of {@link GetRecipeFeedsResponse }
      * 
      */
-    public SearchForUsersResponse createSearchForUsersResponse() {
-        return new SearchForUsersResponse();
+    public GetRecipeFeedsResponse createGetRecipeFeedsResponse() {
+        return new GetRecipeFeedsResponse();
     }
 
     /**
@@ -62,11 +78,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetProfileResponse }
+     * Create an instance of {@link FoodList }
      * 
      */
-    public GetProfileResponse createGetProfileResponse() {
-        return new GetProfileResponse();
+    public FoodList createFoodList() {
+        return new FoodList();
     }
 
     /**
@@ -78,11 +94,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetRecipeFeedsResponse }
+     * Create an instance of {@link SearchForUsersResponse }
      * 
      */
-    public GetRecipeFeedsResponse createGetRecipeFeedsResponse() {
-        return new GetRecipeFeedsResponse();
+    public SearchForUsersResponse createSearchForUsersResponse() {
+        return new SearchForUsersResponse();
     }
 
 }

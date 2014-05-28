@@ -25,8 +25,8 @@ import tr.edu.boun.swe574.fsn.web.common.ws.WSCaller;
 import tr.edu.boun.swe574.fsn.web.wicket.FsnSession;
 import tr.edu.boun.swe574.fsn.web.wicket.common.BasePanel;
 import tr.edu.boun.swe574.fsn.web.wicket.home.HomePage;
+import edu.boun.swe574.fsn.common.client.food.FoodInfo;
 import edu.boun.swe574.fsn.common.client.food.GetIngredientsResponse;
-import edu.boun.swe574.fsn.common.client.food.IngredientInfo;
 
 
 public class AddToBL extends BasePanel {
@@ -44,9 +44,9 @@ public class AddToBL extends BasePanel {
 	private AjaxSubmitLink lnkCancel;
 	private FeedbackPanel feedbackPanel = new FeedbackPanel("feedBackPanel");
 	
-	private final List<IngredientInfo> ingredients = new ArrayList<IngredientInfo>();
-	private final HashMap<String, IngredientInfo> ingredientsHash = new HashMap<String, IngredientInfo>();
-	private final List<IngredientInfo> ingredientsSelected = new ArrayList<IngredientInfo>();
+	private final List<FoodInfo> ingredients = new ArrayList<FoodInfo>();
+	private final HashMap<String, FoodInfo> ingredientsHash = new HashMap<String, FoodInfo>();
+	private final List<FoodInfo> ingredientsSelected = new ArrayList<FoodInfo>();
 	
 	public AddToBL(String id, final ModalWindow mwDeleteFromBL) { 
 		super(id);
@@ -57,8 +57,8 @@ public class AddToBL extends BasePanel {
 		if(ingredientsResponse.getListOfIngredients() != null && !ingredientsResponse.getListOfIngredients().isEmpty()) {
 			ingredients.addAll(ingredientsResponse.getListOfIngredients());
 			//put to hash
-			for (IngredientInfo info : ingredients) {
-				ingredientsHash.put(info.getIngredientName(), info);
+			for (FoodInfo info : ingredients) {
+				ingredientsHash.put(info.getFoodName(), info);
 			}
 		}
 		
@@ -85,9 +85,9 @@ public class AddToBL extends BasePanel {
 
 	                List<String> choices = new ArrayList<String>(10);
 
-	                for (final IngredientInfo locale : ingredients)
+	                for (final FoodInfo locale : ingredients)
 	                {
-	                    final String country = locale.getIngredientName();
+	                    final String country = locale.getFoodName();
 
 	                    if (country.toUpperCase().startsWith(input.toUpperCase()))
 	                    {
@@ -123,11 +123,11 @@ public class AddToBL extends BasePanel {
 	                    CharSequence urlFor = requestCycle.urlFor(bookmarkablePageRequestHandler);
 	                    String selectedIng = field.getModelObject();
 	                    
-	                    IngredientInfo ingredientInfo = ingredientsHash.get(selectedIng);
+	                    FoodInfo ingredientInfo = ingredientsHash.get(selectedIng);
 	                    if(ingredientInfo != null)  {
 	                    	if(!ingredientsSelected.contains(ingredientInfo)) {
 	                    		ingredientsSelected.add(ingredientInfo);
-	                    		System.out.println("---------------ingredient added:" + selectedIng + " " + ingredientsSelected.size());
+//	                    		System.out.println("---------------ingredient added:" + selectedIng + " " + ingredientsSelected.size());
 	                    	}
 	                    }
 	                    field.setDefaultModelObject(getIngredientString());
@@ -198,10 +198,9 @@ public class AddToBL extends BasePanel {
 	
 	private String getIngredientString() {
 		StringBuilder sb = new StringBuilder();
-		for (IngredientInfo info : ingredientsSelected) {
-			sb.append(info.getIngredientName()).append(",");
+		for (FoodInfo info : ingredientsSelected) {
+			sb.append(info.getFoodName()).append(",");
 		}
-		System.out.println("----------------IngString:" + sb.toString());
 		return sb.toString();
 	}
 	

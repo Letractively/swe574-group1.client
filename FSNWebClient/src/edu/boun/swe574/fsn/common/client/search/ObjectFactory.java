@@ -38,11 +38,27 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link BaseServiceResponse }
+     * Create an instance of {@link RecipeInfo }
      * 
      */
-    public BaseServiceResponse createBaseServiceResponse() {
-        return new BaseServiceResponse();
+    public RecipeInfo createRecipeInfo() {
+        return new RecipeInfo();
+    }
+
+    /**
+     * Create an instance of {@link FoodInfo }
+     * 
+     */
+    public FoodInfo createFoodInfo() {
+        return new FoodInfo();
+    }
+
+    /**
+     * Create an instance of {@link IngredientInfo }
+     * 
+     */
+    public IngredientInfo createIngredientInfo() {
+        return new IngredientInfo();
     }
 
     /**
@@ -54,19 +70,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link RecipeInfo }
+     * Create an instance of {@link BaseServiceResponse }
      * 
      */
-    public RecipeInfo createRecipeInfo() {
-        return new RecipeInfo();
-    }
-
-    /**
-     * Create an instance of {@link IngredientInfo }
-     * 
-     */
-    public IngredientInfo createIngredientInfo() {
-        return new IngredientInfo();
+    public BaseServiceResponse createBaseServiceResponse() {
+        return new BaseServiceResponse();
     }
 
 }

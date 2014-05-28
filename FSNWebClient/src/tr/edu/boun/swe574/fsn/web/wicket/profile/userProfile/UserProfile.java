@@ -16,13 +16,14 @@ import org.apache.wicket.request.resource.DynamicImageResource;
 
 import tr.edu.boun.swe574.fsn.web.common.DateUtil;
 import tr.edu.boun.swe574.fsn.web.common.FsnRoles;
-import tr.edu.boun.swe574.fsn.web.common.info.IngredientGroup;
-import tr.edu.boun.swe574.fsn.web.common.info.IngredientInfoForm;
+import tr.edu.boun.swe574.fsn.web.common.info.FoodGroup;
+import tr.edu.boun.swe574.fsn.web.common.info.FoodForm;
+import tr.edu.boun.swe574.fsn.web.common.util.Validator;
 import tr.edu.boun.swe574.fsn.web.common.ws.WSCaller;
 import tr.edu.boun.swe574.fsn.web.wicket.FsnSession;
 import tr.edu.boun.swe574.fsn.web.wicket.common.BasePage;
+import edu.boun.swe574.fsn.common.client.network.FoodInfo;
 import edu.boun.swe574.fsn.common.client.network.GetProfileResponse;
-import edu.boun.swe574.fsn.common.client.network.IngredientInfo;
 
 @AuthorizeInstantiation(value = {FsnRoles.USER})
 public class UserProfile extends BasePage {
@@ -34,7 +35,7 @@ public class UserProfile extends BasePage {
 
 	private static Logger logger = Logger.getLogger(UserProfile.class);
 
-	private final  List<IngredientGroup> blackListCategorized;
+	private final  List<FoodGroup> blackListCategorized;
 	
 
 	public UserProfile(String email) {
@@ -44,8 +45,8 @@ public class UserProfile extends BasePage {
 		}
 		
 		final GetProfileResponse profile = WSCaller.getNetworkService().getProfileOfOtherUser(FsnSession.getInstance().getUser().getToken(), email);
-		List<IngredientInfoForm> blackList = convertToIngList(profile.getIngredientBlackList());
-		blackListCategorized = IngredientGroup.categorize(blackList);
+		List<FoodForm> blackList = convertToIngList(profile.getIngredientBlackList());
+		blackListCategorized = FoodGroup.categorize(blackList);
 		
 		Label lblMessage = new Label("lblMessage", profile.getProfileMessage());
 		Label lblLocation = new Label("lblLocation", profile.getLocation());
@@ -90,11 +91,11 @@ public class UserProfile extends BasePage {
 
 			@Override
 			protected void populateItem(LoopItem item) {
-				IngredientGroup group = blackListCategorized.get(item.getIndex());
+				FoodGroup group = blackListCategorized.get(item.getIndex());
 				
 				item.add(new Label("category", group.getCategoryName()));
 				
-				final List<IngredientInfoForm> ingredientList = group.getIngredientList();
+				final List<FoodForm> ingredientList = group.getIngredientList();
 				
 				Loop loopIng = new Loop("ingredientsLoop", ingredientList.size()) {
 
@@ -105,9 +106,9 @@ public class UserProfile extends BasePage {
 
 					@Override
 					protected void populateItem(LoopItem item2) {
-						final IngredientInfoForm ingredientInfo = ingredientList.get(item2.getIndex());
+						final FoodForm ingredientInfo = ingredientList.get(item2.getIndex());
 						
-				        item2.add(new Label("ingredient", ingredientInfo.getIngredientName()));
+				        item2.add(new Label("ingredient", ingredientInfo.getFoodName()));
 					}
 					
 				};
@@ -123,16 +124,17 @@ public class UserProfile extends BasePage {
 		add(lblBirthDate);
 	}
 	
-	private List<IngredientInfoForm> convertToIngList(List<IngredientInfo> ingredientBlackList) {
-		List<IngredientInfoForm> list = new ArrayList<IngredientInfoForm>();
-		IngredientInfoForm info;
+	private List<FoodForm> convertToIngList(List<FoodInfo> ingredientBlackList) {
+		List<FoodForm> list = new ArrayList<FoodForm>();
+		FoodForm info;
 		
 		if(ingredientBlackList != null) {
-			for (IngredientInfo iInfo : ingredientBlackList) {
-				info = new IngredientInfoForm();
-				info.setCategoryName(iInfo.getCategoryName());
-				info.setIngredientId(iInfo.getIngredientId());
-				info.setIngredientName(iInfo.getIngredientName());
+			for (FoodInfo iInfo : ingredientBlackList) {
+				info = new FoodForm();
+				//TODO
+				info.setCategoryName(Validator.fixNullCategory(null));
+				info.setId(iInfo.getFoodId());
+				info.setFoodName(iInfo.getFoodName());
 				list.add(info);
 			}
 		}

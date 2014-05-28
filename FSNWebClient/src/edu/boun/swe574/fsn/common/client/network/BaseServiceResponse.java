@@ -1,8 +1,6 @@
 
 package edu.boun.swe574.fsn.common.client.network;
 
-import java.io.Serializable;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlSeeAlso;
@@ -39,13 +37,9 @@ import javax.xml.bind.annotation.XmlType;
     SearchForUsersResponse.class,
     GetRecipeFeedsResponse.class
 })
-public class BaseServiceResponse implements Serializable {
+public class BaseServiceResponse {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1019475413463370796L;
-	protected Integer errorCode;
+    protected Integer errorCode;
     protected Integer resultCode;
 
     /**

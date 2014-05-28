@@ -25,21 +25,6 @@ public interface NetworkService {
 
     /**
      * 
-     * @param email
-     * @param token
-     * @return
-     *     returns edu.boun.swe574.fsn.common.client.network.BaseServiceResponse
-     */
-    @WebMethod
-    @WebResult(partName = "return")
-    public BaseServiceResponse follow(
-        @WebParam(name = "token", partName = "token")
-        String token,
-        @WebParam(name = "email", partName = "email")
-        String email);
-
-    /**
-     * 
      * @param token
      * @return
      *     returns edu.boun.swe574.fsn.common.client.network.GetProfileResponse
@@ -103,6 +88,21 @@ public interface NetworkService {
 
     /**
      * 
+     * @param email
+     * @param token
+     * @return
+     *     returns edu.boun.swe574.fsn.common.client.network.BaseServiceResponse
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    public BaseServiceResponse follow(
+        @WebParam(name = "token", partName = "token")
+        String token,
+        @WebParam(name = "email", partName = "email")
+        String email);
+
+    /**
+     * 
      * @param token
      * @return
      *     returns edu.boun.swe574.fsn.common.client.network.SearchForUsersResponse
@@ -130,5 +130,62 @@ public interface NetworkService {
         int index,
         @WebParam(name = "pageSize", partName = "pageSize")
         int pageSize);
+
+    /**
+     * 
+     * @param token
+     * @param image
+     * @return
+     *     returns edu.boun.swe574.fsn.common.client.network.BaseServiceResponse
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    public BaseServiceResponse updatePhoto(
+        @WebParam(name = "token", partName = "token")
+        String token,
+        @WebParam(name = "image", partName = "image")
+        byte[] image);
+
+    /**
+     * 
+     * @param token
+     * @return
+     *     returns edu.boun.swe574.fsn.common.client.network.BaseServiceResponse
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    public BaseServiceResponse deletePhoto(
+        @WebParam(name = "token", partName = "token")
+        String token);
+
+    /**
+     * 
+     * @param token
+     * @param addlistIn
+     * @return
+     *     returns edu.boun.swe574.fsn.common.client.network.BaseServiceResponse
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    public BaseServiceResponse addToBlacklist(
+        @WebParam(name = "token", partName = "token")
+        String token,
+        @WebParam(name = "addlistIn", partName = "addlistIn")
+        FoodList addlistIn);
+
+    /**
+     * 
+     * @param rmlistIn
+     * @param token
+     * @return
+     *     returns edu.boun.swe574.fsn.common.client.network.BaseServiceResponse
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    public BaseServiceResponse removeFromBlacklist(
+        @WebParam(name = "token", partName = "token")
+        String token,
+        @WebParam(name = "rmlistIn", partName = "rmlistIn")
+        FoodList rmlistIn);
 
 }

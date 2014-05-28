@@ -58,8 +58,8 @@ public class FsnSession extends AuthenticatedWebSession {
     	
         WebUser user = new WebUser();
         user.setEmail(username);
-        user.setFirstName("Myra");
-        user.setLastName("Hudson");
+        user.setFirstName(login.getName());
+        user.setLastName(login.getSurname());
         user.setToken(login.getToken());
         this.user = user;
         return true;

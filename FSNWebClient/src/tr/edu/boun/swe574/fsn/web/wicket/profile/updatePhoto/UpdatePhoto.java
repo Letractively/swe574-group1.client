@@ -1,8 +1,5 @@
 package tr.edu.boun.swe574.fsn.web.wicket.profile.updatePhoto;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;

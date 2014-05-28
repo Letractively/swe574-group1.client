@@ -37,5 +37,5 @@ public class WebUser implements Serializable {
 	public void setToken(String token) {
 		this.token = token;
 	}
-
+	
 }

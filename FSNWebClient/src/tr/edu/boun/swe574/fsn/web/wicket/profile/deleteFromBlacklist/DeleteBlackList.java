@@ -8,7 +8,7 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 
-import tr.edu.boun.swe574.fsn.web.common.info.IngredientInfoForm;
+import tr.edu.boun.swe574.fsn.web.common.info.FoodForm;
 import tr.edu.boun.swe574.fsn.web.wicket.FsnSession;
 import tr.edu.boun.swe574.fsn.web.wicket.common.BasePanel;
 
@@ -28,15 +28,15 @@ public class DeleteBlackList extends BasePanel {
 	private AjaxSubmitLink lnkCancel;
 	private FeedbackPanel feedbackPanel = new FeedbackPanel("feedBackPanel");
 	
-	public DeleteBlackList(String id, final ModalWindow mwDeleteFromBL, final IngredientInfoForm ingredientInfo) { 
+	public DeleteBlackList(String id, final ModalWindow mwDeleteFromBL, final FoodForm ingredientInfo) { 
 		super(id);
 		
-		logger.info(FsnSession.getInstance().getUser().getEmail() + " is deleting " + ingredientInfo.getIngredientName() + " from the BL");
+		logger.info(FsnSession.getInstance().getUser().getEmail() + " is deleting " + ingredientInfo.getFoodName() + " from the BL");
 		
 		
 		form = new Form<Void>("form");
 		
-		Label ingredientName = new Label("lblIngredientName", ingredientInfo.getIngredientName());
+		Label ingredientName = new Label("lblIngredientName", ingredientInfo.getFoodName());
 		form.add(ingredientName);
 		
 

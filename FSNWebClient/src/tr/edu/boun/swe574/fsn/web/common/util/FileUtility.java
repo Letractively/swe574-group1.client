@@ -19,8 +19,4 @@ public class FileUtility {
     	return imgExtensions.contains(fileExtension.toLowerCase(Locale.US));
     }
     
-    public static void main(String[] args) {
-		System.out.println(isImageFile("BSCS_CONTRACT_OPERATIONS_WS_PS%3Fwsdl.JPG"));
-	}
-
 }

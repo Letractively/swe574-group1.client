@@ -1,8 +1,6 @@
 
 package edu.boun.swe574.fsn.common.client.network;
 
-import java.io.Serializable;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
@@ -18,9 +16,9 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="categoryName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="ingredientId" type="{http://www.w3.org/2001/XMLSchema}long"/>
- *         &lt;element name="ingredientName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="amount" type="{http://www.w3.org/2001/XMLSchema}double"/>
+ *         &lt;element name="food" type="{http://ws.backend.fsn.swe574.boun.edu/}foodInfo" minOccurs="0"/>
+ *         &lt;element name="unit" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -31,82 +29,78 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ingredientInfo", propOrder = {
-    "categoryName",
-    "ingredientId",
-    "ingredientName"
+    "amount",
+    "food",
+    "unit"
 })
-public class IngredientInfo implements Serializable {
+public class IngredientInfo {
+
+    protected double amount;
+    protected FoodInfo food;
+    protected String unit;
 
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 8175913242331887026L;
-	protected String categoryName;
-    protected long ingredientId;
-    protected String ingredientName;
+     * Gets the value of the amount property.
+     * 
+     */
+    public double getAmount() {
+        return amount;
+    }
 
     /**
-     * Gets the value of the categoryName property.
+     * Sets the value of the amount property.
+     * 
+     */
+    public void setAmount(double value) {
+        this.amount = value;
+    }
+
+    /**
+     * Gets the value of the food property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link FoodInfo }
+     *     
+     */
+    public FoodInfo getFood() {
+        return food;
+    }
+
+    /**
+     * Sets the value of the food property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link FoodInfo }
+     *     
+     */
+    public void setFood(FoodInfo value) {
+        this.food = value;
+    }
+
+    /**
+     * Gets the value of the unit property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getCategoryName() {
-        return categoryName;
+    public String getUnit() {
+        return unit;
     }
 
     /**
-     * Sets the value of the categoryName property.
+     * Sets the value of the unit property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setCategoryName(String value) {
-        this.categoryName = value;
-    }
-
-    /**
-     * Gets the value of the ingredientId property.
-     * 
-     */
-    public long getIngredientId() {
-        return ingredientId;
-    }
-
-    /**
-     * Sets the value of the ingredientId property.
-     * 
-     */
-    public void setIngredientId(long value) {
-        this.ingredientId = value;
-    }
-
-    /**
-     * Gets the value of the ingredientName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getIngredientName() {
-        return ingredientName;
-    }
-
-    /**
-     * Sets the value of the ingredientName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setIngredientName(String value) {
-        this.ingredientName = value;
+    public void setUnit(String value) {
+        this.unit = value;
     }
 
 }

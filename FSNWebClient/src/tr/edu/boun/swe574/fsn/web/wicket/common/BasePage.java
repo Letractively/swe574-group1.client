@@ -4,22 +4,24 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.sourceforge.easywicket.web.common.EasyPage;
+
 import org.apache.log4j.Logger;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.authroles.authorization.strategies.role.metadata.MetaDataRoleAuthorizationStrategy;
 import org.apache.wicket.markup.html.WebMarkupContainer;
-import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 
 import tr.edu.boun.swe574.fsn.web.wicket.FsnSession;
+import tr.edu.boun.swe574.fsn.web.wicket.food.createRecipe.CreateRecipe;
 import tr.edu.boun.swe574.fsn.web.wicket.home.HomePage;
 import tr.edu.boun.swe574.fsn.web.wicket.profile.myProfile.MyProfile;
 import tr.edu.boun.swe574.fsn.web.wicket.profile.searchUsers.SearchUsers;
 
-public class BasePage extends WebPage {
+public class BasePage extends EasyPage {
 
 	/**
 	 * 
@@ -52,6 +54,8 @@ public class BasePage extends WebPage {
     {
         feedbackPanel = new FeedbackPanel("feedBackPanel");
         feedbackPanel.setOutputMarkupId(true);
+        feedbackPanel.setOutputMarkupPlaceholderTag(true);
+        
         lblEmail = new Label("lblEmail", getFullName());
         profileTab = new WebMarkupContainer("profileTab");
         recipesTab = new WebMarkupContainer("recipesTab");
@@ -130,7 +134,7 @@ public class BasePage extends WebPage {
 
             public void onClick()
             {
-            	setResponsePage(HomePage.class);
+            	setResponsePage(CreateRecipe.class);
             }
 
             private static final long serialVersionUID = 0x6f9ac8930ea687afL;
@@ -206,6 +210,14 @@ public class BasePage extends WebPage {
         MetaDataRoleAuthorizationStrategy.authorize(recommendationTab, RENDER, "USER");
         MetaDataRoleAuthorizationStrategy.authorize(logoutTab, RENDER, "USER");
     }
+    
+	protected void refreshErrorPanel(AjaxRequestTarget ajaxRequestTarget) {
+		if ( ajaxRequestTarget != null ) {
+			if ( feedbackPanel.anyMessage()) {
+				ajaxRequestTarget.add(feedbackPanel);
+			}
+		}
+	}
 
     protected boolean isBlank(Collection collection)
     {

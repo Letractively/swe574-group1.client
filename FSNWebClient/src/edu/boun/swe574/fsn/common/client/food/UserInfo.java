@@ -18,6 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element name="email" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="profileMessage" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="surname" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="userId" type="{http://www.w3.org/2001/XMLSchema}long"/>
  *       &lt;/sequence>
@@ -32,6 +33,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "userInfo", propOrder = {
     "email",
     "name",
+    "profileMessage",
     "surname",
     "userId"
 })
@@ -39,6 +41,7 @@ public class UserInfo {
 
     protected String email;
     protected String name;
+    protected String profileMessage;
     protected String surname;
     protected long userId;
 
@@ -88,6 +91,30 @@ public class UserInfo {
      */
     public void setName(String value) {
         this.name = value;
+    }
+
+    /**
+     * Gets the value of the profileMessage property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getProfileMessage() {
+        return profileMessage;
+    }
+
+    /**
+     * Sets the value of the profileMessage property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setProfileMessage(String value) {
+        this.profileMessage = value;
     }
 
     /**

@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;extension base="{http://ws.backend.fsn.swe574.boun.edu/}baseServiceResponse">
  *       &lt;sequence>
- *         &lt;element name="listOfIngredients" type="{http://ws.backend.fsn.swe574.boun.edu/}ingredientInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="listOfIngredients" type="{http://ws.backend.fsn.swe574.boun.edu/}foodInfo" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/extension>
  *   &lt;/complexContent>
@@ -37,7 +37,7 @@ public class GetIngredientsResponse
 {
 
     @XmlElement(nillable = true)
-    protected List<IngredientInfo> listOfIngredients;
+    protected List<FoodInfo> listOfIngredients;
 
     /**
      * Gets the value of the listOfIngredients property.
@@ -57,13 +57,13 @@ public class GetIngredientsResponse
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link IngredientInfo }
+     * {@link FoodInfo }
      * 
      * 
      */
-    public List<IngredientInfo> getListOfIngredients() {
+    public List<FoodInfo> getListOfIngredients() {
         if (listOfIngredients == null) {
-            listOfIngredients = new ArrayList<IngredientInfo>();
+            listOfIngredients = new ArrayList<FoodInfo>();
         }
         return this.listOfIngredients;
     }

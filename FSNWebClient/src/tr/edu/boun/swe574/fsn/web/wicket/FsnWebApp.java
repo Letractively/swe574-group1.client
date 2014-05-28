@@ -1,14 +1,12 @@
 package tr.edu.boun.swe574.fsn.web.wicket;
 
+import net.sourceforge.easywicket.EasyWicketComponentInitializer;
+
 import org.apache.wicket.Page;
 import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
 import org.apache.wicket.markup.html.WebPage;
-import org.apache.wicket.settings.IExceptionSettings;
 
-import tr.edu.boun.swe574.fsn.web.wicket.exception.AccessDenied;
-import tr.edu.boun.swe574.fsn.web.wicket.exception.PageExpired;
-import tr.edu.boun.swe574.fsn.web.wicket.exception.SysErr;
 import tr.edu.boun.swe574.fsn.web.wicket.home.HomePage;
 import tr.edu.boun.swe574.fsn.web.wicket.login.FsnSignInPage;
 import tr.edu.boun.swe574.fsn.web.wicket.register.Register;
@@ -40,6 +38,7 @@ public class FsnWebApp extends AuthenticatedWebApplication {
         super.init();
         initMounts();
         initExceptionPages();
+        initEasyWicket();
     }
     
 	private void initExceptionPages() {
@@ -48,6 +47,11 @@ public class FsnWebApp extends AuthenticatedWebApplication {
 //				IExceptionSettings.SHOW_INTERNAL_ERROR_PAGE);
 //		getApplicationSettings().setPageExpiredErrorPage(PageExpired.class);
 //        getApplicationSettings().setAccessDeniedPage(AccessDenied.class);
+	}
+	
+	private void initEasyWicket() {
+		getComponentInitializationListeners().add(new EasyWicketComponentInitializer());
+
 	}
 
 }

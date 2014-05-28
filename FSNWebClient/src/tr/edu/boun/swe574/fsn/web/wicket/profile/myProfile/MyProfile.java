@@ -19,9 +19,10 @@ import org.apache.wicket.request.resource.DynamicImageResource;
 
 import tr.edu.boun.swe574.fsn.web.common.DateUtil;
 import tr.edu.boun.swe574.fsn.web.common.FsnRoles;
-import tr.edu.boun.swe574.fsn.web.common.info.IngredientGroup;
-import tr.edu.boun.swe574.fsn.web.common.info.IngredientInfoForm;
+import tr.edu.boun.swe574.fsn.web.common.info.FoodGroup;
+import tr.edu.boun.swe574.fsn.web.common.info.FoodForm;
 import tr.edu.boun.swe574.fsn.web.common.info.UserInfoForm;
+import tr.edu.boun.swe574.fsn.web.common.util.Validator;
 import tr.edu.boun.swe574.fsn.web.common.ws.WSCaller;
 import tr.edu.boun.swe574.fsn.web.wicket.FsnSession;
 import tr.edu.boun.swe574.fsn.web.wicket.common.BasePage;
@@ -30,8 +31,8 @@ import tr.edu.boun.swe574.fsn.web.wicket.profile.deleteFromBlacklist.DeleteBlack
 import tr.edu.boun.swe574.fsn.web.wicket.profile.deletePhoto.DeletePhoto;
 import tr.edu.boun.swe574.fsn.web.wicket.profile.editProfile.EditProfile;
 import tr.edu.boun.swe574.fsn.web.wicket.profile.updatePhoto.UpdatePhoto;
+import edu.boun.swe574.fsn.common.client.network.FoodInfo;
 import edu.boun.swe574.fsn.common.client.network.GetProfileResponse;
-import edu.boun.swe574.fsn.common.client.network.IngredientInfo;
 
 @AuthorizeInstantiation(value = {FsnRoles.USER})
 public class MyProfile extends BasePage {
@@ -51,14 +52,14 @@ public class MyProfile extends BasePage {
 	private AjaxLink<Object> lnkAddToBL;
 	private AjaxLink<Object> lnkDeletePhoto;
 	private AjaxLink<Object> lnkUpdatePhoto;
-	private final  List<IngredientGroup> blackListCategorized;
+	private final  List<FoodGroup> blackListCategorized;
 	
 
 	public MyProfile() {
 		
 		final GetProfileResponse profile = WSCaller.getNetworkService().getProfileOfSelf(FsnSession.getInstance().getUser().getToken());
-		List<IngredientInfoForm> blackList = convertToIngList(profile.getIngredientBlackList());
-		blackListCategorized = IngredientGroup.categorize(blackList);
+		List<FoodForm> blackList = convertToIngList(profile.getIngredientBlackList());
+		blackListCategorized = FoodGroup.categorize(blackList);
 		
 		Label lblMessage = new Label("lblMessage", profile.getProfileMessage());
 		Label lblLocation = new Label("lblLocation", profile.getLocation());
@@ -283,11 +284,11 @@ public class MyProfile extends BasePage {
 
 			@Override
 			protected void populateItem(LoopItem item) {
-				IngredientGroup group = blackListCategorized.get(item.getIndex());
+				FoodGroup group = blackListCategorized.get(item.getIndex());
 				
 				item.add(new Label("category", group.getCategoryName()));
 				
-				final List<IngredientInfoForm> ingredientList = group.getIngredientList();
+				final List<FoodForm> ingredientList = group.getIngredientList();
 				
 				Loop loopIng = new Loop("ingredientsLoop", ingredientList.size()) {
 
@@ -298,7 +299,7 @@ public class MyProfile extends BasePage {
 
 					@Override
 					protected void populateItem(LoopItem item2) {
-						final IngredientInfoForm ingredientInfo = ingredientList.get(item2.getIndex());
+						final FoodForm ingredientInfo = ingredientList.get(item2.getIndex());
 						
 						AjaxLink<Object> lnDeleteBL = new AjaxLink<Object>("lnDeleteBL") {
 
@@ -315,7 +316,7 @@ public class MyProfile extends BasePage {
 				            }
 				        };
 				        
-				        lnDeleteBL.add(new Label("ingredient", ingredientInfo.getIngredientName()));
+				        lnDeleteBL.add(new Label("ingredient", ingredientInfo.getFoodName()));
 						item2.add(lnDeleteBL);
 					}
 					
@@ -343,16 +344,17 @@ public class MyProfile extends BasePage {
 		return form;
 	}
 	
-	private List<IngredientInfoForm> convertToIngList(List<IngredientInfo> ingredientBlackList) {
-		List<IngredientInfoForm> list = new ArrayList<IngredientInfoForm>();
-		IngredientInfoForm info;
+	private List<FoodForm> convertToIngList(List<FoodInfo> ingredientBlackList) {
+		List<FoodForm> list = new ArrayList<FoodForm>();
+		FoodForm info;
 		
 		if(ingredientBlackList != null) {
-			for (IngredientInfo iInfo : ingredientBlackList) {
-				info = new IngredientInfoForm();
-				info.setCategoryName(iInfo.getCategoryName());
-				info.setIngredientId(iInfo.getIngredientId());
-				info.setIngredientName(iInfo.getIngredientName());
+			for (FoodInfo iInfo : ingredientBlackList) {
+				info = new FoodForm();
+				//TODO
+				info.setCategoryName(Validator.fixNullCategory(null));
+				info.setId(iInfo.getFoodId());
+				info.setFoodName(iInfo.getFoodName());
 				list.add(info);
 			}
 		}
