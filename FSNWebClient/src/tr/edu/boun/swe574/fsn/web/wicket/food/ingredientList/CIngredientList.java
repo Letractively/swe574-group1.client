@@ -18,7 +18,7 @@ import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.model.StringResourceModel;
 
 import tr.edu.boun.swe574.fsn.web.common.info.IngredientForm;
-import tr.edu.boun.swe574.fsn.web.event.MsisdnRangeRemovedEvent;
+import tr.edu.boun.swe574.fsn.web.event.IngredientRemovedEvent;
 import tr.edu.boun.swe574.fsn.web.wicket.common.BasePanel;
 
 
@@ -67,7 +67,7 @@ public class CIngredientList extends BasePanel implements IEasyWicket {
 
 					@Override
 					public void onClick(AjaxRequestTarget ajaxRequestTarget) {
-						dispatchEvent(new MsisdnRangeRemovedEvent(CIngredientList.this, 
+						dispatchEvent(new IngredientRemovedEvent(CIngredientList.this, 
 								ajaxRequestTarget, current));
 					}
 				};

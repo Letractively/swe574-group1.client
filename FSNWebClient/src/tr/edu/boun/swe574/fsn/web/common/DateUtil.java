@@ -4,6 +4,9 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+
+import javax.xml.datatype.XMLGregorianCalendar;
 
 public class DateUtil {
 
@@ -39,6 +42,17 @@ public class DateUtil {
 		else
 			return sdfCalendarDate.format(date);
 	}
+	
+	public static String getDateString(XMLGregorianCalendar date, String pattern) {
+		SimpleDateFormat sdfCalendarDate = new SimpleDateFormat(pattern);
+		if (date == null)
+			return null;
+		else {
+			GregorianCalendar gregorianCalendar = date.toGregorianCalendar();
+			Date time = gregorianCalendar.getTime();
+			return sdfCalendarDate.format(time);
+		}
+	}
 
 	public static String getDateTimeString(Date date) {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
@@ -68,7 +82,10 @@ public class DateUtil {
 
 	public static final String datePattern = "dd.MM.yyyy";
 	public static final String dateTimePattern = "dd.MM.yyyy HH:mm:ss";
-	public static final String CDB_DATE_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
 	public static final String DATE_FORMAT_DDMMYYYY = "dd-MM-yyyy";
+	public static final String DATE_FORMAT_MM_DD_YYYY = "MM-dd-yyyy";
+	
+	
+	
 
 }

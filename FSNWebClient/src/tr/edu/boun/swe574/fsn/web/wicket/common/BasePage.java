@@ -19,6 +19,7 @@ import tr.edu.boun.swe574.fsn.web.wicket.FsnSession;
 import tr.edu.boun.swe574.fsn.web.wicket.food.createRecipe.CreateRecipe;
 import tr.edu.boun.swe574.fsn.web.wicket.home.HomePage;
 import tr.edu.boun.swe574.fsn.web.wicket.profile.myProfile.MyProfile;
+import tr.edu.boun.swe574.fsn.web.wicket.profile.recipeFeeds.RecipeFeeds;
 import tr.edu.boun.swe574.fsn.web.wicket.profile.searchUsers.SearchUsers;
 
 public class BasePage extends EasyPage {
@@ -100,36 +101,39 @@ public class BasePage extends EasyPage {
             private static final long serialVersionUID = 0x359a985dcf54ffc7L;
         };
         
-        Link lnkFollowedUsers = new Link("lnkFollowedUsers") {
-
-            public void onClick()
-            {
-            	setResponsePage(HomePage.class);
-            }
-
-            private static final long serialVersionUID = 0xe27d6824a3ab259eL;
-        };
+//        Link lnkFollowedUsers = new Link("lnkFollowedUsers") {
+//
+//            public void onClick()
+//            {
+//            	setResponsePage(HomePage.class);
+//            }
+//
+//            private static final long serialVersionUID = 0xe27d6824a3ab259eL;
+//        };
+//        lnkFollowedUsers.setVisible(false);
         
-        Link lnkMyFollowers = new Link("lnkMyFollowers") {
-
-            public void onClick()
-            {
-            	setResponsePage(HomePage.class);
-            }
-
-            private static final long serialVersionUID = 0xc775ea122dcf194dL;
-        };
+//        Link lnkMyFollowers = new Link("lnkMyFollowers") {
+//
+//            public void onClick()
+//            {
+//            	setResponsePage(HomePage.class);
+//            }
+//
+//            private static final long serialVersionUID = 0xc775ea122dcf194dL;
+//        };
+//        lnkMyFollowers.setVisible(false);
         
-        Link lnkMyRecipes = new Link("lnkMyRecipes") {
-
-            public void onClick()
-            {
-            	setResponsePage(HomePage.class);
-            }
-
-            private static final long serialVersionUID = 0x9bcc5d32c789f552L;
-        };
-        
+//        Link lnkMyRecipes = new Link("lnkMyRecipes") {
+//
+//            public void onClick()
+//            {
+//            	setResponsePage(HomePage.class);
+//            }
+//
+//            private static final long serialVersionUID = 0x9bcc5d32c789f552L;
+//        };
+//        lnkMyRecipes.setVisible(false);
+//        
         Link lnkCreateRecipe = new Link("lnkCreateRecipe") {
 
             public void onClick()
@@ -144,7 +148,7 @@ public class BasePage extends EasyPage {
 
             public void onClick()
             {
-            	setResponsePage(HomePage.class);
+            	setResponsePage(RecipeFeeds.class);
             }
 
             private static final long serialVersionUID = 0xe8b5dd6ffd40ce2L;
@@ -168,15 +172,15 @@ public class BasePage extends EasyPage {
         profileTab.add(new Component[] {
             lnkSearchForUsers
         });
-        profileTab.add(new Component[] {
-            lnkFollowedUsers
-        });
-        profileTab.add(new Component[] {
-            lnkMyFollowers
-        });
-        recipesTab.add(new Component[] {
-            lnkMyRecipes
-        });
+//        profileTab.add(new Component[] {
+//            lnkFollowedUsers
+//        });
+//        profileTab.add(new Component[] {
+//            lnkMyFollowers
+//        });
+//        recipesTab.add(new Component[] {
+//            lnkMyRecipes
+//        });
         recipesTab.add(new Component[] {
             lnkCreateRecipe
         });
@@ -259,6 +263,5 @@ public class BasePage extends EasyPage {
                 feedbackPanel
             });
     }
-
 
 }

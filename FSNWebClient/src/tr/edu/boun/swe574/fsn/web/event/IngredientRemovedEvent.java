@@ -1,15 +1,15 @@
 package tr.edu.boun.swe574.fsn.web.event;
 
-import net.sourceforge.easywicket.web.event.ItemSelectedEvent;
+import net.sourceforge.easywicket.web.event.ItemSelectedForDeletionEvent;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 
 import tr.edu.boun.swe574.fsn.web.common.info.IngredientForm;
 
-public class MsisdnRangeSelectedEvent extends ItemSelectedEvent<IngredientForm> {
+public class IngredientRemovedEvent extends ItemSelectedForDeletionEvent<IngredientForm> {
 
-	public MsisdnRangeSelectedEvent(Component source,
+	public IngredientRemovedEvent(Component source,
 			AjaxRequestTarget requestTarget, IngredientForm targetItem) {
 		super(source, requestTarget, targetItem);
 		

@@ -21,7 +21,7 @@ import tr.edu.boun.swe574.fsn.web.common.info.FoodForm;
 import tr.edu.boun.swe574.fsn.web.common.info.IngredientForm;
 import tr.edu.boun.swe574.fsn.web.common.util.Validator;
 import tr.edu.boun.swe574.fsn.web.common.ws.WSCaller;
-import tr.edu.boun.swe574.fsn.web.event.MsisdnRangeSelectedEvent;
+import tr.edu.boun.swe574.fsn.web.event.IngredientSelectedEvent;
 import tr.edu.boun.swe574.fsn.web.wicket.FsnSession;
 import tr.edu.boun.swe574.fsn.web.wicket.common.BasePanel;
 import edu.boun.swe574.fsn.common.client.food.GetIngredientsResponse;
@@ -122,7 +122,7 @@ public class CIngredientEntry extends BasePanel implements IEasyWicket {
 			return;
 		}
 		
-		dispatchEvent(new MsisdnRangeSelectedEvent(this, AjaxRequestTarget.get(),
+		dispatchEvent(new IngredientSelectedEvent(this, AjaxRequestTarget.get(),
 				ingredientForm));
 		
 		

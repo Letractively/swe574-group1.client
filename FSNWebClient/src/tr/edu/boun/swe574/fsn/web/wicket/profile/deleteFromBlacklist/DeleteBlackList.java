@@ -9,6 +9,7 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 
 import tr.edu.boun.swe574.fsn.web.common.info.FoodForm;
+import tr.edu.boun.swe574.fsn.web.common.ws.WSCaller;
 import tr.edu.boun.swe574.fsn.web.wicket.FsnSession;
 import tr.edu.boun.swe574.fsn.web.wicket.common.BasePanel;
 
@@ -26,7 +27,7 @@ public class DeleteBlackList extends BasePanel {
 	
 	private AjaxSubmitLink lnkDelete;
 	private AjaxSubmitLink lnkCancel;
-	private FeedbackPanel feedbackPanel = new FeedbackPanel("feedBackPanel");
+	private FeedbackPanel feedbackPanel = new FeedbackPanel("warnPanel");
 	
 	public DeleteBlackList(String id, final ModalWindow mwDeleteFromBL, final FoodForm ingredientInfo) { 
 		super(id);
@@ -50,7 +51,7 @@ public class DeleteBlackList extends BasePanel {
             @Override
             protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
             	//Call delete service
-            	
+            	WSCaller.deleteFromBL(FsnSession.getInstance().getUser().getToken(), ingredientInfo);
             	mwDeleteFromBL.close(target);
             }
 

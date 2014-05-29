@@ -5,22 +5,25 @@ import net.sourceforge.easywicket.EasyWicket;
 import org.apache.log4j.Logger;
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.markup.html.form.TextField;
 
+import tr.edu.boun.swe574.fsn.web.common.FsnRoles;
 import tr.edu.boun.swe574.fsn.web.common.info.IngredientForm;
 import tr.edu.boun.swe574.fsn.web.common.info.RecipeForm;
 import tr.edu.boun.swe574.fsn.web.common.ws.WSCaller;
-import tr.edu.boun.swe574.fsn.web.event.MsisdnRangeRemovedEvent;
-import tr.edu.boun.swe574.fsn.web.event.MsisdnRangeSelectedEvent;
+import tr.edu.boun.swe574.fsn.web.event.IngredientRemovedEvent;
+import tr.edu.boun.swe574.fsn.web.event.IngredientSelectedEvent;
 import tr.edu.boun.swe574.fsn.web.wicket.FsnSession;
 import tr.edu.boun.swe574.fsn.web.wicket.common.BasePage;
 import tr.edu.boun.swe574.fsn.web.wicket.food.ingredientEntry.CIngredientEntry;
 import tr.edu.boun.swe574.fsn.web.wicket.food.ingredientList.CIngredientList;
 import tr.edu.boun.swe574.fsn.web.wicket.home.HomePage;
 
+@AuthorizeInstantiation(value = {FsnRoles.USER})
 public class CreateRecipe extends BasePage {
 
 	/**
@@ -31,7 +34,6 @@ public class CreateRecipe extends BasePage {
 	private final static Logger logger = Logger.getLogger(CreateRecipe.class);
 
 	IngredientForm ingredientInfo;
-//	List<IngredientForm> ingredientInfoList;
 	String directionsStr;
 	RecipeForm recipeForm;
 
@@ -64,10 +66,10 @@ public class CreateRecipe extends BasePage {
 	public void pack() {
 		super.pack();
 
-		msisdnRangeEntry.addEventLink(MsisdnRangeSelectedEvent.class, this,
+		msisdnRangeEntry.addEventLink(IngredientSelectedEvent.class, this,
 				"onMsisdnRangeAdded");
 
-		msisdnRangeList.addEventLink(MsisdnRangeRemovedEvent.class, this,
+		msisdnRangeList.addEventLink(IngredientRemovedEvent.class, this,
 				"onMsisdnRangeRemoved");
 		
 		btnSend.add(new AttributeModifier("onclick", "disableButton(this)"));
@@ -80,7 +82,7 @@ public class CreateRecipe extends BasePage {
 	}
 
 	@SuppressWarnings("unused")
-	private void onMsisdnRangeAdded(MsisdnRangeSelectedEvent event) {
+	private void onMsisdnRangeAdded(IngredientSelectedEvent event) {
 		if (logger.isInfoEnabled()) {
 			logger.info("Food to be added=" + event.getTargetItem());
 		}
@@ -109,7 +111,7 @@ public class CreateRecipe extends BasePage {
 	}
 
 	@SuppressWarnings("unused")
-	private void onMsisdnRangeRemoved(MsisdnRangeRemovedEvent event) {
+	private void onMsisdnRangeRemoved(IngredientRemovedEvent event) {
 		if (logger.isInfoEnabled()) {
 			logger.info("Ingredient to be removed=" + event.getTargetItem());
 		}

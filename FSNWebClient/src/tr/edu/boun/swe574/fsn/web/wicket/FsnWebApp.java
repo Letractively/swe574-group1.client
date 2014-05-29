@@ -7,8 +7,8 @@ import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSessio
 import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
 import org.apache.wicket.markup.html.WebPage;
 
-import tr.edu.boun.swe574.fsn.web.wicket.home.HomePage;
 import tr.edu.boun.swe574.fsn.web.wicket.login.FsnSignInPage;
+import tr.edu.boun.swe574.fsn.web.wicket.profile.recipeFeeds.RecipeFeeds;
 import tr.edu.boun.swe574.fsn.web.wicket.register.Register;
 
 public class FsnWebApp extends AuthenticatedWebApplication {
@@ -25,7 +25,7 @@ public class FsnWebApp extends AuthenticatedWebApplication {
 
 	@Override
 	public Class<? extends Page> getHomePage() {
-		return HomePage.class;
+		return RecipeFeeds.class;
 	}
 	
     private void initMounts()

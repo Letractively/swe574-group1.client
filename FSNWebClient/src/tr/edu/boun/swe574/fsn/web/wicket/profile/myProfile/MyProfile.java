@@ -11,7 +11,7 @@ import org.apache.wicket.authroles.authorization.strategies.role.annotations.Aut
 import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
 import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow.WindowClosedCallback;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.image.Image;
+import org.apache.wicket.markup.html.image.NonCachingImage;
 import org.apache.wicket.markup.html.list.Loop;
 import org.apache.wicket.markup.html.list.LoopItem;
 import org.apache.wicket.request.resource.ContextRelativeResource;
@@ -19,8 +19,8 @@ import org.apache.wicket.request.resource.DynamicImageResource;
 
 import tr.edu.boun.swe574.fsn.web.common.DateUtil;
 import tr.edu.boun.swe574.fsn.web.common.FsnRoles;
-import tr.edu.boun.swe574.fsn.web.common.info.FoodGroup;
 import tr.edu.boun.swe574.fsn.web.common.info.FoodForm;
+import tr.edu.boun.swe574.fsn.web.common.info.FoodGroup;
 import tr.edu.boun.swe574.fsn.web.common.info.UserInfoForm;
 import tr.edu.boun.swe574.fsn.web.common.util.Validator;
 import tr.edu.boun.swe574.fsn.web.common.ws.WSCaller;
@@ -58,6 +58,9 @@ public class MyProfile extends BasePage {
 	public MyProfile() {
 		
 		final GetProfileResponse profile = WSCaller.getNetworkService().getProfileOfSelf(FsnSession.getInstance().getUser().getToken());
+		
+		System.out.println("getProfileOfSelf service result code:" + profile.getResultCode() + " errorCode:" + profile.getErrorCode() + " location:" + profile.getLocation() + " image:" + profile.getImage());
+		
 		List<FoodForm> blackList = convertToIngList(profile.getIngredientBlackList());
 		blackListCategorized = FoodGroup.categorize(blackList);
 		
@@ -74,6 +77,9 @@ public class MyProfile extends BasePage {
 		
 		Label lblBirthDate = new Label("lblBirthDate", dateString);
 		
+		Label lblName = new Label("lblName", profile.getName() + " " + profile.getSurname());
+		add(lblName);
+		
 		DynamicImageResource ds = new DynamicImageResource() {
 
 			/**
@@ -88,10 +94,10 @@ public class MyProfile extends BasePage {
 		};
 		
 		if(profile.getImage() != null) {
-			Image img = new Image("search_icon", ds);
+			NonCachingImage img = new NonCachingImage("search_icon", ds);
 			add(img);
 		} else {
-			add(new Image("search_icon", new ContextRelativeResource("/images/icon-user-default.png")));
+			add(new NonCachingImage("search_icon", new ContextRelativeResource("/images/icon-user-default.png")));
 		}
 		
 		mwUpdateProfile = new ModalWindow("mwUpdateProfile");

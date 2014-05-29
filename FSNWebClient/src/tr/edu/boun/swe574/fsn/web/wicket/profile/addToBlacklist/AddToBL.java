@@ -27,6 +27,7 @@ import tr.edu.boun.swe574.fsn.web.wicket.common.BasePanel;
 import tr.edu.boun.swe574.fsn.web.wicket.home.HomePage;
 import edu.boun.swe574.fsn.common.client.food.FoodInfo;
 import edu.boun.swe574.fsn.common.client.food.GetIngredientsResponse;
+import edu.boun.swe574.fsn.common.client.network.BaseServiceResponse;
 
 
 public class AddToBL extends BasePanel {
@@ -42,7 +43,7 @@ public class AddToBL extends BasePanel {
 	
 	private AjaxSubmitLink lnkDelete;
 	private AjaxSubmitLink lnkCancel;
-	private FeedbackPanel feedbackPanel = new FeedbackPanel("feedBackPanel");
+	private FeedbackPanel feedbackPanel = new FeedbackPanel("msgPanel");
 	
 	private final List<FoodInfo> ingredients = new ArrayList<FoodInfo>();
 	private final HashMap<String, FoodInfo> ingredientsHash = new HashMap<String, FoodInfo>();
@@ -52,7 +53,7 @@ public class AddToBL extends BasePanel {
 		super(id);
 		
 		//get all ingredients from foods service
-		GetIngredientsResponse ingredientsResponse = WSCaller.getFoodService().getIngredients(FsnSession.getInstance().getUser().getToken(), "");
+		GetIngredientsResponse ingredientsResponse = WSCaller.getFoodService().getIngredients(FsnSession.getInstance().getUser().getToken(), "S%");
 		
 		if(ingredientsResponse.getListOfIngredients() != null && !ingredientsResponse.getListOfIngredients().isEmpty()) {
 			ingredients.addAll(ingredientsResponse.getListOfIngredients());
@@ -127,7 +128,6 @@ public class AddToBL extends BasePanel {
 	                    if(ingredientInfo != null)  {
 	                    	if(!ingredientsSelected.contains(ingredientInfo)) {
 	                    		ingredientsSelected.add(ingredientInfo);
-//	                    		System.out.println("---------------ingredient added:" + selectedIng + " " + ingredientsSelected.size());
 	                    	}
 	                    }
 	                    field.setDefaultModelObject(getIngredientString());
@@ -138,13 +138,6 @@ public class AddToBL extends BasePanel {
 	            protected void onError(AjaxRequestTarget target) {
 	            }
 	   });
-	     
-	     
-		
-		
-		
-		
-		
 		
 
 		lnkDelete = new AjaxSubmitLink("lnkDelete") {
@@ -157,7 +150,10 @@ public class AddToBL extends BasePanel {
             @Override
             protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
             	//Call delete service
-            	
+            	if(!ingredientsSelected.isEmpty()) {
+                	WSCaller.addToBL(FsnSession.getInstance().getUser().getToken(), ingredientsSelected);
+            	}
+
             	mwDeleteFromBL.close(target);
             }
 

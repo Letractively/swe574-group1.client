@@ -7,6 +7,7 @@ import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 
+import tr.edu.boun.swe574.fsn.web.common.ws.WSCaller;
 import tr.edu.boun.swe574.fsn.web.wicket.FsnSession;
 import tr.edu.boun.swe574.fsn.web.wicket.common.BasePanel;
 
@@ -22,7 +23,7 @@ public class DeletePhoto extends BasePanel {
 
 	private AjaxSubmitLink lnkDelete;
 	private AjaxSubmitLink lnkCancel;
-	private FeedbackPanel feedbackPanel = new FeedbackPanel("feedBackPanel");
+	private FeedbackPanel feedbackPanel = new FeedbackPanel("warnPanel");
 	private Form<Void> form;
 	
 	public DeletePhoto(String id, final ModalWindow mwCreateBlog) { 
@@ -41,8 +42,8 @@ public class DeletePhoto extends BasePanel {
 			
             @Override
             protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
-            	//TODO Call web service to delete profile photo
-            	
+            	//Call web service to delete profile photo
+            	WSCaller.deletePhoto(FsnSession.getInstance().getUser().getToken());
             	mwCreateBlog.close(target);
             }
 

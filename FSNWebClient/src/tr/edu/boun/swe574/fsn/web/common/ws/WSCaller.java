@@ -4,23 +4,25 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-
 import org.apache.log4j.Logger;
 
-import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
-
+import tr.edu.boun.swe574.fsn.web.common.DateUtil;
+import tr.edu.boun.swe574.fsn.web.common.info.FoodForm;
 import tr.edu.boun.swe574.fsn.web.common.info.IngredientForm;
 import tr.edu.boun.swe574.fsn.web.common.info.RecipeForm;
+import tr.edu.boun.swe574.fsn.web.common.info.UserInfoForm;
 import tr.edu.boun.swe574.fsn.web.common.info.WebUser;
 import tr.edu.boun.swe574.fsn.web.common.util.PropertyReader;
 import tr.edu.boun.swe574.fsn.web.common.util.Validator;
-import tr.edu.boun.swe574.fsn.web.wicket.food.createRecipe.CreateRecipe;
+
+import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
+
 import edu.boun.swe574.fsn.common.client.auth.AuthService;
 import edu.boun.swe574.fsn.common.client.food.BaseServiceResponse;
+import edu.boun.swe574.fsn.common.client.food.FoodInfo;
 import edu.boun.swe574.fsn.common.client.food.FoodsService;
 import edu.boun.swe574.fsn.common.client.food.RecipeInfo;
+import edu.boun.swe574.fsn.common.client.network.FoodList;
 import edu.boun.swe574.fsn.common.client.network.NetworkService;
 import edu.boun.swe574.fsn.common.client.search.SearchService;
 
@@ -48,6 +50,12 @@ public class WSCaller {
 		return StubCache.getInstance().getSearchStub(searchWsURL);
 	}
 	
+	/**
+	 * Call createRecipeService
+	 * @param user
+	 * @param recipeForm
+	 * @return
+	 */
 	public static BaseServiceResponse createRecipe(WebUser user, RecipeForm recipeForm) {
 		RecipeInfo recipe = new RecipeInfo();
 		
@@ -74,5 +82,80 @@ public class WSCaller {
 		
 		return response;
 	}
+	
+	public static edu.boun.swe574.fsn.common.client.network.BaseServiceResponse addToBL(String token, List<FoodInfo> ingredientsSelected) {
+		
+		FoodList foodList = new FoodList(); 
+		edu.boun.swe574.fsn.common.client.network.FoodInfo food;
+		for (FoodInfo foodInfo : ingredientsSelected) {
+			food = new edu.boun.swe574.fsn.common.client.network.FoodInfo();
+			food.setFoodId(foodInfo.getFoodId());
+			food.setFoodName(foodInfo.getFoodName());
+			foodList.getList().add(food);
+		}
+		edu.boun.swe574.fsn.common.client.network.BaseServiceResponse response = getNetworkService().addToBlacklist(token, foodList);
+		
+		if(logger.isDebugEnabled()) {
+			logger.debug("addToBL service result code:" + response.getResultCode() + " errorCode:" + response.getErrorCode());
+		}
+		System.out.println("addToBL service result code:" + response.getResultCode() + " errorCode:" + response.getErrorCode());
+		
+		return response;
+	}
+	
+	public static edu.boun.swe574.fsn.common.client.network.BaseServiceResponse updateProfile(String token, UserInfoForm form) {
+		String dateString = null;
+		if(form.getBirthdate() != null) {
+			dateString = DateUtil.getDateString(form.getBirthdate(), DateUtil.DATE_FORMAT_MM_DD_YYYY);
+		}
+		
+		edu.boun.swe574.fsn.common.client.network.BaseServiceResponse response = getNetworkService().editProfile(token, form.getLocation(), dateString, form.getProfileMessage());
+		
+		if(logger.isDebugEnabled()) {
+			logger.debug("editProfile service result code:" + response.getResultCode() + " errorCode:" + response.getErrorCode());
+		}
+		System.out.println("editProfile service result code:" + response.getResultCode() + " errorCode:" + response.getErrorCode());
+		
+		return response;
+	}
+	
+	public static edu.boun.swe574.fsn.common.client.network.BaseServiceResponse deleteFromBL(String token, FoodForm food) {
+		FoodList foodList = new FoodList(); 
+		edu.boun.swe574.fsn.common.client.network.FoodInfo foodInfo = new edu.boun.swe574.fsn.common.client.network.FoodInfo();
+		foodInfo.setFoodId(food.getId());
+		foodInfo.setFoodName(food.getFoodName());
+		foodList.getList().add(foodInfo);
+		edu.boun.swe574.fsn.common.client.network.BaseServiceResponse response = getNetworkService().removeFromBlacklist(token, foodList);
+		
+		if(logger.isDebugEnabled()) {
+			logger.debug("removeFromBlacklist service result code:" + response.getResultCode() + " errorCode:" + response.getErrorCode());
+		}
+		System.out.println("removeFromBlacklist service result code:" + response.getResultCode() + " errorCode:" + response.getErrorCode());
+		
+		return response;
+	}
+	
+	public static edu.boun.swe574.fsn.common.client.network.BaseServiceResponse updatePhoto(String token, byte[] image) {
+		edu.boun.swe574.fsn.common.client.network.BaseServiceResponse response = getNetworkService().updatePhoto(token, image);
+		
+		if(logger.isDebugEnabled()) {
+			logger.debug("updatePhoto service result code:" + response.getResultCode() + " errorCode:" + response.getErrorCode());
+		}
+		System.out.println("updatePhoto service result code:" + response.getResultCode() + " errorCode:" + response.getErrorCode());
+		
+		return response;
+	}
+	
+	public static edu.boun.swe574.fsn.common.client.network.BaseServiceResponse deletePhoto(String token) {
+		edu.boun.swe574.fsn.common.client.network.BaseServiceResponse response = getNetworkService().deletePhoto(token);
+		
+		if(logger.isDebugEnabled()) {
+			logger.debug("deletePhoto service result code:" + response.getResultCode() + " errorCode:" + response.getErrorCode());
+		}
+		System.out.println("deletePhoto service result code:" + response.getResultCode() + " errorCode:" + response.getErrorCode());
+
+		return response;
+	}
+	
 
 }

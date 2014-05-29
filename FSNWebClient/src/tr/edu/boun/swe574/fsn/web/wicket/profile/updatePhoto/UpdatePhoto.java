@@ -11,6 +11,7 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.util.lang.Bytes;
 
 import tr.edu.boun.swe574.fsn.web.common.util.FileUtility;
+import tr.edu.boun.swe574.fsn.web.common.ws.WSCaller;
 import tr.edu.boun.swe574.fsn.web.wicket.FsnSession;
 import tr.edu.boun.swe574.fsn.web.wicket.common.BasePanel;
 
@@ -29,7 +30,7 @@ public class UpdatePhoto extends BasePanel {
 
 	private AjaxSubmitLink lnkDelete;
 	private AjaxSubmitLink lnkCancel;
-	private FeedbackPanel feedbackPanel = new FeedbackPanel("feedBackPanel");
+	private FeedbackPanel feedbackPanel = new FeedbackPanel("warnPanel");
 	private Form<Void> form;
 	
 	private FileUploadField fileUploadField;
@@ -69,10 +70,9 @@ public class UpdatePhoto extends BasePanel {
 					error("Please choose a valid image file");
 					return;
 				}
-				
             	
-				//TODO call WS to save photo
-				
+				//call WS to save photo
+				WSCaller.updatePhoto(FsnSession.getInstance().getUser().getToken(),  fileUploadField.getFileUploads().get(0).getBytes());
             	mwUpdatePhoto.close(target);
             }
 

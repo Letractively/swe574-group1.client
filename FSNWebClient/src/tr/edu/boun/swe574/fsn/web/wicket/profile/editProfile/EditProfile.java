@@ -18,6 +18,7 @@ import org.apache.wicket.model.PropertyModel;
 import tr.edu.boun.swe574.fsn.web.common.FsnRoles;
 import tr.edu.boun.swe574.fsn.web.common.info.UserInfoForm;
 import tr.edu.boun.swe574.fsn.web.common.info.WebUser;
+import tr.edu.boun.swe574.fsn.web.common.ws.WSCaller;
 import tr.edu.boun.swe574.fsn.web.wicket.FsnSession;
 import tr.edu.boun.swe574.fsn.web.wicket.common.BasePanel;
 
@@ -35,7 +36,7 @@ public class EditProfile extends BasePanel {
 	
 	private AjaxSubmitLink lnkUpdate;
 	private AjaxSubmitLink lnkCancel;
-	private FeedbackPanel feedbackPanel = new FeedbackPanel("feedBackPanel");
+	private FeedbackPanel feedbackPanel = new FeedbackPanel("warnPanel");
 	
 	private TextField<String> name;
 	private TextField<String> surname;
@@ -64,11 +65,13 @@ public class EditProfile extends BasePanel {
 		
 		location = new TextField<String>("location", new PropertyModel<String>(formInfo, "location"));
 		location.setModelObject(profile.getLocation());
+		location.setRequired(true);
 		form.add(location);
 		
         birthday = DateTextField.forDatePattern("birthday", "yyyy-MM-dd");
         birthday.setModel(new PropertyModel<Date>(formInfo, "birthdate"));
         birthday.setModelObject(profile.getBirthdate());
+        birthday.setRequired(true);
         birthday.add(new DatePicker() {
 
             /**
@@ -86,6 +89,7 @@ public class EditProfile extends BasePanel {
 		
 		profileMessage = new TextArea<String>("profileMessage", new PropertyModel<String>(formInfo, "profileMessage"));
 		profileMessage.setModelObject(profile.getProfileMessage());
+		profileMessage.setRequired(true);
 		form.add(profileMessage);
 
 		lnkUpdate = new AjaxSubmitLink("lnkUpdate") {
@@ -97,7 +101,7 @@ public class EditProfile extends BasePanel {
 			
             @Override
             protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
-            	//call ws
+            	WSCaller.updateProfile(FsnSession.getInstance().getUser().getToken(), formInfo);
 				mwEditProfile.close(target);
             }
 
