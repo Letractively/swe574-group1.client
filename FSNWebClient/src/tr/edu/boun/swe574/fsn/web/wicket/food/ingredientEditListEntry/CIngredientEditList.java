@@ -1,5 +1,6 @@
-package tr.edu.boun.swe574.fsn.web.wicket.food.ingredientList;
+package tr.edu.boun.swe574.fsn.web.wicket.food.ingredientEditListEntry;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,24 +9,34 @@ import net.sourceforge.easywicket.EasyWicket;
 import net.sourceforge.easywicket.EasyWicketUtil;
 import net.sourceforge.easywicket.IEasyWicket;
 
+import org.apache.log4j.Logger;
 import org.apache.wicket.MarkupContainer;
+import org.apache.wicket.ajax.AjaxEventBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
-import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.form.ChoiceRenderer;
+import org.apache.wicket.markup.html.form.DropDownChoice;
+import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.list.Loop;
 import org.apache.wicket.markup.html.list.LoopItem;
+import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.model.StringResourceModel;
 
+import tr.edu.boun.swe574.fsn.web.common.info.FoodForm;
 import tr.edu.boun.swe574.fsn.web.common.info.IngredientForm;
+import tr.edu.boun.swe574.fsn.web.common.util.Validator;
+import tr.edu.boun.swe574.fsn.web.common.ws.WSCaller;
 import tr.edu.boun.swe574.fsn.web.event.IngredientRemovedEvent;
+import tr.edu.boun.swe574.fsn.web.wicket.FsnSession;
 import tr.edu.boun.swe574.fsn.web.wicket.common.BasePanel;
+import edu.boun.swe574.fsn.common.client.food.GetIngredientsResponse;
 
 
-public class CIngredientList extends BasePanel implements IEasyWicket {
+public class CIngredientEditList extends BasePanel implements IEasyWicket {
 	
 
-//	private final static Logger logger = LoggerFactory.getLogger(CIngredientList.class);
+	private final static Logger logger = Logger.getLogger(CIngredientEditList.class);
 
 	
 	private static final long serialVersionUID = 1L;
@@ -35,31 +46,48 @@ public class CIngredientList extends BasePanel implements IEasyWicket {
 	Loop rangeList;
 
 	private EasyWicket annot;
-
-
-	public CIngredientList(String id) {
-		super(id);
 	
+    TextField<String>     amount;
+    TextField<String>     unit;
+    DropDownChoice<FoodForm> tariffType;
+    
+    List<FoodForm> listOfFoods;
+    
+	public CIngredientEditList(String id) {
+		super(id);
+		
 		easyWicketUtil = EasyWicketUtil.getInstance();
+		
+		setOutputMarkupId(true);
+		
+		listOfFoods = getFoodList();
 		
 		rangeList = new Loop("rangeList", new PropertyModel<Integer>(this, 
 		"listCount")) {
 	
 			private static final long serialVersionUID = 1L;
+			
 
 			@Override
 			protected void populateItem(LoopItem li) {
 				List<IngredientForm> currentList = getMsisdnRangeList();
 				final IngredientForm current = currentList.get(li.getIndex());
 				
-				Label lblStart = new Label("amount", String.valueOf(current.getAmount()));
-				li.add(lblStart);
+				amount = new TextField("amount", new PropertyModel(current, "amount"));
+				li.add(amount);
 				
-				Label lblLast = new Label("unit", current.getUnit());
-				li.add(lblLast);
+				unit = new TextField("unit", new PropertyModel(current, "unit"));
+				li.add(unit);
+				unit.setOutputMarkupId(true);
 				
-				Label lblFood = new Label("food", current.getFood().getFoodName());
-				li.add(lblFood);
+				DropDownChoice<FoodForm> tariffType = new DropDownChoice<FoodForm>("tariffType",
+                        new Model<FoodForm>(current.getFood()),
+                        listOfFoods,
+                        new ChoiceRenderer<FoodForm>("foodName",
+                                                       "id"));
+				
+				li.add(tariffType);
+
 				
 				AjaxLink<IngredientForm> lnkRemove = new AjaxLink<IngredientForm>("lnkRemove") {
 					
@@ -67,7 +95,7 @@ public class CIngredientList extends BasePanel implements IEasyWicket {
 
 					@Override
 					public void onClick(AjaxRequestTarget ajaxRequestTarget) {
-						dispatchEvent(new IngredientRemovedEvent(CIngredientList.this, 
+						dispatchEvent(new IngredientRemovedEvent(CIngredientEditList.this, 
 								ajaxRequestTarget, current));
 					}
 				};
@@ -75,9 +103,23 @@ public class CIngredientList extends BasePanel implements IEasyWicket {
 				li.add(lnkRemove);
 				
 			}
-		};
+			
 
+		};
+		
 		add(rangeList);		
+	}
+	
+	public List<FoodForm> getFoodList() {
+		GetIngredientsResponse ingredients = WSCaller.getFoodService().getIngredients(FsnSession.getInstance().getUser().getToken(), "S");
+		List<FoodForm> listOfIngredients = Validator.convertToFoodFormList(ingredients.getListOfIngredients());
+		
+		
+		if ( logger.isInfoEnabled() ) {
+			logger.info("Got foods list. ResultCode=" + ingredients.getResultCode() + " Number of foods:" + (listOfIngredients == null ? 0 : listOfIngredients.size()));
+		}
+		
+		return listOfIngredients != null ? listOfIngredients : new ArrayList<FoodForm>();
 	}
 
 	@Override

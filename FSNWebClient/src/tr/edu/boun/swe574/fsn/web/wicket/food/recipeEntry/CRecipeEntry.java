@@ -1,4 +1,4 @@
-package tr.edu.boun.swe574.fsn.web.wicket.recipe.recipeEntry;
+package tr.edu.boun.swe574.fsn.web.wicket.food.recipeEntry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,14 +10,12 @@ import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.list.Loop;
 import org.apache.wicket.markup.html.list.LoopItem;
 
 import tr.edu.boun.swe574.fsn.web.common.DateUtil;
-import tr.edu.boun.swe574.fsn.web.common.info.UserInfoForm;
 import tr.edu.boun.swe574.fsn.web.wicket.common.BasePanel;
-import tr.edu.boun.swe574.fsn.web.wicket.profile.editProfile.EditProfile;
+import tr.edu.boun.swe574.fsn.web.wicket.food.changeRecipe.ChangeRecipe;
 import edu.boun.swe574.fsn.common.client.network.IngredientInfo;
 import edu.boun.swe574.fsn.common.client.network.RecipeInfo;
 
@@ -79,7 +77,7 @@ public class CRecipeEntry extends BasePanel implements IEasyWicket {
 
 			@Override
             public void onClick(AjaxRequestTarget arg0) {
-				//TODO set response page
+				setResponsePage(new ChangeRecipe(recipeInfo));
             }
         };
         add(lnkChangeRecipe);

@@ -6,6 +6,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 public class DateUtil {
@@ -86,6 +88,10 @@ public class DateUtil {
 	public static final String DATE_FORMAT_MM_DD_YYYY = "MM-dd-yyyy";
 	
 	
+	public static XMLGregorianCalendar getXMLDate() throws DatatypeConfigurationException {
+		GregorianCalendar gregorianCalendar = new GregorianCalendar();
+		XMLGregorianCalendar xmlGregorianCalendar = DatatypeFactory.newInstance().newXMLGregorianCalendar(gregorianCalendar);
+		return xmlGregorianCalendar;
+	}
 	
-
 }

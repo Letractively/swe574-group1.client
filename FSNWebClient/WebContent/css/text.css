@@ -69,13 +69,14 @@ h6,
 ol,
 ul,
 pre,
-table,
+
 address
 
 {
 	margin-bottom: 20px;
 }
 
+table,
 fieldset
 {
 	margin-bottom: 10px;

@@ -19,8 +19,8 @@ import tr.edu.boun.swe574.fsn.web.event.IngredientRemovedEvent;
 import tr.edu.boun.swe574.fsn.web.event.IngredientSelectedEvent;
 import tr.edu.boun.swe574.fsn.web.wicket.FsnSession;
 import tr.edu.boun.swe574.fsn.web.wicket.common.BasePage;
-import tr.edu.boun.swe574.fsn.web.wicket.food.ingredientEntry.CIngredientEntry;
-import tr.edu.boun.swe574.fsn.web.wicket.food.ingredientList.CIngredientList;
+import tr.edu.boun.swe574.fsn.web.wicket.food.ingredientEntryAdd.CIngredientEntry;
+import tr.edu.boun.swe574.fsn.web.wicket.food.ingredientListEntry.CIngredientList;
 import tr.edu.boun.swe574.fsn.web.wicket.home.HomePage;
 
 @AuthorizeInstantiation(value = {FsnRoles.USER})
@@ -127,6 +127,8 @@ public class CreateRecipe extends BasePage {
 	 public void actionSend() {
 		 //TODO validation
 		 WSCaller.createRecipe(FsnSession.getInstance().getUser(), recipeForm);
+		 
+		 
 		 setResponsePage(HomePage.class);
 	 }
 

@@ -1,0 +1,51 @@
+<wicket:extend>
+	<div style="padding-top: 10px;">
+		<form wicket:id="form">
+			<div style="text-align: right;">
+				<span><a class="post-tag" wicket:id="lnkViewRecipe">View
+						Recipe</a>&nbsp;&nbsp; <a class="post-tag" wicket:id="lnkViewHistory">View
+						History</a></span>
+			</div>
+			<hr />
+			<h2>
+				<span wicket:id="title"></span>
+			</h2>
+			<br />
+			<div>
+				<h4>Add new ingredient(s)</h4>
+				<table>
+					<tr>
+						<td><span wicket:id="msisdnRangeEntry" /></td>
+					</tr>
+					<tr>
+						<td><span wicket:id="msisdnRangeList" /></td>
+					</tr>
+				</table>
+				<h4>Modify or delete existing ingredients</h4>
+				<table>
+					<tr>
+						<td><span wicket:id="msisdnRangeEditList" /></td>
+					</tr>
+				</table>
+			</div>
+			<div>
+				<h4>Directions</h4>
+				<textarea wicket:id="directions" rows="5" cols="80" maxlength="799"></textarea>
+			</div>
+			<br/>
+			<div>
+				<h4>Revision note</h4>
+				<input wicket:id="revisionNote" maxlength="199" size="90" />
+			</div>
+			<br/>
+			<table>
+				<tr>
+					<td>
+						<button type="submit" wicket:id="btnSend">Change Recipe</button>
+					</td>
+				</tr>
+			</table>
+			<br/>
+		</form>
+	</div>
+</wicket:extend>

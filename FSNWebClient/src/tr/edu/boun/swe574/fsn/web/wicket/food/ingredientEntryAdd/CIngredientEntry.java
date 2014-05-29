@@ -1,4 +1,4 @@
-package tr.edu.boun.swe574.fsn.web.wicket.food.ingredientEntry;
+package tr.edu.boun.swe574.fsn.web.wicket.food.ingredientEntryAdd;
 
 import java.util.ArrayList;
 import java.util.List;

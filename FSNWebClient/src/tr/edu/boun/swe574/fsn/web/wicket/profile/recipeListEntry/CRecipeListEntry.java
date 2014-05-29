@@ -35,7 +35,7 @@ import tr.edu.boun.swe574.fsn.web.common.constants.ResultCode;
 import tr.edu.boun.swe574.fsn.web.common.ws.WSCaller;
 import tr.edu.boun.swe574.fsn.web.wicket.FsnSession;
 import tr.edu.boun.swe574.fsn.web.wicket.common.BasePanel;
-import tr.edu.boun.swe574.fsn.web.wicket.profile.viewRecipe.ViewRecipe;
+import tr.edu.boun.swe574.fsn.web.wicket.food.viewRecipe.ViewRecipe;
 import edu.boun.swe574.fsn.common.client.network.GetRecipeFeedsResponse;
 import edu.boun.swe574.fsn.common.client.network.RecipeInfo;
 

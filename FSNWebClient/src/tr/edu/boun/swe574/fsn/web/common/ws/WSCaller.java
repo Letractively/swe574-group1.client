@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import javax.xml.datatype.DatatypeConfigurationException;
+
 import org.apache.log4j.Logger;
 
 import tr.edu.boun.swe574.fsn.web.common.DateUtil;
@@ -21,6 +23,7 @@ import edu.boun.swe574.fsn.common.client.auth.AuthService;
 import edu.boun.swe574.fsn.common.client.food.BaseServiceResponse;
 import edu.boun.swe574.fsn.common.client.food.FoodInfo;
 import edu.boun.swe574.fsn.common.client.food.FoodsService;
+import edu.boun.swe574.fsn.common.client.food.IngredientInfo;
 import edu.boun.swe574.fsn.common.client.food.RecipeInfo;
 import edu.boun.swe574.fsn.common.client.network.FoodList;
 import edu.boun.swe574.fsn.common.client.network.NetworkService;
@@ -153,7 +156,43 @@ public class WSCaller {
 			logger.debug("deletePhoto service result code:" + response.getResultCode() + " errorCode:" + response.getErrorCode());
 		}
 		System.out.println("deletePhoto service result code:" + response.getResultCode() + " errorCode:" + response.getErrorCode());
+		
+		
 
+		return response;
+	}
+	
+	public static BaseServiceResponse createNewVersionOfRecipe(WebUser user, RecipeForm recipeForm, long parentRecipeId) {
+		RecipeInfo recipe = new RecipeInfo();
+		
+		try {
+			recipe.setCreateDate(DateUtil.getXMLDate());
+		} catch (DatatypeConfigurationException e) {
+			e.printStackTrace();
+			logger.error("", e);
+		}
+		
+		recipe.setDirections(recipeForm.getDirections());
+		
+		recipe.setOwnerName(user.getFirstName());
+		recipe.setOwnerSurname(user.getLastName());
+		recipe.setRating(0);
+		recipe.setRecipeName(recipeForm.getTitle());
+		
+		List<IngredientForm> ingredientFormList = recipeForm.getIngredientFormList();
+		
+		if(ingredientFormList != null) {
+			for (IngredientForm ingredientForm : ingredientFormList) {
+				IngredientInfo ingredient = Validator.convertToIngredientInfo(ingredientForm);
+				recipe.getIngredientList().add(ingredient);
+			}
+		}
+		
+		BaseServiceResponse response = getFoodService().createNewVersionOfRecipe(user.getToken(), recipe, parentRecipeId, recipeForm.getRevisionNote());
+		if(logger.isDebugEnabled()) {
+			logger.debug("createNewVersionOfRecipe service result code:" + response.getResultCode() + " errorCode:" + response.getErrorCode());
+		}
+		System.out.println("createNewVersionOfRecipe service result code:" + response.getResultCode() + " errorCode:" + response.getErrorCode());
 		return response;
 	}
 	
