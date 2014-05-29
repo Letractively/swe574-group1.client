@@ -1,0 +1,31 @@
+<wicket:panel>
+	<div style="text-align: right;">
+		<span><a class="post-tag" wicket:id="lnkChangeRecipe">Change</a>&nbsp;&nbsp;<a
+			class="post-tag" wicket:id="lnkViewHistory">View History</a></span>
+	</div>
+
+	<div class="profileMsg">
+		<hr>
+		<h2>
+			<span wicket:id="lblTitle"></span>
+		</h2>
+		<span style="color: #A4A4A4">By:&nbsp;<span
+			wicket:id="lblOwner"></span>&nbsp;&nbsp;On:&nbsp;<span
+			wicket:id="lblCreateDate"></span></span>
+	</div>
+	<br />
+	<br />
+	<div class="profileMsg">
+		<h4>Ingredients</h4>
+		<span wicket:id="ingredients"> <span wicket:id="lblIngredient"></span><br />
+		</span>
+	</div>
+	<br />
+	<br />
+	<div class="profileMsg">
+		<h4>Directions</h4>
+		<span wicket:id="lblDirections"></span>
+	</div>
+	<br />
+	<br />
+</wicket:panel>

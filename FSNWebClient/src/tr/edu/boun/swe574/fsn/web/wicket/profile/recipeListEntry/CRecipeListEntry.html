@@ -1,17 +1,18 @@
 <wicket:panel>
-	<div>
-		<table class="grey large" wicket:id="resultTable">
-		</table>
-	</div>
+	<form wicket:id="form">
+		<div>
+			<table class="grey large" wicket:id="resultTable">
+			</table>
+		</div>
+	</form>
 	<wicket:fragment wicket:id="frgRecipe">
 		<a wicket:id="lnkRecipe"> <span wicket:id="lblRecipeTitle"
 			style="font-size: large;"></span>
 		</a>
 		<br />
-		<span style="color: #A4A4A4">By:&nbsp;<span wicket:id="lblOwner"></span>&nbsp;&nbsp;son:&nbsp;<span
+		<span style="color: #A4A4A4">By:&nbsp;<span
+			wicket:id="lblOwner"></span>&nbsp;&nbsp;son:&nbsp;<span
 			wicket:id="lblCreateDate"></span></span>
 		<br />
 	</wicket:fragment>
-
-
 </wicket:panel>

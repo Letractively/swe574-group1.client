@@ -14,9 +14,6 @@ public class RecipeFeeds extends BasePage {
 	 */
 	private static final long serialVersionUID = -7761888071957256271L;
 
-	// private static Logger logger = Logger.getLogger(RecipeFeeds.class);
-	
-	
 
 	public RecipeFeeds() {
 		CRecipeListEntry recipeListEntry = new CRecipeListEntry("recipeListEntry");

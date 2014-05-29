@@ -19,6 +19,7 @@ import org.apache.wicket.extensions.markup.html.repeater.data.table.NavigationTo
 import org.apache.wicket.extensions.markup.html.repeater.data.table.PropertyColumn;
 import org.apache.wicket.extensions.markup.html.repeater.util.SortableDataProvider;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.SubmitLink;
 import org.apache.wicket.markup.html.panel.Fragment;
 import org.apache.wicket.markup.repeater.Item;
@@ -34,6 +35,7 @@ import tr.edu.boun.swe574.fsn.web.common.constants.ResultCode;
 import tr.edu.boun.swe574.fsn.web.common.ws.WSCaller;
 import tr.edu.boun.swe574.fsn.web.wicket.FsnSession;
 import tr.edu.boun.swe574.fsn.web.wicket.common.BasePanel;
+import tr.edu.boun.swe574.fsn.web.wicket.profile.viewRecipe.ViewRecipe;
 import edu.boun.swe574.fsn.common.client.network.GetRecipeFeedsResponse;
 import edu.boun.swe574.fsn.common.client.network.RecipeInfo;
 
@@ -48,11 +50,15 @@ public class CRecipeListEntry extends BasePanel implements IEasyWicket {
 
 	private List<RecipeInfo> recipeList;
 	private DataTable<RecipeInfo> dataTable;
+	
+	private Form<Void> form;
 
 	public CRecipeListEntry(String id) {
 		super(id);
 
 		recipeList = new ArrayList<RecipeInfo>();
+		
+		form = new Form<Void>("form");
 
 		//get recipe feeds
 		GetRecipeFeedsResponse response = WSCaller.getNetworkService().getRecipeFeeds(FsnSession.getInstance().getUser().getToken(),1, 100000);
@@ -69,7 +75,8 @@ public class CRecipeListEntry extends BasePanel implements IEasyWicket {
 		
 		dataTable = getDataTable();
 		dataTable.setOutputMarkupId(true);
-		add(dataTable);
+		form.add(dataTable);
+		add(form);
 	}
 
 	@Override
@@ -110,11 +117,10 @@ public class CRecipeListEntry extends BasePanel implements IEasyWicket {
 					private static final long serialVersionUID = -8580276547405546079L;
 
 					public void onSubmit() {
-						//TODO go to recipe page
-//						setResponsePage(new UserProfile(userInfo.getEmail()));
+						setResponsePage(new ViewRecipe(recipe));
 					};
 				};
-
+				
 				Label lblRecipeTitle = new Label("lblRecipeTitle", recipe.getRecipeName());
 				lnkUser.add(lblRecipeTitle);
 				
@@ -125,7 +131,6 @@ public class CRecipeListEntry extends BasePanel implements IEasyWicket {
 				frgUser.add(lblOwner);
 				
 				frgUser.add(lnkUser);
-
 			}
 
 		});
