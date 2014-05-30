@@ -1,8 +1,6 @@
 
 package edu.boun.swe574.fsn.common.client.food;
 
-import java.io.Serializable;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
@@ -35,7 +33,7 @@ import javax.xml.bind.annotation.XmlType;
     "food",
     "unit"
 })
-public class IngredientInfo implements Serializable{
+public class IngredientInfo {
 
     protected double amount;
     protected FoodInfo food;

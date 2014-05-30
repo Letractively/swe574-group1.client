@@ -17,9 +17,9 @@ import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.markup.html.form.TextField;
 
 import tr.edu.boun.swe574.fsn.web.common.FsnRoles;
+import tr.edu.boun.swe574.fsn.web.common.constants.ResultCode;
 import tr.edu.boun.swe574.fsn.web.common.info.IngredientForm;
 import tr.edu.boun.swe574.fsn.web.common.info.RecipeForm;
-import tr.edu.boun.swe574.fsn.web.common.info.WebUser;
 import tr.edu.boun.swe574.fsn.web.common.util.Validator;
 import tr.edu.boun.swe574.fsn.web.common.ws.WSCaller;
 import tr.edu.boun.swe574.fsn.web.event.IngredientRemovedEvent;
@@ -31,7 +31,7 @@ import tr.edu.boun.swe574.fsn.web.wicket.food.ingredientEntryAdd.CIngredientEntr
 import tr.edu.boun.swe574.fsn.web.wicket.food.ingredientListEntry.CIngredientList;
 import tr.edu.boun.swe574.fsn.web.wicket.food.viewRecipe.ViewRecipe;
 import tr.edu.boun.swe574.fsn.web.wicket.home.HomePage;
-import edu.boun.swe574.fsn.common.client.food.BaseServiceResponse;
+import edu.boun.swe574.fsn.common.client.food.CreateNewVersionOfRecipeResponse;
 import edu.boun.swe574.fsn.common.client.network.RecipeInfo;
 
 @AuthorizeInstantiation(value = {FsnRoles.USER})
@@ -112,7 +112,7 @@ public class ChangeRecipe extends BasePage {
 	}
 	
 	public void onClick() {
-		setResponsePage(new ViewRecipe(recipeInfo));
+		setResponsePage(new ViewRecipe(recipeInfo, null));
     }
 	
 	public void onViewHistoryClick() {
@@ -182,25 +182,38 @@ public class ChangeRecipe extends BasePage {
 	}
 	
 	
-	 public void actionSend() {
-		 //TODO validation
-		 
-		 System.out.println("--recipe form is----");
-		 
-		 List<IngredientForm> ingredientFormList = recipeForm.getIngredientFormList();
-		 for (IngredientForm ingredientForm : ingredientFormList) {
-			System.out.println("--Ingredient amount:" + ingredientForm.getAmount() + " unit:" +ingredientForm.getUnit() + " foodId:" + ingredientForm.getFood().getId());
+	public void actionSend() {
+		// TODO validation
+
+		System.out.println("--recipe form is----");
+
+		List<IngredientForm> ingredientFormList = recipeForm
+				.getIngredientFormList();
+		for (IngredientForm ingredientForm : ingredientFormList) {
+			System.out.println("--Ingredient amount:"
+					+ ingredientForm.getAmount() + " unit:"
+					+ ingredientForm.getUnit() + " foodId:"
+					+ ingredientForm.getFood().getId());
 		}
-		 System.out.println("-- and also:");
-		 for (IngredientForm ingredientForm : ingredientListForNewIngredients) {
-			 System.out.println("--Ingredient amount:" + ingredientForm.getAmount() + " unit:" +ingredientForm.getUnit() + " foodId:" + ingredientForm.getFood().getId());
-		 }
-		 
-		 BaseServiceResponse response = WSCaller.createNewVersionOfRecipe(FsnSession.getInstance().getUser(), recipeForm, recipeInfo.getRecipeId());
-		 
-		 
-		 
-		 setResponsePage(HomePage.class);
-	 }
+		System.out.println("-- and also:");
+		for (IngredientForm ingredientForm : ingredientListForNewIngredients) {
+			System.out.println("--Ingredient amount:"
+					+ ingredientForm.getAmount() + " unit:"
+					+ ingredientForm.getUnit() + " foodId:"
+					+ ingredientForm.getFood().getId());
+		}
+
+		CreateNewVersionOfRecipeResponse response = WSCaller
+				.createNewVersionOfRecipe(FsnSession.getInstance().getUser(),
+						recipeForm, recipeInfo.getRecipeId());
+		
+		if(response.getResultCode().intValue() == ResultCode.SUCCESS.getCode()) {
+			//go to view recipe page
+			setResponsePage(new ViewRecipe(null, response.getIdOfRecipeCreated()));
+		} else {
+			setResponsePage(HomePage.class);
+		}
+		
+	}
 
 }

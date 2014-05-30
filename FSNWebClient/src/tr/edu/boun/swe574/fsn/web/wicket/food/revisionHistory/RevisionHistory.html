@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:wicket="http://wicket.apache.org"
+	xmlns="http://www.w3.org/1999/xhtml">
+<body>
+	<wicket:extend>
+		<div style="padding-top: 20px;">
+			<form wicket:id="form">
+				<div>
+					<h3>
+						<span wicket:id="lblTitle"></span>:&nbsp;Revision History
+					</h3>
+				</div>
+				<br />
+				<hr />
+				<div>
+					<table class="grey large" wicket:id="resultTable">
+					</table>
+				</div>
+			</form>
+		</div>
+		<wicket:fragment wicket:id="frgHeaderless">
+			<span wicket:id="lblHeaderless"></span>
+		</wicket:fragment>
+		<wicket:fragment wicket:id="frgDate">
+			<span wicket:id="lblDate"></span>
+		</wicket:fragment>
+		<wicket:fragment wicket:id="frgUser">
+			<span wicket:id="lblUser"></span>
+		</wicket:fragment>
+	</wicket:extend>
+</body>
+</html>

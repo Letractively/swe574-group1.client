@@ -60,11 +60,11 @@ public interface FoodsService {
      * @param parentRecipeId
      * @param revisionNote
      * @return
-     *     returns edu.boun.swe574.fsn.common.client.food.BaseServiceResponse
+     *     returns edu.boun.swe574.fsn.common.client.food.CreateNewVersionOfRecipeResponse
      */
     @WebMethod
     @WebResult(partName = "return")
-    public BaseServiceResponse createNewVersionOfRecipe(
+    public CreateNewVersionOfRecipeResponse createNewVersionOfRecipe(
         @WebParam(name = "token", partName = "token")
         String token,
         @WebParam(name = "recipe", partName = "recipe")

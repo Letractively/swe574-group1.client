@@ -107,7 +107,22 @@ public class Validator {
 		networkRecipe.setRating(info.getRating());
 		networkRecipe.setRecipeId(info.getRecipeId());
 		networkRecipe.setRecipeName(info.getRecipeName());
-		networkRecipe.getIngredientList();
+		
+		List<IngredientInfo> ingredientList = info.getIngredientList();
+		//convertToIngredientForm
+		edu.boun.swe574.fsn.common.client.network.IngredientInfo i;
+		for (IngredientInfo ingredientInfo : ingredientList) {
+			i = new edu.boun.swe574.fsn.common.client.network.IngredientInfo();
+			i.setAmount(ingredientInfo.getAmount());
+			i.setUnit(ingredientInfo.getUnit());
+			//set food
+			FoodInfo food = ingredientInfo.getFood();
+			edu.boun.swe574.fsn.common.client.network.FoodInfo fi = new edu.boun.swe574.fsn.common.client.network.FoodInfo();
+			fi.setFoodId(food.getFoodId());
+			fi.setFoodName(food.getFoodName());
+			i.setFood(fi);
+			networkRecipe.getIngredientList().add(i);
+		}
 		
 		return networkRecipe;
 	}

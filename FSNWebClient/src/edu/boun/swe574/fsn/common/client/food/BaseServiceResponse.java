@@ -35,6 +35,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlSeeAlso({
     GetRevisionHistoryOfRecipeResponse.class,
     GetRecipeResponse.class,
+    CreateNewVersionOfRecipeResponse.class,
     GetIngredientsResponse.class
 })
 public class BaseServiceResponse {

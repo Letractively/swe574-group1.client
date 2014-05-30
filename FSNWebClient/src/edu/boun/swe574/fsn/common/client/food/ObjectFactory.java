@@ -30,11 +30,59 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetRevisionHistoryOfRecipeResponse }
+     * Create an instance of {@link UserInfo }
      * 
      */
-    public GetRevisionHistoryOfRecipeResponse createGetRevisionHistoryOfRecipeResponse() {
-        return new GetRevisionHistoryOfRecipeResponse();
+    public UserInfo createUserInfo() {
+        return new UserInfo();
+    }
+
+    /**
+     * Create an instance of {@link CreateNewVersionOfRecipeResponse }
+     * 
+     */
+    public CreateNewVersionOfRecipeResponse createCreateNewVersionOfRecipeResponse() {
+        return new CreateNewVersionOfRecipeResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetRecipeResponse }
+     * 
+     */
+    public GetRecipeResponse createGetRecipeResponse() {
+        return new GetRecipeResponse();
+    }
+
+    /**
+     * Create an instance of {@link FoodInfo }
+     * 
+     */
+    public FoodInfo createFoodInfo() {
+        return new FoodInfo();
+    }
+
+    /**
+     * Create an instance of {@link RevisionInfo }
+     * 
+     */
+    public RevisionInfo createRevisionInfo() {
+        return new RevisionInfo();
+    }
+
+    /**
+     * Create an instance of {@link GetIngredientsResponse }
+     * 
+     */
+    public GetIngredientsResponse createGetIngredientsResponse() {
+        return new GetIngredientsResponse();
+    }
+
+    /**
+     * Create an instance of {@link IngredientInfo }
+     * 
+     */
+    public IngredientInfo createIngredientInfo() {
+        return new IngredientInfo();
     }
 
     /**
@@ -54,51 +102,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link IngredientInfo }
+     * Create an instance of {@link GetRevisionHistoryOfRecipeResponse }
      * 
      */
-    public IngredientInfo createIngredientInfo() {
-        return new IngredientInfo();
-    }
-
-    /**
-     * Create an instance of {@link GetRecipeResponse }
-     * 
-     */
-    public GetRecipeResponse createGetRecipeResponse() {
-        return new GetRecipeResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetIngredientsResponse }
-     * 
-     */
-    public GetIngredientsResponse createGetIngredientsResponse() {
-        return new GetIngredientsResponse();
-    }
-
-    /**
-     * Create an instance of {@link RevisionInfo }
-     * 
-     */
-    public RevisionInfo createRevisionInfo() {
-        return new RevisionInfo();
-    }
-
-    /**
-     * Create an instance of {@link UserInfo }
-     * 
-     */
-    public UserInfo createUserInfo() {
-        return new UserInfo();
-    }
-
-    /**
-     * Create an instance of {@link FoodInfo }
-     * 
-     */
-    public FoodInfo createFoodInfo() {
-        return new FoodInfo();
+    public GetRevisionHistoryOfRecipeResponse createGetRevisionHistoryOfRecipeResponse() {
+        return new GetRevisionHistoryOfRecipeResponse();
     }
 
 }

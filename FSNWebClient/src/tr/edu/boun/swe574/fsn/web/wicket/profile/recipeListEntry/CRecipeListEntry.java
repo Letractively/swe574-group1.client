@@ -117,7 +117,7 @@ public class CRecipeListEntry extends BasePanel implements IEasyWicket {
 					private static final long serialVersionUID = -8580276547405546079L;
 
 					public void onSubmit() {
-						setResponsePage(new ViewRecipe(recipe));
+						setResponsePage(new ViewRecipe(recipe, null));
 					};
 				};
 				

@@ -1,8 +1,6 @@
 
 package edu.boun.swe574.fsn.common.client.network;
 
-import java.io.Serializable;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
@@ -39,7 +37,7 @@ import javax.xml.bind.annotation.XmlType;
     "surname",
     "userId"
 })
-public class UserInfo implements Serializable {
+public class UserInfo {
 
     protected String email;
     protected String name;

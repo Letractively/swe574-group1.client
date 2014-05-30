@@ -14,8 +14,14 @@ import org.apache.wicket.markup.html.list.Loop;
 import org.apache.wicket.markup.html.list.LoopItem;
 
 import tr.edu.boun.swe574.fsn.web.common.DateUtil;
+import tr.edu.boun.swe574.fsn.web.common.constants.ResultCode;
+import tr.edu.boun.swe574.fsn.web.common.util.Validator;
+import tr.edu.boun.swe574.fsn.web.common.ws.WSCaller;
+import tr.edu.boun.swe574.fsn.web.wicket.FsnSession;
 import tr.edu.boun.swe574.fsn.web.wicket.common.BasePanel;
 import tr.edu.boun.swe574.fsn.web.wicket.food.changeRecipe.ChangeRecipe;
+import tr.edu.boun.swe574.fsn.web.wicket.food.revisionHistory.RevisionHistory;
+import edu.boun.swe574.fsn.common.client.food.GetRecipeResponse;
 import edu.boun.swe574.fsn.common.client.network.IngredientInfo;
 import edu.boun.swe574.fsn.common.client.network.RecipeInfo;
 
@@ -29,10 +35,22 @@ public class CRecipeEntry extends BasePanel implements IEasyWicket {
 //	private static Logger logger = Logger.getLogger(CRecipeEntry.class);
 	
 	List<IngredientInfo> ingredientList;
+	
+	RecipeInfo recipeInfo;
 
 
-	public CRecipeEntry(String id, final RecipeInfo recipeInfo) {
+	public CRecipeEntry(String id, final RecipeInfo recipeInfoArg, Long recipeId) {
 		super(id);
+		
+		if(recipeInfoArg != null) {
+			recipeInfo = recipeInfoArg;
+		} else {
+			//get recipe
+			GetRecipeResponse response = WSCaller.getFoodService().getRecipe(FsnSession.getInstance().getUser().getToken(), recipeId);
+			if(response.getResultCode() == ResultCode.SUCCESS.getCode()) {
+				recipeInfo = Validator.convertRecipeInfo(response.getRecipe());
+			}
+		}
 		
 		Label lblTitle = new Label("lblTitle", recipeInfo.getRecipeName());
 		add(lblTitle);
@@ -91,7 +109,7 @@ public class CRecipeEntry extends BasePanel implements IEasyWicket {
 
 			@Override
             public void onClick(AjaxRequestTarget arg0) {
-				//TODO set response page
+				setResponsePage(new RevisionHistory(recipeInfo.getRecipeId(), recipeInfo.getRecipeName()));
             }
         };
         add(lnkViewHistory);

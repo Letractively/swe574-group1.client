@@ -16,8 +16,8 @@ public class ViewRecipe extends BasePage {
 	private static final long serialVersionUID = -7761888071957256271L;
 
 
-	public ViewRecipe(RecipeInfo recipeInfo) {
-		CRecipeEntry recipeEntry = new CRecipeEntry("recipeEntry", recipeInfo);
+	public ViewRecipe(RecipeInfo recipeInfo, Long recipeId) {
+		CRecipeEntry recipeEntry = new CRecipeEntry("recipeEntry", recipeInfo, recipeId);
 		add(recipeEntry);
 	}
 

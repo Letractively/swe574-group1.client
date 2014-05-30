@@ -21,6 +21,7 @@ import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl
 
 import edu.boun.swe574.fsn.common.client.auth.AuthService;
 import edu.boun.swe574.fsn.common.client.food.BaseServiceResponse;
+import edu.boun.swe574.fsn.common.client.food.CreateNewVersionOfRecipeResponse;
 import edu.boun.swe574.fsn.common.client.food.FoodInfo;
 import edu.boun.swe574.fsn.common.client.food.FoodsService;
 import edu.boun.swe574.fsn.common.client.food.IngredientInfo;
@@ -162,7 +163,7 @@ public class WSCaller {
 		return response;
 	}
 	
-	public static BaseServiceResponse createNewVersionOfRecipe(WebUser user, RecipeForm recipeForm, long parentRecipeId) {
+	public static CreateNewVersionOfRecipeResponse createNewVersionOfRecipe(WebUser user, RecipeForm recipeForm, long parentRecipeId) {
 		RecipeInfo recipe = new RecipeInfo();
 		
 		try {
@@ -188,7 +189,7 @@ public class WSCaller {
 			}
 		}
 		
-		BaseServiceResponse response = getFoodService().createNewVersionOfRecipe(user.getToken(), recipe, parentRecipeId, recipeForm.getRevisionNote());
+		CreateNewVersionOfRecipeResponse response = getFoodService().createNewVersionOfRecipe(user.getToken(), recipe, parentRecipeId, recipeForm.getRevisionNote());
 		if(logger.isDebugEnabled()) {
 			logger.debug("createNewVersionOfRecipe service result code:" + response.getResultCode() + " errorCode:" + response.getErrorCode());
 		}

@@ -30,19 +30,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link BaseServiceResponse }
-     * 
-     */
-    public BaseServiceResponse createBaseServiceResponse() {
-        return new BaseServiceResponse();
-    }
-
-    /**
      * Create an instance of {@link LoginResponse }
      * 
      */
     public LoginResponse createLoginResponse() {
         return new LoginResponse();
+    }
+
+    /**
+     * Create an instance of {@link BaseServiceResponse }
+     * 
+     */
+    public BaseServiceResponse createBaseServiceResponse() {
+        return new BaseServiceResponse();
     }
 
 }
