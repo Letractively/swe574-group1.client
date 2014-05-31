@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:wicket="http://wicket.apache.org" xmlns="http://www.w3.org/1999/xhtml">
+<body>
+	<wicket:extend>
+	<div style="padding-top: 10px;">
+	<form wicket:id="form">
+		<div>
+			<h3>Users Followed by Me</h3>
+		</div>
+		<br/>
+		<hr/>
+		<div>
+				<table class="grey large" wicket:id="resultTable">
+				</table>
+		</div>	
+	</form>
+	</div>
+		<wicket:fragment wicket:id="frgUser">
+			<a wicket:id="lnkUser">
+				<span wicket:id="lblUserName" style="font-size: large;"></span> </a><br/>
+				<span style="color: #A4A4A4" wicket:id="lblProfileMessage"></span> 
+				<br/>
+		</wicket:fragment>
+	</wicket:extend>
+</body>
+</html>

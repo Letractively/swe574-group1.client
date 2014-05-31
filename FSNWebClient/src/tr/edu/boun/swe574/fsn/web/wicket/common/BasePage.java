@@ -18,6 +18,7 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import tr.edu.boun.swe574.fsn.web.wicket.FsnSession;
 import tr.edu.boun.swe574.fsn.web.wicket.food.createRecipe.CreateRecipe;
 import tr.edu.boun.swe574.fsn.web.wicket.home.HomePage;
+import tr.edu.boun.swe574.fsn.web.wicket.profile.followingUsers.FollowedUsers;
 import tr.edu.boun.swe574.fsn.web.wicket.profile.myProfile.MyProfile;
 import tr.edu.boun.swe574.fsn.web.wicket.profile.recipeFeeds.RecipeFeeds;
 import tr.edu.boun.swe574.fsn.web.wicket.profile.searchUsers.SearchUsers;
@@ -101,16 +102,15 @@ public class BasePage extends EasyPage {
             private static final long serialVersionUID = 0x359a985dcf54ffc7L;
         };
         
-//        Link lnkFollowedUsers = new Link("lnkFollowedUsers") {
-//
-//            public void onClick()
-//            {
-//            	setResponsePage(HomePage.class);
-//            }
-//
-//            private static final long serialVersionUID = 0xe27d6824a3ab259eL;
-//        };
-//        lnkFollowedUsers.setVisible(false);
+        Link lnkFollowedUsers = new Link("lnkFollowedUsers") {
+
+            public void onClick()
+            {
+            	setResponsePage(FollowedUsers.class);
+            }
+
+            private static final long serialVersionUID = 0xe27d6824a3ab259eL;
+        };
         
 //        Link lnkMyFollowers = new Link("lnkMyFollowers") {
 //
@@ -172,9 +172,9 @@ public class BasePage extends EasyPage {
         profileTab.add(new Component[] {
             lnkSearchForUsers
         });
-//        profileTab.add(new Component[] {
-//            lnkFollowedUsers
-//        });
+        profileTab.add(new Component[] {
+            lnkFollowedUsers
+        });
 //        profileTab.add(new Component[] {
 //            lnkMyFollowers
 //        });
