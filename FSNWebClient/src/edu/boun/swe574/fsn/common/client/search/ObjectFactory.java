@@ -30,22 +30,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link IngredientInfo }
-     * 
-     */
-    public IngredientInfo createIngredientInfo() {
-        return new IngredientInfo();
-    }
-
-    /**
-     * Create an instance of {@link BaseServiceResponse }
-     * 
-     */
-    public BaseServiceResponse createBaseServiceResponse() {
-        return new BaseServiceResponse();
-    }
-
-    /**
      * Create an instance of {@link FoodInfo }
      * 
      */
@@ -62,6 +46,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetRecipeFeedsResponse }
+     * 
+     */
+    public GetRecipeFeedsResponse createGetRecipeFeedsResponse() {
+        return new GetRecipeFeedsResponse();
+    }
+
+    /**
      * Create an instance of {@link RecipeInfo }
      * 
      */
@@ -70,11 +62,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetRecipeFeedsResponse }
+     * Create an instance of {@link BaseServiceResponse }
      * 
      */
-    public GetRecipeFeedsResponse createGetRecipeFeedsResponse() {
-        return new GetRecipeFeedsResponse();
+    public BaseServiceResponse createBaseServiceResponse() {
+        return new BaseServiceResponse();
+    }
+
+    /**
+     * Create an instance of {@link IngredientInfo }
+     * 
+     */
+    public IngredientInfo createIngredientInfo() {
+        return new IngredientInfo();
     }
 
 }

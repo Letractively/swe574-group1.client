@@ -82,22 +82,19 @@ public class SearchUsers extends BasePage {
 					logger.debug("Getting user by the criteria:" + searchString.getModelObject());
 				}
 				
-				SearchForUsersResponse response = WSCaller.getNetworkService().searchForUsers(FsnSession.getInstance().getUser().getToken(), searchString.getModelObject());
-				
-				if(response.getResultCode() == ResultCode.FAILURE.getCode()) {
-					logger.error("Nwtwork service returned error code:" + response.getErrorCode());
-					error("Something went wrong.");
-					return;
-				}
-				List<UserInfo> listOfUsers = response.getUserList();
-				if(listOfUsers != null && !listOfUsers.isEmpty()) {
-					userList.clear();
-					userList.addAll(listOfUsers);
-//					Rhoda Penmark
-					UserInfo i = new UserInfo();
-					i.setName("Rhoda");
-					i.setSurname("Penmark");
-					userList.add(i);
+				if(searchString.getModelObject() != null) {
+					SearchForUsersResponse response = WSCaller.getNetworkService().searchForUsers(FsnSession.getInstance().getUser().getToken(), searchString.getModelObject());
+					
+					if(response.getResultCode() == ResultCode.FAILURE.getCode()) {
+						logger.error("Nwtwork service returned error code:" + response.getErrorCode());
+						error("Something went wrong.");
+						return;
+					}
+					List<UserInfo> listOfUsers = response.getUserList();
+					if(listOfUsers != null && !listOfUsers.isEmpty()) {
+						userList.clear();
+						userList.addAll(listOfUsers);
+					}
 				}
 				dataTable.setVisible(true);
 			 }
@@ -107,7 +104,7 @@ public class SearchUsers extends BasePage {
 		form.add(searchString);
 		form.add(dataTable);
 		
-		searchString.setRequired(true);
+//		searchString.setRequired(true);
 		
 		add(form);
 	}
@@ -152,7 +149,9 @@ public class SearchUsers extends BasePage {
                 Label lblUserName = new Label("lblUserName", userInfo.getName() + " " + userInfo.getSurname());
                 lnkUser.add(lblUserName);
                 
-                //TODO set profile message
+                //set profile message
+                Label lblProfileMessage = new Label("lblProfileMessage", userInfo.getProfileMessage());
+                frgUser.add(lblProfileMessage);
                 
                 frgUser.add(lnkUser);
                 

@@ -27,7 +27,6 @@ import tr.edu.boun.swe574.fsn.web.wicket.common.BasePanel;
 import tr.edu.boun.swe574.fsn.web.wicket.home.HomePage;
 import edu.boun.swe574.fsn.common.client.food.FoodInfo;
 import edu.boun.swe574.fsn.common.client.food.GetIngredientsResponse;
-import edu.boun.swe574.fsn.common.client.network.BaseServiceResponse;
 
 
 public class AddToBL extends BasePanel {
@@ -45,7 +44,7 @@ public class AddToBL extends BasePanel {
 	private AjaxSubmitLink lnkCancel;
 	private FeedbackPanel feedbackPanel = new FeedbackPanel("msgPanel");
 	
-	private final List<FoodInfo> ingredients = new ArrayList<FoodInfo>();
+//	private final List<FoodInfo> ingredients = new ArrayList<FoodInfo>();
 	private final HashMap<String, FoodInfo> ingredientsHash = new HashMap<String, FoodInfo>();
 	private final List<FoodInfo> ingredientsSelected = new ArrayList<FoodInfo>();
 	
@@ -53,15 +52,15 @@ public class AddToBL extends BasePanel {
 		super(id);
 		
 		//get all ingredients from foods service
-		GetIngredientsResponse ingredientsResponse = WSCaller.getFoodService().getIngredients(FsnSession.getInstance().getUser().getToken(), "S%");
+//		GetIngredientsResponse ingredientsResponse = WSCaller.getFoodService().getIngredients(FsnSession.getInstance().getUser().getToken(), null);
 		
-		if(ingredientsResponse.getListOfIngredients() != null && !ingredientsResponse.getListOfIngredients().isEmpty()) {
-			ingredients.addAll(ingredientsResponse.getListOfIngredients());
-			//put to hash
-			for (FoodInfo info : ingredients) {
-				ingredientsHash.put(info.getFoodName(), info);
-			}
-		}
+//		if(ingredientsResponse.getListOfIngredients() != null && !ingredientsResponse.getListOfIngredients().isEmpty()) {
+//			ingredients.addAll(ingredientsResponse.getListOfIngredients());
+//			//put to hash
+//			for (FoodInfo info : ingredients) {
+//				ingredientsHash.put(info.getFoodName(), info);
+//			}
+//		}
 		
 		form = new Form<Void>("form");
 		
@@ -85,6 +84,21 @@ public class AddToBL extends BasePanel {
 	                }
 
 	                List<String> choices = new ArrayList<String>(10);
+	                
+	                //get all ingredients from foods service
+	        		GetIngredientsResponse ingredientsResponse = WSCaller.getFoodService().getIngredients(FsnSession.getInstance().getUser().getToken(), input);
+	        		
+	        		System.out.println("input is:" + input + " getIngredients response result:" + ingredientsResponse.getResultCode() + " errorCode:" + ingredientsResponse.getErrorCode() + " " + ingredientsResponse.getListOfIngredients());
+	        		
+	        		List<FoodInfo> ingredients = new ArrayList<FoodInfo>();
+	        		
+	        		if(ingredientsResponse.getListOfIngredients() != null && !ingredientsResponse.getListOfIngredients().isEmpty()) {
+	        			ingredients.addAll(ingredientsResponse.getListOfIngredients());
+	        			//put to hash
+	        			for (FoodInfo info : ingredients) {
+	        				ingredientsHash.put(info.getFoodName(), info);
+	        			}
+	        		}
 
 	                for (final FoodInfo locale : ingredients)
 	                {

@@ -21,6 +21,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *     &lt;extension base="{http://ws.backend.fsn.swe574.boun.edu/}baseServiceResponse">
  *       &lt;sequence>
  *         &lt;element name="dateOfBirth" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
+ *         &lt;element name="followed" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *         &lt;element name="image" type="{http://www.w3.org/2001/XMLSchema}base64Binary" minOccurs="0"/>
  *         &lt;element name="ingredientBlackList" type="{http://ws.backend.fsn.swe574.boun.edu/}foodInfo" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="location" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
@@ -38,6 +39,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "getProfileResponse", propOrder = {
     "dateOfBirth",
+    "followed",
     "image",
     "ingredientBlackList",
     "location",
@@ -50,6 +52,7 @@ public class GetProfileResponse
 {
 
     protected XMLGregorianCalendar dateOfBirth;
+    protected boolean followed;
     protected byte[] image;
     @XmlElement(nillable = true)
     protected List<FoodInfo> ingredientBlackList;
@@ -80,6 +83,22 @@ public class GetProfileResponse
      */
     public void setDateOfBirth(XMLGregorianCalendar value) {
         this.dateOfBirth = value;
+    }
+
+    /**
+     * Gets the value of the followed property.
+     * 
+     */
+    public boolean isFollowed() {
+        return followed;
+    }
+
+    /**
+     * Sets the value of the followed property.
+     * 
+     */
+    public void setFollowed(boolean value) {
+        this.followed = value;
     }
 
     /**

@@ -357,8 +357,7 @@ public class MyProfile extends BasePage {
 		if(ingredientBlackList != null) {
 			for (FoodInfo iInfo : ingredientBlackList) {
 				info = new FoodForm();
-				//TODO
-				info.setCategoryName(Validator.fixNullCategory(null));
+				info.setCategoryName(Validator.fixNullCategory(iInfo.getCategoryName()));
 				info.setId(iInfo.getFoodId());
 				info.setFoodName(iInfo.getFoodName());
 				list.add(info);

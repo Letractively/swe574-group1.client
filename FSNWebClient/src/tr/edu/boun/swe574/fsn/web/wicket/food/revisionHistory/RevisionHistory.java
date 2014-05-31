@@ -6,9 +6,12 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.extensions.markup.html.repeater.data.grid.ICellPopulator;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.DataTable;
+import org.apache.wicket.extensions.markup.html.repeater.data.table.HeaderlessColumn;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.HeadersToolbar;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.IColumn;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.NavigationToolbar;
@@ -16,7 +19,6 @@ import org.apache.wicket.extensions.markup.html.repeater.data.table.PropertyColu
 import org.apache.wicket.extensions.markup.html.repeater.util.SortableDataProvider;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.markup.html.form.SubmitLink;
 import org.apache.wicket.markup.html.panel.Fragment;
 import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.markup.repeater.OddEvenItem;
@@ -32,6 +34,8 @@ import tr.edu.boun.swe574.fsn.web.common.constants.ResultCode;
 import tr.edu.boun.swe574.fsn.web.common.ws.WSCaller;
 import tr.edu.boun.swe574.fsn.web.wicket.FsnSession;
 import tr.edu.boun.swe574.fsn.web.wicket.common.BasePage;
+import tr.edu.boun.swe574.fsn.web.wicket.food.revisionDiff.RevisionDiff;
+import tr.edu.boun.swe574.fsn.web.wicket.food.viewRecipe.ViewRecipe;
 import edu.boun.swe574.fsn.common.client.food.GetRevisionHistoryOfRecipeResponse;
 import edu.boun.swe574.fsn.common.client.food.RevisionInfo;
 
@@ -49,8 +53,12 @@ public class RevisionHistory extends BasePage {
 	private DataTable<RevisionInfo>  dataTable;
 	private List<RevisionInfo> listOfRevisions;
 	
+	private AjaxLink<Object> lnkCurrent;
+	private AjaxLink<Object> lnkDifference;
+	
+	private String title;
+	
 	public RevisionHistory(long recipeId, String title) {
-		
 		
 		GetRevisionHistoryOfRecipeResponse response = WSCaller.getFoodService().getRevisionHistoryOfRecipe(FsnSession.getInstance().getUser().getToken(), recipeId);
 		
@@ -59,15 +67,13 @@ public class RevisionHistory extends BasePage {
 		} else {
 			listOfRevisions = new ArrayList<RevisionInfo>();
 		}
-		
-		//http://www.wicket-library.com/wicket-examples/repeater/wicket/bookmarkable/org.apache.wicket.examples.repeater.GridViewPage;jsessionid=FFA39F59CF71FA7AB7E0FD09F2AAFC57?0
-		//see GridView Example - demonstrates a grid view
-		//http://www.wicket-library.com/wicket-examples/repeater/
+
 		dataTable = getTable();
 		dataTable.setOutputMarkupId(true);
 		
 		form = new Form<Void>("form");
 		
+		this.title = title;
 		Label lblTitle = new Label("lblTitle", title);
 		form.add(lblTitle);
 		form.add(dataTable);
@@ -81,8 +87,7 @@ public class RevisionHistory extends BasePage {
         List<IColumn<RevisionInfo>> columns = new ArrayList<IColumn<RevisionInfo>>();
         
 
-        columns.add(new PropertyColumn<RevisionInfo>(
-                new Model<String>("currentRecipeId"),"currentRecipeId") {
+        columns.add(new HeaderlessColumn<RevisionInfo>() {
 
             /**
              * 
@@ -100,11 +105,45 @@ public class RevisionHistory extends BasePage {
                                                      rowModel);
                 item.add(frgUser);
 
+                final RevisionInfo ri = rowModel.getObject();
                 
-                Label lblUserName = new Label("lblHeaderless", rowModel.getObject().getCurrentRecipeId() + " " + rowModel.getObject().getParentRecipeId());
+                
+        		lnkCurrent = new AjaxLink<Object>("lnkCurrent") {
+
+                    /**
+        			 * 
+        			 */
+        			private static final long serialVersionUID = 5838154829422314429L;
+
+        			@Override
+                    public void onClick(AjaxRequestTarget arg0) {
+        				setResponsePage(new ViewRecipe(null, ri.getCurrentRecipeId()));
+                    }
+                };
+                frgUser.add(lnkCurrent);
+                
+                lnkDifference = new AjaxLink<Object>("lnkDifference") {
+
+
+        			/**
+					 * 
+					 */
+					private static final long serialVersionUID = -3040270362645679503L;
+
+					@Override
+                    public void onClick(AjaxRequestTarget arg0) {
+        				//set response page
+						setResponsePage(new RevisionDiff(title, ri));
+                    }
+                };
+                frgUser.add(lnkDifference);
                 
                 
-                frgUser.add(lblUserName);
+                if(ri.getParentRecipeId() == 0) {
+                	lnkDifference.setEnabled(false);
+                } else {
+                	lnkDifference.setEnabled(true);
+                }
                 
             }
             

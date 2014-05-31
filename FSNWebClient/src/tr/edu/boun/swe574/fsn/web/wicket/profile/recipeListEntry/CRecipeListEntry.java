@@ -61,7 +61,7 @@ public class CRecipeListEntry extends BasePanel implements IEasyWicket {
 		form = new Form<Void>("form");
 
 		//get recipe feeds
-		GetRecipeFeedsResponse response = WSCaller.getNetworkService().getRecipeFeeds(FsnSession.getInstance().getUser().getToken(),1, 100000);
+		GetRecipeFeedsResponse response = WSCaller.getNetworkService().getRecipeFeeds(FsnSession.getInstance().getUser().getToken());
 		
 		System.out.println("getRecipeFeeds service result code:" + response.getResultCode() + " errorCode:" + response.getErrorCode() + " " + response.getRecipeList());
 		

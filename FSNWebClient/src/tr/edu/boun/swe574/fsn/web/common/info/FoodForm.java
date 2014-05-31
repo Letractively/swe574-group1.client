@@ -31,6 +31,19 @@ public class FoodForm implements Serializable {
 	public void setFoodName(String foodName) {
 		this.foodName = foodName;
 	}
+	
+	@Override
+	public boolean equals(Object anObject) {
+		if (this == anObject) {
+			return true;
+		}
+		if (anObject instanceof FoodForm) {
+			if(this.id == ((FoodForm)anObject).getId()) {
+				return true;
+			}
+		}
+		return false;
+	}
 
     
 }

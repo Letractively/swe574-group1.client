@@ -23,6 +23,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="createDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="directions" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="ingredientList" type="{http://ws.backend.fsn.swe574.boun.edu/}ingredientInfo" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="ownRating" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="ownerName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="ownerSurname" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="rating" type="{http://www.w3.org/2001/XMLSchema}int"/>
@@ -41,6 +42,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "createDate",
     "directions",
     "ingredientList",
+    "ownRating",
     "ownerName",
     "ownerSurname",
     "rating",
@@ -53,6 +55,7 @@ public class RecipeInfo {
     protected String directions;
     @XmlElement(nillable = true)
     protected List<IngredientInfo> ingredientList;
+    protected int ownRating;
     protected String ownerName;
     protected String ownerSurname;
     protected int rating;
@@ -134,6 +137,22 @@ public class RecipeInfo {
             ingredientList = new ArrayList<IngredientInfo>();
         }
         return this.ingredientList;
+    }
+
+    /**
+     * Gets the value of the ownRating property.
+     * 
+     */
+    public int getOwnRating() {
+        return ownRating;
+    }
+
+    /**
+     * Sets the value of the ownRating property.
+     * 
+     */
+    public void setOwnRating(int value) {
+        this.ownRating = value;
     }
 
     /**

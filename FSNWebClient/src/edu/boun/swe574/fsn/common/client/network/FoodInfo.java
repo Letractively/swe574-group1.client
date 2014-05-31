@@ -16,6 +16,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
+ *         &lt;element name="categoryName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="foodId" type="{http://www.w3.org/2001/XMLSchema}long"/>
  *         &lt;element name="foodName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
@@ -28,13 +29,39 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "foodInfo", propOrder = {
+    "categoryName",
     "foodId",
     "foodName"
 })
 public class FoodInfo {
 
+    protected String categoryName;
     protected long foodId;
     protected String foodName;
+
+    /**
+     * Gets the value of the categoryName property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    /**
+     * Sets the value of the categoryName property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCategoryName(String value) {
+        this.categoryName = value;
+    }
 
     /**
      * Gets the value of the foodId property.

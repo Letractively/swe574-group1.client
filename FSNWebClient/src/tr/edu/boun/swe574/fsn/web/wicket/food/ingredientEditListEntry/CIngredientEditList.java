@@ -11,15 +11,13 @@ import net.sourceforge.easywicket.IEasyWicket;
 
 import org.apache.log4j.Logger;
 import org.apache.wicket.MarkupContainer;
-import org.apache.wicket.ajax.AjaxEventBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
-import org.apache.wicket.markup.html.form.ChoiceRenderer;
+import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.list.Loop;
 import org.apache.wicket.markup.html.list.LoopItem;
-import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.model.StringResourceModel;
 
@@ -80,13 +78,9 @@ public class CIngredientEditList extends BasePanel implements IEasyWicket {
 				li.add(unit);
 				unit.setOutputMarkupId(true);
 				
-				DropDownChoice<FoodForm> tariffType = new DropDownChoice<FoodForm>("tariffType",
-                        new Model<FoodForm>(current.getFood()),
-                        listOfFoods,
-                        new ChoiceRenderer<FoodForm>("foodName",
-                                                       "id"));
+				Label lblFoodName = new Label("lblFoodName", current.getFood().getFoodName());
 				
-				li.add(tariffType);
+				li.add(lblFoodName);
 
 				
 				AjaxLink<IngredientForm> lnkRemove = new AjaxLink<IngredientForm>("lnkRemove") {
@@ -111,7 +105,7 @@ public class CIngredientEditList extends BasePanel implements IEasyWicket {
 	}
 	
 	public List<FoodForm> getFoodList() {
-		GetIngredientsResponse ingredients = WSCaller.getFoodService().getIngredients(FsnSession.getInstance().getUser().getToken(), "S");
+		GetIngredientsResponse ingredients = WSCaller.getFoodService().getIngredients(FsnSession.getInstance().getUser().getToken(), "");
 		List<FoodForm> listOfIngredients = Validator.convertToFoodFormList(ingredients.getListOfIngredients());
 		
 		

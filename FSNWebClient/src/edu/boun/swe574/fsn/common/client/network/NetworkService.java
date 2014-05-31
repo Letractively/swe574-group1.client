@@ -115,9 +115,7 @@ public interface NetworkService {
 
     /**
      * 
-     * @param index
      * @param token
-     * @param pageSize
      * @return
      *     returns edu.boun.swe574.fsn.common.client.network.GetRecipeFeedsResponse
      */
@@ -125,11 +123,7 @@ public interface NetworkService {
     @WebResult(partName = "return")
     public GetRecipeFeedsResponse getRecipeFeeds(
         @WebParam(name = "token", partName = "token")
-        String token,
-        @WebParam(name = "index", partName = "index")
-        int index,
-        @WebParam(name = "pageSize", partName = "pageSize")
-        int pageSize);
+        String token);
 
     /**
      * 

@@ -30,27 +30,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link FoodInfo }
+     * Create an instance of {@link SearchForUsersResponse }
      * 
      */
-    public FoodInfo createFoodInfo() {
-        return new FoodInfo();
-    }
-
-    /**
-     * Create an instance of {@link FoodList }
-     * 
-     */
-    public FoodList createFoodList() {
-        return new FoodList();
-    }
-
-    /**
-     * Create an instance of {@link RecipeInfo }
-     * 
-     */
-    public RecipeInfo createRecipeInfo() {
-        return new RecipeInfo();
+    public SearchForUsersResponse createSearchForUsersResponse() {
+        return new SearchForUsersResponse();
     }
 
     /**
@@ -62,27 +46,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link IngredientInfo }
+     * Create an instance of {@link UserInfo }
      * 
      */
-    public IngredientInfo createIngredientInfo() {
-        return new IngredientInfo();
+    public UserInfo createUserInfo() {
+        return new UserInfo();
     }
 
     /**
-     * Create an instance of {@link GetRecipeFeedsResponse }
+     * Create an instance of {@link RecipeInfo }
      * 
      */
-    public GetRecipeFeedsResponse createGetRecipeFeedsResponse() {
-        return new GetRecipeFeedsResponse();
-    }
-
-    /**
-     * Create an instance of {@link SearchForUsersResponse }
-     * 
-     */
-    public SearchForUsersResponse createSearchForUsersResponse() {
-        return new SearchForUsersResponse();
+    public RecipeInfo createRecipeInfo() {
+        return new RecipeInfo();
     }
 
     /**
@@ -94,11 +70,35 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link UserInfo }
+     * Create an instance of {@link GetRecipeFeedsResponse }
      * 
      */
-    public UserInfo createUserInfo() {
-        return new UserInfo();
+    public GetRecipeFeedsResponse createGetRecipeFeedsResponse() {
+        return new GetRecipeFeedsResponse();
+    }
+
+    /**
+     * Create an instance of {@link FoodInfo }
+     * 
+     */
+    public FoodInfo createFoodInfo() {
+        return new FoodInfo();
+    }
+
+    /**
+     * Create an instance of {@link IngredientInfo }
+     * 
+     */
+    public IngredientInfo createIngredientInfo() {
+        return new IngredientInfo();
+    }
+
+    /**
+     * Create an instance of {@link FoodList }
+     * 
+     */
+    public FoodList createFoodList() {
+        return new FoodList();
     }
 
 }

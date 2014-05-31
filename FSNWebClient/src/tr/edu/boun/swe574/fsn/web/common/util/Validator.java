@@ -16,6 +16,10 @@ public class Validator {
 	public static String fixNullCategory(String category) {
 		return category == null ? UNCATEGORIZED : category;
 	}
+	
+	public static boolean isTextBlank(String str) {
+		return str == null || str.length() == 0;
+	}
 
 	public static IngredientForm convertToIngredientForm(IngredientInfo ing) {
 		IngredientForm form = new IngredientForm();

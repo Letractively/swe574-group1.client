@@ -48,6 +48,7 @@ public class UserProfile extends BasePage {
 		List<FoodForm> blackList = convertToIngList(profile.getIngredientBlackList());
 		blackListCategorized = FoodGroup.categorize(blackList);
 		
+		Label lblName = new Label("lblName", profile.getName() + " " + profile.getSurname());
 		Label lblMessage = new Label("lblMessage", profile.getProfileMessage());
 		Label lblLocation = new Label("lblLocation", profile.getLocation());
 		
@@ -122,6 +123,7 @@ public class UserProfile extends BasePage {
 		add(lblLocation);
 		add(lblMessage);
 		add(lblBirthDate);
+		add(lblName);
 	}
 	
 	private List<FoodForm> convertToIngList(List<FoodInfo> ingredientBlackList) {

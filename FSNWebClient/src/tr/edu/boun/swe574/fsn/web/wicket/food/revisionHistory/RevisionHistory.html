@@ -3,7 +3,7 @@
 	xmlns="http://www.w3.org/1999/xhtml">
 <body>
 	<wicket:extend>
-		<div style="padding-top: 20px;">
+		<div style="padding-top: 20px;" class="profileMsg">
 			<form wicket:id="form">
 				<div>
 					<h3>
@@ -19,7 +19,9 @@
 			</form>
 		</div>
 		<wicket:fragment wicket:id="frgHeaderless">
-			<span wicket:id="lblHeaderless"></span>
+			<a wicket:id="lnkDifference">difference</a>
+			&nbsp;&nbsp;-&nbsp;&nbsp;
+			<a wicket:id="lnkCurrent">current</a>
 		</wicket:fragment>
 		<wicket:fragment wicket:id="frgDate">
 			<span wicket:id="lblDate"></span>

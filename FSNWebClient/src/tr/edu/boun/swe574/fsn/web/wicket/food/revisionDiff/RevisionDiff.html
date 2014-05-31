@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:wicket="http://wicket.apache.org"
+	xmlns="http://www.w3.org/1999/xhtml">
+<body>
+	<wicket:extend>
+		<div class="profileMsg" style="padding-top: 20px;">
+			<div>
+				<h3>
+					<span wicket:id="lblTitle"></span>:&nbsp;Revision History
+				</h3>
+			</div>
+			<br />
+			<hr />
+			<table cellspacing="10px">
+				<tr align="center">
+					<td><h4>
+							Revision as of&nbsp;<span wicket:id="lblParentCreateDate"></span>&nbsp;by&nbsp;<span
+								wicket:id="lblParentOwner"></span>
+						</h4></td>
+					<td><h4>
+							Latest revision as of&nbsp;<span wicket:id="lblCurrentCreateDate"></span>&nbsp;by&nbsp;<span
+								wicket:id="lblCurrentOwner"></span>
+						</h4></td>
+				</tr>
+				<tr wicket:id="rangeList">
+					<!-- td tag generated in runtime -->
+					<span wicket:id="lblParent"></span>
+
+					<span wicket:id="lblCurrent"></span>
+
+				</tr>
+			</table>
+
+			<br />
+			<div>
+				<h4>
+					Revision note by&nbsp;<span wicket:id="lblRevNoteOwner"></span>
+				</h4>
+				<span wicket:id="lblRevNote"></span>
+			</div>
+			<br />
+			<br />
+		</div>
+	</wicket:extend>
+</body>
+</html>

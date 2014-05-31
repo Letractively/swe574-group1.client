@@ -88,7 +88,7 @@ public class CIngredientEntry extends BasePanel implements IEasyWicket {
 	}
 	
 	public List<FoodForm> getTariffTypeList() {
-		GetIngredientsResponse ingredients = WSCaller.getFoodService().getIngredients(FsnSession.getInstance().getUser().getToken(), "S");
+		GetIngredientsResponse ingredients = WSCaller.getFoodService().getIngredients(FsnSession.getInstance().getUser().getToken(), "");
 		List<FoodForm> listOfIngredients = Validator.convertToFoodFormList(ingredients.getListOfIngredients());
 		
 		

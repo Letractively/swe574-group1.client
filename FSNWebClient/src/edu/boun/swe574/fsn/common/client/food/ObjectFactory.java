@@ -30,6 +30,38 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetIngredientsResponse }
+     * 
+     */
+    public GetIngredientsResponse createGetIngredientsResponse() {
+        return new GetIngredientsResponse();
+    }
+
+    /**
+     * Create an instance of {@link RecipeInfo }
+     * 
+     */
+    public RecipeInfo createRecipeInfo() {
+        return new RecipeInfo();
+    }
+
+    /**
+     * Create an instance of {@link FoodInfo }
+     * 
+     */
+    public FoodInfo createFoodInfo() {
+        return new FoodInfo();
+    }
+
+    /**
+     * Create an instance of {@link BaseServiceResponse }
+     * 
+     */
+    public BaseServiceResponse createBaseServiceResponse() {
+        return new BaseServiceResponse();
+    }
+
+    /**
      * Create an instance of {@link UserInfo }
      * 
      */
@@ -46,19 +78,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetRecipeResponse }
+     * Create an instance of {@link GetRevisionHistoryOfRecipeResponse }
      * 
      */
-    public GetRecipeResponse createGetRecipeResponse() {
-        return new GetRecipeResponse();
-    }
-
-    /**
-     * Create an instance of {@link FoodInfo }
-     * 
-     */
-    public FoodInfo createFoodInfo() {
-        return new FoodInfo();
+    public GetRevisionHistoryOfRecipeResponse createGetRevisionHistoryOfRecipeResponse() {
+        return new GetRevisionHistoryOfRecipeResponse();
     }
 
     /**
@@ -70,11 +94,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetIngredientsResponse }
+     * Create an instance of {@link GetRecipeResponse }
      * 
      */
-    public GetIngredientsResponse createGetIngredientsResponse() {
-        return new GetIngredientsResponse();
+    public GetRecipeResponse createGetRecipeResponse() {
+        return new GetRecipeResponse();
     }
 
     /**
@@ -83,30 +107,6 @@ public class ObjectFactory {
      */
     public IngredientInfo createIngredientInfo() {
         return new IngredientInfo();
-    }
-
-    /**
-     * Create an instance of {@link BaseServiceResponse }
-     * 
-     */
-    public BaseServiceResponse createBaseServiceResponse() {
-        return new BaseServiceResponse();
-    }
-
-    /**
-     * Create an instance of {@link RecipeInfo }
-     * 
-     */
-    public RecipeInfo createRecipeInfo() {
-        return new RecipeInfo();
-    }
-
-    /**
-     * Create an instance of {@link GetRevisionHistoryOfRecipeResponse }
-     * 
-     */
-    public GetRevisionHistoryOfRecipeResponse createGetRevisionHistoryOfRecipeResponse() {
-        return new GetRevisionHistoryOfRecipeResponse();
     }
 
 }

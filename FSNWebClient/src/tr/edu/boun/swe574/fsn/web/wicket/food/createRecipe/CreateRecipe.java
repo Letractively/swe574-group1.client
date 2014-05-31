@@ -86,23 +86,32 @@ public class CreateRecipe extends BasePage {
 		if (logger.isInfoEnabled()) {
 			logger.info("Food to be added=" + event.getTargetItem());
 		}
+		System.out.println("Food to be added=" + event.getTargetItem());
 
 		refreshErrorPanel(AjaxRequestTarget.get());
 
-		IngredientForm range = event.getTargetItem();
+		IngredientForm ingredient = event.getTargetItem();
 
-		if (range.getUnit() == null) {
+		if (ingredient.getUnit() == null) {
 			error("Unit is empty!");
 			return;
 		}
 
-		if (range.getFood() == null) {
+		if (ingredient.getFood() == null) {
 			error("Food is empty!");
 			return;
 		}
-
-//		ingredientInfoList.add(range);
-		recipeForm.getIngredientFormList().add(range);
+		
+		//check whether the food already added
+		recipeForm.getIngredientFormList();
+		for (IngredientForm ing : recipeForm.getIngredientFormList()) {
+			if (ing.getFood().getId() == ingredient.getFood().getId()) {
+				error("This food has already been added to the recipe!");
+				return;
+			}
+		}
+		
+		recipeForm.getIngredientFormList().add(ingredient);
 
 		event.getRequestTarget().add(msisdnRangeList);
 
