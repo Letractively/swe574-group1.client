@@ -1,20 +1,36 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html xmlns:wicket="http://wicket.apache.org" xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns:wicket="http://wicket.apache.org"
+	xmlns="http://www.w3.org/1999/xhtml">
 <body>
 	<wicket:extend>
-	<div style="padding-top: 10px;">
-	<form wicket:id="form">
-		<div>
-			<h3>Search for Recipe</h3>
-			
-		 	<input type="text" wicket:id="ac" size="30"/>&nbsp;&nbsp;<b>Foods to be searched:</b>&nbsp;
-		 	<span wicket:id="selectedValue"></span><br/><br/>
-		 	<a wicket:id="lnkSearch">Search</a>
+		<div style="padding-top: 10px;">
+			<form wicket:id="form">
+				<div>
+					<h3>Search for Recipe</h3>
+
+					<input type="text" wicket:id="ac" size="30" />&nbsp;&nbsp;<b>Foods
+						to be searched:</b>&nbsp; <span wicket:id="selectedValue"></span><br />
+					<br /> <a wicket:id="lnkSearch">Search</a>
+					<div>
+						<table class="grey large" wicket:id="resultTable">
+						</table>
+					</div>
+				</div>
+				<br />
+				<hr />
+
+			</form>
+			<wicket:fragment wicket:id="frgRecipe">
+				<a wicket:id="lnkRecipe"> <span wicket:id="lblRecipeTitle"
+					style="font-size: large;"></span>
+				</a>&nbsp;
+		<span style="color: #A4A4A4">By:&nbsp;<span
+					wicket:id="lblOwner"></span>&nbsp;&nbsp;On:&nbsp;<span
+					wicket:id="lblCreateDate"></span></span>
+				<br />
+				<span style="color: #A4A4A4" wicket:id="ratingViewEntery"></span>
+			</wicket:fragment>
 		</div>
-		<br/>
-		<hr/>
-	</form>
-	</div>
 
 	</wicket:extend>
 </body>

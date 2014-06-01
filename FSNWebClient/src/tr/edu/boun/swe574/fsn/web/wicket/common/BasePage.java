@@ -86,7 +86,7 @@ public class BasePage extends EasyPage {
 
             public void onClick()
             {
-                setResponsePage(MyProfile.class);
+                setResponsePage(new MyProfile(System.currentTimeMillis()));
             }
 
             private static final long serialVersionUID = 0x20aa8a6f78c094ccL;

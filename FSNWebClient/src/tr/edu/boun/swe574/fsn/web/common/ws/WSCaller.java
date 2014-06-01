@@ -20,7 +20,6 @@ import tr.edu.boun.swe574.fsn.web.common.util.Validator;
 import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
 
 import edu.boun.swe574.fsn.common.client.auth.AuthService;
-import edu.boun.swe574.fsn.common.client.food.BaseServiceResponse;
 import edu.boun.swe574.fsn.common.client.food.CreateNewVersionOfRecipeResponse;
 import edu.boun.swe574.fsn.common.client.food.CreateRecipeResponse;
 import edu.boun.swe574.fsn.common.client.food.FoodInfo;
@@ -207,7 +206,8 @@ public class WSCaller {
 		}
 		System.out.println("Calling searchForRecipes. Parameters-> Token:" + token + " foodIds:" + array.getItem());
 		GetRecipeFeedsResponse response = getSearchService().searchForRecipes(token, array);
-		System.out.println("searchForRecipes service result code:" + response.getResultCode() + " errorCode:" + response.getErrorCode());
+		System.out.println("searchForRecipes service result code:" + response.getResultCode() + " errorCode:" + response.getErrorCode() + " numOfRecipes:" + (response.getRecipeList() == null ? 0 : response.getRecipeList().size()
+				));
 		return response;
 	}
 }
