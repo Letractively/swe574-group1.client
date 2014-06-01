@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:columnCount="4"
+    android:orientation="horizontal" >
+    
+     <TableRow
+        android:id="@+id/tableRow1"
+        android:layout_width="wrap_content"
+        android:baselineAligned="true" >
+         <TextView
+            android:id="@+id/textView1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="clip_horizontal"
+            android:text="@string/recipe_title"
+            android:layout_span="4"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+	</TableRow>
+	
+    <TableRow
+        android:id="@+id/tableRow2"
+        android:layout_width="wrap_content"
+        android:baselineAligned="true" >
+         <EditText
+             android:id="@+id/titleBox"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_span="4"
+             android:ems="10" >
+         </EditText>
+	</TableRow>
+	
+	<TableRow
+        android:id="@+id/tableRow3"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:baselineAligned="true" >
+
+		<TextView
+		    android:id="@+id/textView2"
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    android:layout_span="4"
+		    android:text="@string/recipe_ingredients"
+		    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+	</TableRow>
+	
+	<TableRow
+        android:id="@+id/tableRow4"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:baselineAligned="true" >
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="clip_horizontal"
+            android:text="@string/recipe_ingredient_amount"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="clip_horizontal"
+            android:text="@string/recipe_ingredient_unit"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="clip_horizontal"
+            android:text="@string/recipe_ingredient_food"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+	</TableRow>
+
+	<TableRow
+        android:id="@+id/tableRow5"
+        android:layout_width="wrap_content"
+        android:baselineAligned="true" >
+        <EditText
+             android:id="@+id/amountBox1"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:ems="4" >
+        </EditText>
+        <EditText
+             android:id="@+id/unitBox1"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:ems="4" >
+        </EditText>
+        <EditText
+             android:id="@+id/foodBox1"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:ems="4" >
+        </EditText>
+
+        <ImageButton android:src="@drawable/icon_plus" >
+            
+        </ImageButton>    
+	</TableRow>
+	
+	<TableRow
+        android:id="@+id/tableRow6"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:baselineAligned="true" >
+         <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="clip_horizontal"
+            android:layout_span="4"
+            android:text="@string/recipe_directions"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+	</TableRow>
+	<TableRow
+        android:id="@+id/tableRow7"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:baselineAligned="true" >
+
+		<EditText
+		    android:id="@+id/directionsBox"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_span="4"
+		    android:ems="10"
+		    android:inputType="textMultiLine" >
+		</EditText>
+	</TableRow>
+	
+	<TableRow>
+		<Button
+	        android:id="@+id/buttonCreateRecipe"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:onClick="onButtonCreateRecipeClicked"
+	        android:text="@string/create" />
+	</TableRow>
+	
+</TableLayout>

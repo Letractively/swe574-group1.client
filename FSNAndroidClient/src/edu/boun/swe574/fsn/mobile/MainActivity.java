@@ -1,5 +1,8 @@
 package edu.boun.swe574.fsn.mobile;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentManager;
@@ -9,15 +12,21 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 
 import com.boun.swe.foodsocialnetwork.R;
 
 import edu.boun.swe574.fsn.mobile.context.FSNUserContext;
 import edu.boun.swe574.fsn.mobile.task.ITaskListener;
 import edu.boun.swe574.fsn.mobile.task.TaskResultType;
+import edu.boun.swe574.fsn.mobile.task.async.TaskCreateRecipe;
 import edu.boun.swe574.fsn.mobile.util.AndroidUtil;
 import edu.boun.swe574.fsn.mobile.util.ResponseGetRecipe;
 import edu.boun.swe574.fsn.mobile.util.ResponseSearchForUsers;
+import edu.boun.swe574.fsn.mobile.ws.dto.FoodInfo;
+import edu.boun.swe574.fsn.mobile.ws.dto.IngredientInfo;
+import edu.boun.swe574.fsn.mobile.ws.dto.RecipeInfo;
 import edu.boun.swe574.fsn.mobile.ws.response.ResponseGetProfile;
 import edu.boun.swe574.fsn.mobile.ws.response.ResponseGetRecipeFeed;
 
@@ -36,6 +45,7 @@ public class MainActivity extends Activity implements ITaskListener, NavigationD
 	private RecipeFeedFragment fragmenNewsfeed;
 	private RecipeFragment fragmentRecipe;
 	private SearchUsersFragment fragmentSearchUsers;
+	private CreateRecipeFragment fragmentCreateRecipe;
 
 	private long currentRecipeId;
 	private long currentUserId;
@@ -94,6 +104,10 @@ public class MainActivity extends Activity implements ITaskListener, NavigationD
 		case 2:
 			onSearchRequested();
 			break;
+		case 3:
+			this.fragmentCreateRecipe = CreateRecipeFragment.newInstance();
+			fragmentManager.beginTransaction().replace(R.id.container, this.fragmentCreateRecipe).commit();
+			break;		
 		default:
 			FSNUserContext.getInstance(getApplicationContext()).setLoggedIn(false);
 			FSNUserContext.getInstance(getApplicationContext()).setEmail(null);
@@ -129,7 +143,34 @@ public class MainActivity extends Activity implements ITaskListener, NavigationD
 	}
 
 	/****************************************** ACTIONS ********************************************/
-
+	public void onButtonCreateRecipeClicked(View view) {
+		try{
+			EditText titleBox = AndroidUtil.getView(this, R.id.titleBox);
+			EditText amountBox1 = AndroidUtil.getView(this, R.id.amountBox1);
+			EditText unitBox1 = AndroidUtil.getView(this, R.id.unitBox1);
+			EditText foodBox1 = AndroidUtil.getView(this, R.id.foodBox1);
+			EditText directionsBox = AndroidUtil.getView(this, R.id.directionsBox);
+			if (AndroidUtil.hasText(titleBox) && AndroidUtil.hasText(amountBox1) && AndroidUtil.hasText(unitBox1) 
+					&& AndroidUtil.hasText(foodBox1) && AndroidUtil.hasText(directionsBox)) {
+				RecipeInfo recipe = new RecipeInfo(null);
+				recipe.setCreateDate(new Date());
+				recipe.setDirections(directionsBox.getText().toString());
+				recipe.setRecipeName(titleBox.getText().toString());
+				recipe.setIngredientList(new ArrayList<IngredientInfo>());
+				IngredientInfo ingredientInfo = new IngredientInfo(null);
+				ingredientInfo.setAmount(Double.parseDouble(amountBox1.getText().toString()));
+				ingredientInfo.setUnit(unitBox1.getText().toString());
+				FoodInfo food = new FoodInfo(null);
+				food.setFoodId(Long.parseLong(foodBox1.getText().toString()));
+				ingredientInfo.setFood(food );
+				
+				
+				new TaskCreateRecipe<MainActivity>(this).execute(recipe					);
+			}
+		}catch(Exception e){
+			
+		}
+	}
 	/****************************************** OTHER ********************************************/
 
 	public void onSectionAttached(int titleId) {

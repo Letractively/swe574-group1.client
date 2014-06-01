@@ -23,5 +23,13 @@
     <string name="place_holder">Loading...</string>
     <string name="foods_blacklist">Foods Blacklist</string>
     <string name="user_search_hint">User Name</string>
+    <string name="recipe_title">Title</string>
+    <string name="recipe_ingredients">Ingredient(s)</string>
+    <string name="recipe_ingredient_amount">Amount</string>
+    <string name="recipe_ingredient_unit">Unit</string>
+    <string name="recipe_ingredient_food">Food</string>
+    <string name="recipe_directions">Directions</string>
+    <string name="create">Create</string>
+        <string name="title_recipe_create">- Create Recipe</string>
     
 </resources>
