@@ -39,4 +39,8 @@ public class ListItemFeedAdapter extends ArrayAdapter<RecipeInfo> {
 
 		return rowView;
 	}
+
+	public List<RecipeInfo> getValues() {
+		return values;
+	}
 }

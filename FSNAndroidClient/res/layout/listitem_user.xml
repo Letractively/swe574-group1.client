@@ -5,19 +5,29 @@
 
     <TextView
         android:id="@+id/textViewRecipeName"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:text="@string/place_holder"
+        android:text="Name"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
         android:id="@+id/textViewRecipeOwner"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/textViewRecipeName"
         android:layout_below="@+id/textViewRecipeName"
-        android:text="@string/place_holder"
+        android:text="Location"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textViewRecipeOwner"
+        android:text="Place of birth"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </RelativeLayout>

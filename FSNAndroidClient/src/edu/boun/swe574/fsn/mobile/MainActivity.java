@@ -14,6 +14,7 @@ import edu.boun.swe574.fsn.mobile.context.FSNUserContext;
 import edu.boun.swe574.fsn.mobile.task.ITaskListener;
 import edu.boun.swe574.fsn.mobile.task.TaskResultType;
 import edu.boun.swe574.fsn.mobile.util.AndroidUtil;
+import edu.boun.swe574.fsn.mobile.util.ResponseGetRecipe;
 import edu.boun.swe574.fsn.mobile.ws.response.ResponseGetProfileOfSelf;
 import edu.boun.swe574.fsn.mobile.ws.response.ResponseGetRecipeFeed;
 
@@ -29,7 +30,10 @@ public class MainActivity extends Activity implements ITaskListener, NavigationD
 	 */
 	private String title;
 	private ProfileFragment fragmentProfile;
-	private NewsfeedFragment fragmenNewsfeed;
+	private RecipeFeedFragment fragmenNewsfeed;
+	private RecipeFragment fragmentRecipe;
+
+	private long currentRecipeId;
 
 	/****************************************** LIFECYLCE **********************************************/
 
@@ -58,12 +62,16 @@ public class MainActivity extends Activity implements ITaskListener, NavigationD
 		// // update the main content by replacing fragments
 		FragmentManager fragmentManager = getFragmentManager();
 		switch (position) {
+		case -1:
+			this.fragmentRecipe = RecipeFragment.newInstance(currentRecipeId);
+			fragmentManager.beginTransaction().replace(R.id.container, this.fragmentRecipe).commit();
+			break;
 		case 0:
-			this.fragmenNewsfeed = NewsfeedFragment.newInstance(position + 1, true);
+			this.fragmenNewsfeed = RecipeFeedFragment.newInstance();
 			fragmentManager.beginTransaction().replace(R.id.container, this.fragmenNewsfeed).commit();
 			break;
 		case 1:
-			this.fragmentProfile = ProfileFragment.newInstance(position + 1, true);
+			this.fragmentProfile = ProfileFragment.newInstance(true);
 			fragmentManager.beginTransaction().replace(R.id.container, this.fragmentProfile).commit();
 			break;
 		case 2:
@@ -105,18 +113,8 @@ public class MainActivity extends Activity implements ITaskListener, NavigationD
 
 	/****************************************** OTHER ********************************************/
 
-	public void onSectionAttached(int number) {
-		switch (number) {
-		case 1:
-			title = getString(R.string.title_home);
-			break;
-		case 2:
-			title = getString(R.string.title_profile);
-			break;
-		case 3:
-			title = getString(R.string.title_logout);
-			break;
-		}
+	public void onSectionAttached(int titleId) {
+		title = getString(titleId);
 	}
 
 	public void restoreActionBar() {
@@ -131,16 +129,20 @@ public class MainActivity extends Activity implements ITaskListener, NavigationD
 		if (type == TaskResultType.GET_PROFILE_OF_SELF) {
 			this.fragmentProfile.onProfileInformationReceived((ResponseGetProfileOfSelf) result);
 		} else if (type == TaskResultType.GET_RECIPE_FEEDS) {
-			// ResponseGetRecipeFeed response = new ResponseGetRecipeFeed(null);
-			// response.setRecipeList(new ArrayList<RecipeInfo>());
-			// RecipeInfo recipeInfo = new RecipeInfo(null);
-			// recipeInfo.setRecipeName("Test Recipe 1");
-			// response.getRecipeList().add(recipeInfo );
-			// RecipeInfo recipeInfo2 = new RecipeInfo(null);
-			// recipeInfo2.setRecipeName("Test Recipe 2");
-			// response.getRecipeList().add(recipeInfo2 );
 			this.fragmenNewsfeed.onRecipeFeedReceived((ResponseGetRecipeFeed) result);
+		} else if (type == TaskResultType.GET_RECIPE) {
+			this.fragmentRecipe.onRecipeReceived((ResponseGetRecipe) result);
 		}
+	}
+
+	/****************************************** GETTER & SETTERS ********************************************/
+
+	public long getCurrentRecipeId() {
+		return currentRecipeId;
+	}
+
+	public void setCurrentRecipeId(long currentRecipeId) {
+		this.currentRecipeId = currentRecipeId;
 	}
 
 }

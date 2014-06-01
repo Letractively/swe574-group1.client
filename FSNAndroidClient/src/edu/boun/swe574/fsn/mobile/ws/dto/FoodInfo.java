@@ -2,9 +2,10 @@ package edu.boun.swe574.fsn.mobile.ws.dto;
 
 import org.ksoap2.serialization.SoapObject;
 
+import edu.boun.swe574.fsn.mobile.constants.FSNWSConstants;
 import edu.boun.swe574.fsn.mobile.util.AndroidUtil;
 
-public class FoodInfo extends BaseDTO{
+public class FoodInfo extends BaseDTO {
 	private String categoryName;
 	private Long foodId;
 	private String foodName;
@@ -41,4 +42,11 @@ public class FoodInfo extends BaseDTO{
 		this.foodName = foodName;
 	}
 
+	public SoapObject toSoapObject(String methodName) {
+		SoapObject soapRequest = new SoapObject(FSNWSConstants.NAMESPACE, methodName);
+		soapRequest.addProperty("categoryName", this.categoryName);
+		soapRequest.addProperty("foodId", this.foodId);
+		soapRequest.addProperty("foodName", this.foodName);
+		return soapRequest;
+	}
 }

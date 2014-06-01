@@ -2,6 +2,7 @@ package edu.boun.swe574.fsn.mobile.ws.dto;
 
 import org.ksoap2.serialization.SoapObject;
 
+import edu.boun.swe574.fsn.mobile.constants.FSNWSConstants;
 import edu.boun.swe574.fsn.mobile.util.AndroidUtil;
 
 public class IngredientInfo extends BaseDTO {
@@ -41,4 +42,11 @@ public class IngredientInfo extends BaseDTO {
 		this.food = food;
 	}
 
+	public SoapObject toSoapObject(String methodName) {
+		SoapObject soapRequest = new SoapObject(FSNWSConstants.NAMESPACE, methodName);
+		soapRequest.addProperty("amount", this.amount);
+		soapRequest.addProperty("unit", this.unit);
+		soapRequest.addProperty("amount", this.food.toSoapObject(methodName));
+		return soapRequest;
+	}
 }

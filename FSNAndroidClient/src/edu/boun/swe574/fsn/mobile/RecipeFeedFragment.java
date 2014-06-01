@@ -14,24 +14,15 @@ import com.boun.swe.foodsocialnetwork.R;
 
 import edu.boun.swe574.fsn.mobile.adapter.ListItemFeedAdapter;
 import edu.boun.swe574.fsn.mobile.task.async.TaskGetRecipeFeed;
+import edu.boun.swe574.fsn.mobile.ws.dto.RecipeInfo;
 import edu.boun.swe574.fsn.mobile.ws.response.ResponseGetRecipeFeed;
 
-public class NewsfeedFragment extends ListFragment {
-	/**
-	 * The fragment argument representing the section number for this fragment.
-	 */
-	private static final String ARG_SECTION_NUMBER = "section_number";
-	private boolean self;
-
+public class RecipeFeedFragment extends ListFragment {
 	/**
 	 * Returns a new instance of this fragment for the given section number.
 	 */
-	public static NewsfeedFragment newInstance(int sectionNumber, boolean self) {
-		NewsfeedFragment fragment = new NewsfeedFragment();
-		Bundle args = new Bundle();
-		args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-		fragment.setArguments(args);
-		fragment.self = self;
+	public static RecipeFeedFragment newInstance() {
+		RecipeFeedFragment fragment = new RecipeFeedFragment();
 		return fragment;
 	}
 
@@ -39,17 +30,14 @@ public class NewsfeedFragment extends ListFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_newsfeed, container, false);
 		TaskGetRecipeFeed<MainActivity> task = new TaskGetRecipeFeed<MainActivity>((MainActivity) getActivity());
-		if (self) {
-			task.execute();
-		} else {
-		}
+		task.execute();
 		return rootView;
 	}
 
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		((MainActivity) activity).onSectionAttached(getArguments().getInt(ARG_SECTION_NUMBER));
+		((MainActivity) activity).onSectionAttached(R.string.title_home);
 	}
 
 	public void onRecipeFeedReceived(ResponseGetRecipeFeed result) {
@@ -61,7 +49,12 @@ public class NewsfeedFragment extends ListFragment {
 
 			listView.setOnItemClickListener(new OnItemClickListener() {
 				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+					RecipeInfo item = ((ListItemFeedAdapter) getListAdapter()).getValues().get(position);
+					if (item != null) {
+						MainActivity activity = ((MainActivity) getActivity());
+						activity.setCurrentRecipeId(item.getRecipeId());
+						activity.onNavigationDrawerItemSelected(-1);
+					}
 				}
 			});
 

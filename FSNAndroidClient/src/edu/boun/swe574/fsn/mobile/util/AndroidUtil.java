@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.ksoap2.serialization.PropertyInfo;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
 
@@ -88,19 +89,20 @@ public class AndroidUtil {
 
 	public static <T extends BaseDTO> List<T> convertSoapObjectToList(SoapObject object, String propertyPath, Class<T> clas) {
 		List<T> list = new ArrayList<T>();
-		SoapObject property = null;
+		SoapObject property = object;
 		try {
 			if (object != null && StringUtil.hasText(propertyPath)) {
 				if (propertyPath.contains(".")) {
 					property = convertSoapObjectToPrimitive(object, propertyPath.substring(0, propertyPath.lastIndexOf(".")), SoapObject.class);
 				}
-				String propertyName = propertyPath.substring(propertyPath.lastIndexOf("."));
+				String propertyName = propertyPath.substring(propertyPath.lastIndexOf(".") + 1);
 				if (property != null && StringUtil.hasText(propertyName)) {
 					for (int i = 0; i < property.getPropertyCount(); i++) {
-						SoapObject item;
-						Object itemObject = object.getProperty(i);
-						if (itemObject != null && itemObject instanceof SoapObject && propertyName.equals((item = (SoapObject) itemObject).getName())) {
-							list.add(clas.getConstructor(SoapObject.class).newInstance(item));
+						PropertyInfo propertyInfo = new PropertyInfo();
+						property.getPropertyInfo(i, propertyInfo);
+						Object itemObject = property.getProperty(i);
+						if (itemObject != null && itemObject instanceof SoapObject && propertyName.equals(propertyInfo.getName())) {
+							list.add(clas.getConstructor(SoapObject.class).newInstance(itemObject));
 						}
 					}
 				}

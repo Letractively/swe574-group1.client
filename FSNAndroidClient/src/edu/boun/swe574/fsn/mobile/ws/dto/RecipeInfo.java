@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.ksoap2.serialization.SoapObject;
 
+import edu.boun.swe574.fsn.mobile.constants.FSNWSConstants;
 import edu.boun.swe574.fsn.mobile.util.AndroidUtil;
 
 public class RecipeInfo extends BaseDTO {
@@ -20,15 +21,15 @@ public class RecipeInfo extends BaseDTO {
 
 	public RecipeInfo(SoapObject object) {
 		if (object != null) {
-			this.createDate = AndroidUtil.convertSoapObjectToPrimitive(object, "return.createDate", Date.class);
-			this.directions = AndroidUtil.convertSoapObjectToPrimitive(object, "return.directions", String.class);
-			this.ownRating = AndroidUtil.convertSoapObjectToPrimitive(object, "return.ownRating", Integer.class);
-			this.ownerName = AndroidUtil.convertSoapObjectToPrimitive(object, "return.ownerName", String.class);
-			this.ownerSurname = AndroidUtil.convertSoapObjectToPrimitive(object, "return.ownerSurname", String.class);
-			this.rating = AndroidUtil.convertSoapObjectToPrimitive(object, "return.rating", Integer.class);
-			this.recipeId = AndroidUtil.convertSoapObjectToPrimitive(object, "return.recipeId", Long.class);
-			this.recipeName = AndroidUtil.convertSoapObjectToPrimitive(object, "return.recipeName", String.class);
-			this.ingredientList = AndroidUtil.convertSoapObjectToList(object, "return.xxx", IngredientInfo.class);
+			this.createDate = AndroidUtil.convertSoapObjectToPrimitive(object, "createDate", Date.class);
+			this.directions = AndroidUtil.convertSoapObjectToPrimitive(object, "directions", String.class);
+			this.ownRating = AndroidUtil.convertSoapObjectToPrimitive(object, "ownRating", Integer.class);
+			this.ownerName = AndroidUtil.convertSoapObjectToPrimitive(object, "ownerName", String.class);
+			this.ownerSurname = AndroidUtil.convertSoapObjectToPrimitive(object, "ownerSurname", String.class);
+			this.rating = AndroidUtil.convertSoapObjectToPrimitive(object, "rating", Integer.class);
+			this.recipeId = AndroidUtil.convertSoapObjectToPrimitive(object, "recipeId", Long.class);
+			this.recipeName = AndroidUtil.convertSoapObjectToPrimitive(object, "recipeName", String.class);
+			this.ingredientList = AndroidUtil.convertSoapObjectToList(object, "ingredientList", IngredientInfo.class);
 		}
 	}
 
@@ -102,5 +103,25 @@ public class RecipeInfo extends BaseDTO {
 
 	public void setRecipeName(String recipeName) {
 		this.recipeName = recipeName;
+	}
+
+	public SoapObject toSoapObject(String methodName) {
+		SoapObject soapRequest = new SoapObject(FSNWSConstants.NAMESPACE, methodName);
+		soapRequest.addProperty("createDate", this.createDate);
+		soapRequest.addProperty("directions", this.directions);
+		soapRequest.addProperty("ownRating", this.ownRating);
+		soapRequest.addProperty("ownerName", this.ownerName);
+		soapRequest.addProperty("ownerSurname", this.ownerSurname);
+		soapRequest.addProperty("rating", this.rating);
+		soapRequest.addProperty("recipeId", this.recipeId);
+		soapRequest.addProperty("recipeName", this.recipeName);
+		if (this.ingredientList != null) {
+			for (IngredientInfo ingredient : this.ingredientList) {
+				if (ingredient != null) {
+					soapRequest.addProperty("ingredientList", ingredient.toSoapObject(methodName));
+				}
+			}
+		}
+		return soapRequest;
 	}
 }
