@@ -9,8 +9,9 @@ import edu.boun.swe574.fsn.mobile.constants.FSNWSConstants;
 import edu.boun.swe574.fsn.mobile.ws.request.BaseRequest;
 import edu.boun.swe574.fsn.mobile.ws.request.RequestGetRecipe;
 import edu.boun.swe574.fsn.mobile.ws.request.RequestLogIn;
+import edu.boun.swe574.fsn.mobile.ws.request.RequestSearchForUsers;
 import edu.boun.swe574.fsn.mobile.ws.response.ResponseGetRecipeFeed;
-import edu.boun.swe574.fsn.mobile.ws.response.ResponseGetProfileOfSelf;
+import edu.boun.swe574.fsn.mobile.ws.response.ResponseGetProfile;
 import edu.boun.swe574.fsn.mobile.ws.response.ResponseLogin;
 
 public abstract class FSNServiceUtil {
@@ -35,10 +36,18 @@ public abstract class FSNServiceUtil {
 		return null;
 	}
 
-	public static ResponseGetProfileOfSelf getProfileOfSelf(BaseRequest request) {
+	public static ResponseGetProfile getProfileOfSelf(BaseRequest request) {
 		Object soapResponse = callWebService(FSNWSConstants.URL_NETWORK_SERVICE, FSNWSConstants.NETWORK_SERVICE_OPERATION_NAME_GET_PROFILE_OF_SELF, request.toSoapObject(FSNWSConstants.NETWORK_SERVICE_OPERATION_NAME_GET_PROFILE_OF_SELF));
 		if (soapResponse instanceof SoapObject) {
-			return new ResponseGetProfileOfSelf((SoapObject) soapResponse);
+			return new ResponseGetProfile((SoapObject) soapResponse);
+		}
+		return null;
+	}
+
+	public static ResponseSearchForUsers searchForUsers(RequestSearchForUsers request) {
+		Object soapResponse = callWebService(FSNWSConstants.URL_NETWORK_SERVICE, FSNWSConstants.NETWORK_SERVICE_OPERATION_NAME_SEARCH_FOR_USERS, request.toSoapObject(FSNWSConstants.NETWORK_SERVICE_OPERATION_NAME_GET_PROFILE_OF_SELF));
+		if (soapResponse instanceof SoapObject) {
+			return new ResponseSearchForUsers((SoapObject) soapResponse);
 		}
 		return null;
 	}

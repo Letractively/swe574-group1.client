@@ -12,25 +12,31 @@ import android.widget.ListView;
 
 import com.boun.swe.foodsocialnetwork.R;
 
-import edu.boun.swe574.fsn.mobile.adapter.RecipeFeedAdapter;
-import edu.boun.swe574.fsn.mobile.task.async.TaskGetRecipeFeed;
-import edu.boun.swe574.fsn.mobile.ws.dto.RecipeInfo;
-import edu.boun.swe574.fsn.mobile.ws.response.ResponseGetRecipeFeed;
+import edu.boun.swe574.fsn.mobile.adapter.UserSearchAdapter;
+import edu.boun.swe574.fsn.mobile.task.async.TaskSearchUsers;
+import edu.boun.swe574.fsn.mobile.util.ResponseSearchForUsers;
+import edu.boun.swe574.fsn.mobile.util.UserInfo;
 
-public class RecipeFeedFragment extends ListFragment {
+public class SearchUsersFragment extends ListFragment {
+
+	private String query;
+
 	/**
 	 * Returns a new instance of this fragment for the given section number.
+	 * 
+	 * @param query
 	 */
-	public static RecipeFeedFragment newInstance() {
-		RecipeFeedFragment fragment = new RecipeFeedFragment();
+	public static SearchUsersFragment newInstance(String query) {
+		SearchUsersFragment fragment = new SearchUsersFragment();
+		fragment.query = query;
 		return fragment;
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_newsfeed, container, false);
-		TaskGetRecipeFeed<MainActivity> task = new TaskGetRecipeFeed<MainActivity>((MainActivity) getActivity());
-		task.execute();
+		View rootView = inflater.inflate(R.layout.fragment_users, container, false);
+		TaskSearchUsers<MainActivity> task = new TaskSearchUsers<MainActivity>((MainActivity) getActivity());
+		task.execute(this.query);
 		return rootView;
 	}
 
@@ -40,20 +46,20 @@ public class RecipeFeedFragment extends ListFragment {
 		((MainActivity) activity).onSectionAttached(R.string.title_home);
 	}
 
-	public void onRecipeFeedReceived(ResponseGetRecipeFeed result) {
-		if (result != null && result.getRecipeList() != null) {
-			RecipeFeedAdapter adapter = new RecipeFeedAdapter(getActivity().getApplicationContext(), result.getRecipeList());
+	public void onSearchResultReceived(ResponseSearchForUsers result) {
+		if (result != null && result.getUserList() != null) {
+			UserSearchAdapter adapter = new UserSearchAdapter(getActivity().getApplicationContext(), result.getUserList());
 			setListAdapter(adapter);
 			ListView listView = getListView();
 			listView.setTextFilterEnabled(true);
 
 			listView.setOnItemClickListener(new OnItemClickListener() {
 				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-					RecipeInfo item = ((RecipeFeedAdapter) getListAdapter()).getValues().get(position);
+					UserInfo item = ((UserSearchAdapter) getListAdapter()).getValues().get(position);
 					if (item != null) {
 						MainActivity activity = ((MainActivity) getActivity());
-						activity.setCurrentRecipeId(item.getRecipeId());
-						activity.onNavigationDrawerItemSelected(-1);
+						activity.setCurrentUserId(item.getUserId());
+						activity.onNavigationDrawerItemSelected(-2);
 					}
 				}
 			});

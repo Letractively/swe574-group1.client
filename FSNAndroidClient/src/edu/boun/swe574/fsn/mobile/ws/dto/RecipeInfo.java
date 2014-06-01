@@ -20,6 +20,7 @@ public class RecipeInfo extends BaseDTO {
 	private String recipeName;
 
 	public RecipeInfo(SoapObject object) {
+		super(object);
 		if (object != null) {
 			this.createDate = AndroidUtil.convertSoapObjectToPrimitive(object, "createDate", Date.class);
 			this.directions = AndroidUtil.convertSoapObjectToPrimitive(object, "directions", String.class);

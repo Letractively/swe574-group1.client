@@ -4,7 +4,7 @@
     android:layout_height="fill_parent" >
 
     <TextView
-        android:id="@+id/textViewRecipeName"
+        android:id="@+id/textViewUserSearchUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -13,21 +13,12 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
-        android:id="@+id/textViewRecipeOwner"
+        android:id="@+id/textViewUserSearchProfileMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textViewRecipeName"
-        android:layout_below="@+id/textViewRecipeName"
-        android:text="Location"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textViewRecipeOwner"
-        android:text="Place of birth"
+        android:layout_alignRight="@+id/textViewUserSearchUserName"
+        android:layout_below="@+id/textViewUserSearchUserName"
+        android:text="Profile Messagee"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </RelativeLayout>
