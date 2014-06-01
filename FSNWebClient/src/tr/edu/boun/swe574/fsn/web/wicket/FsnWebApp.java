@@ -45,7 +45,7 @@ public class FsnWebApp extends AuthenticatedWebApplication {
 //		getApplicationSettings().setInternalErrorPage(SysErr.class);
 //		getExceptionSettings().setUnexpectedExceptionDisplay(
 //				IExceptionSettings.SHOW_INTERNAL_ERROR_PAGE);
-//		getApplicationSettings().setPageExpiredErrorPage(PageExpired.class);
+		getApplicationSettings().setPageExpiredErrorPage(getSignInPageClass());
 //        getApplicationSettings().setAccessDeniedPage(AccessDenied.class);
 	}
 	
