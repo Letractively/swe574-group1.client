@@ -1,6 +1,8 @@
 
 package edu.boun.swe574.fsn.common.client.search;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlSeeAlso;
@@ -35,7 +37,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlSeeAlso({
     GetRecipeFeedsResponse.class
 })
-public class BaseServiceResponse {
+public class BaseServiceResponse implements Serializable{
 
     protected Integer errorCode;
     protected Integer resultCode;

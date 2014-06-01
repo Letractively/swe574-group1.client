@@ -9,7 +9,7 @@ public class IngredientForm implements Serializable {
 	 */
 	private static final long serialVersionUID = -7160063503750525491L;
 	private FoodForm food;
-	private double amount;
+	private String amount;
 	private String unit;
 	
 	public FoodForm getFood() {
@@ -18,10 +18,10 @@ public class IngredientForm implements Serializable {
 	public void setFood(FoodForm food) {
 		this.food = food;
 	}
-	public double getAmount() {
+	public String getAmount() {
 		return amount;
 	}
-	public void setAmount(double amount) {
+	public void setAmount(String amount) {
 		this.amount = amount;
 	}
 	public String getUnit() {

@@ -23,7 +23,7 @@ public class Validator {
 
 	public static IngredientForm convertToIngredientForm(IngredientInfo ing) {
 		IngredientForm form = new IngredientForm();
-		form.setAmount(ing.getAmount());
+		form.setAmount(String.valueOf(ing.getAmount()));
 		form.setUnit(ing.getUnit());
 		form.setFood(convertToFoodForm(ing.getFood()));
 		return form;
@@ -31,7 +31,7 @@ public class Validator {
 	
 	public static IngredientForm convertToIngredientForm(edu.boun.swe574.fsn.common.client.network.IngredientInfo ing) {
 		IngredientForm form = new IngredientForm();
-		form.setAmount(ing.getAmount());
+		form.setAmount(String.valueOf(ing.getAmount()));
 		form.setUnit(ing.getUnit());
 		form.setFood(convertToFoodForm(ing.getFood()));
 		return form;
@@ -64,7 +64,7 @@ public class Validator {
 	public static IngredientInfo convertToIngredientInfo(IngredientForm form) {
 		IngredientInfo info = new IngredientInfo();
 		
-		info.setAmount(form.getAmount());
+		info.setAmount(Double.parseDouble(form.getAmount()));
 		info.setUnit(form.getUnit());
 		info.setFood(convertToFoodInfo(form.getFood()));
 		
