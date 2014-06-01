@@ -12,9 +12,9 @@ public class ResponseLogin extends BaseResponse {
 	public ResponseLogin(SoapObject object) {
 		super(object);
 		if (object != null) {
-			this.token = AndroidUtil.getSoapObjectProperty(object, "return.token", String.class);
-			this.name = AndroidUtil.getSoapObjectProperty(object, "return.name", String.class);
-			this.surname = AndroidUtil.getSoapObjectProperty(object, "return.surname", String.class);
+			this.token = AndroidUtil.convertSoapObjectToPrimitive(object, "return.token", String.class);
+			this.name = AndroidUtil.convertSoapObjectToPrimitive(object, "return.name", String.class);
+			this.surname = AndroidUtil.convertSoapObjectToPrimitive(object, "return.surname", String.class);
 		}
 	}
 

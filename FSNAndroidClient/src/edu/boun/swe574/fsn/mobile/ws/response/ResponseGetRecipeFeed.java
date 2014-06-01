@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.ksoap2.serialization.SoapObject;
 
+import edu.boun.swe574.fsn.mobile.util.AndroidUtil;
 import edu.boun.swe574.fsn.mobile.ws.dto.RecipeInfo;
 
 public class ResponseGetRecipeFeed extends BaseResponse {
@@ -12,6 +13,7 @@ public class ResponseGetRecipeFeed extends BaseResponse {
 	public ResponseGetRecipeFeed(SoapObject object) {
 		super(object);
 		if (object != null) {
+			this.recipeList = AndroidUtil.convertSoapObjectToList(object, "return.recipeList", RecipeInfo.class);
 		}
 	}
 

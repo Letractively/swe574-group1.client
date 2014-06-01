@@ -35,7 +35,7 @@ public abstract class FSNServiceUtil {
 	}
 
 	public static ResponseGetProfileOfSelf getProfileOfSelf(BaseRequest request) {
-		Object soapResponse = callWebService(FSNWSConstants.URL_NETWORK_SERVICE, FSNWSConstants.NETWORK_SERVICE_OPERATION_NAME_GET_PROFILE_OF_SELF, request.toSoapObject());
+		Object soapResponse = callWebService(FSNWSConstants.URL_NETWORK_SERVICE, FSNWSConstants.NETWORK_SERVICE_OPERATION_NAME_GET_PROFILE_OF_SELF, request.toSoapObject(FSNWSConstants.NETWORK_SERVICE_OPERATION_NAME_GET_PROFILE_OF_SELF));
 		if (soapResponse instanceof SoapObject) {
 			return new ResponseGetProfileOfSelf((SoapObject) soapResponse);
 		}
@@ -43,7 +43,7 @@ public abstract class FSNServiceUtil {
 	}
 
 	public static ResponseGetRecipeFeed getRecipeFeed(BaseRequest request) {
-		Object soapResponse = callWebService(FSNWSConstants.URL_AUTH_SERVICE, FSNWSConstants.NETWORK_SERVICE_OPERATION_NAME_GET_RECIPE_FEED, request.toSoapObject());
+		Object soapResponse = callWebService(FSNWSConstants.URL_NETWORK_SERVICE, FSNWSConstants.NETWORK_SERVICE_OPERATION_NAME_GET_RECIPE_FEED, request.toSoapObject(FSNWSConstants.NETWORK_SERVICE_OPERATION_NAME_GET_RECIPE_FEED));
 		if (soapResponse instanceof SoapObject) {
 			return new ResponseGetRecipeFeed((SoapObject) soapResponse);
 		}

@@ -4,16 +4,16 @@ import org.ksoap2.serialization.SoapObject;
 
 import edu.boun.swe574.fsn.mobile.util.AndroidUtil;
 
-public class FoodInfo {
+public class FoodInfo extends BaseDTO{
 	private String categoryName;
 	private Long foodId;
 	private String foodName;
 
 	public FoodInfo(SoapObject object) {
 		if (object != null) {
-			this.categoryName = AndroidUtil.getSoapObjectProperty(object, "categoryName", String.class);
-			this.foodId = AndroidUtil.getSoapObjectProperty(object, "foodId", Long.class);
-			this.foodName = AndroidUtil.getSoapObjectProperty(object, "foodName", String.class);
+			this.categoryName = AndroidUtil.convertSoapObjectToPrimitive(object, "categoryName", String.class);
+			this.foodId = AndroidUtil.convertSoapObjectToPrimitive(object, "foodId", Long.class);
+			this.foodName = AndroidUtil.convertSoapObjectToPrimitive(object, "foodName", String.class);
 		}
 	}
 

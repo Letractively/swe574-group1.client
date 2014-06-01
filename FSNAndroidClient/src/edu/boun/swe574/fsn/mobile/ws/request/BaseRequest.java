@@ -15,8 +15,8 @@ public class BaseRequest {
 		this.token = token;
 	}
 
-	public SoapObject toSoapObject() {
-		SoapObject soapRequest = new SoapObject(FSNWSConstants.NAMESPACE, FSNWSConstants.AUTH_SERVICE_OPERATION_NAME_LOGIN);
+	public SoapObject toSoapObject(String methodName) {
+		SoapObject soapRequest = new SoapObject(FSNWSConstants.NAMESPACE, methodName);
 		soapRequest.addProperty("token", this.token);
 		return soapRequest;
 	}

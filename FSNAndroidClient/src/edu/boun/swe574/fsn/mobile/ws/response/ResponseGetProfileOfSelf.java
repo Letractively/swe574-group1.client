@@ -18,9 +18,9 @@ public class ResponseGetProfileOfSelf extends BaseResponse {
 	public ResponseGetProfileOfSelf(SoapObject object) {
 		super(object);
 		if (object != null) {
-			this.dateOfBirt = AndroidUtil.getSoapObjectProperty(object, "return.dateOfBirt", Date.class);
-			this.location = AndroidUtil.getSoapObjectProperty(object, "return.location", String.class);
-			this.profileMessage = AndroidUtil.getSoapObjectProperty(object, "return.profileMessage", String.class);
+			this.dateOfBirt = AndroidUtil.convertSoapObjectToPrimitive(object, "return.dateOfBirt", Date.class);
+			this.location = AndroidUtil.convertSoapObjectToPrimitive(object, "return.location", String.class);
+			this.profileMessage = AndroidUtil.convertSoapObjectToPrimitive(object, "return.profileMessage", String.class);
 		}
 	}
 

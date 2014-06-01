@@ -1,7 +1,5 @@
 package edu.boun.swe574.fsn.mobile;
 
-import java.util.ArrayList;
-
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentManager;
@@ -16,7 +14,6 @@ import edu.boun.swe574.fsn.mobile.context.FSNUserContext;
 import edu.boun.swe574.fsn.mobile.task.ITaskListener;
 import edu.boun.swe574.fsn.mobile.task.TaskResultType;
 import edu.boun.swe574.fsn.mobile.util.AndroidUtil;
-import edu.boun.swe574.fsn.mobile.ws.dto.RecipeInfo;
 import edu.boun.swe574.fsn.mobile.ws.response.ResponseGetProfileOfSelf;
 import edu.boun.swe574.fsn.mobile.ws.response.ResponseGetRecipeFeed;
 
@@ -134,15 +131,15 @@ public class MainActivity extends Activity implements ITaskListener, NavigationD
 		if (type == TaskResultType.GET_PROFILE_OF_SELF) {
 			this.fragmentProfile.onProfileInformationReceived((ResponseGetProfileOfSelf) result);
 		} else if (type == TaskResultType.GET_RECIPE_FEEDS) {
-			ResponseGetRecipeFeed response = new ResponseGetRecipeFeed(null);
-			response.setRecipeList(new ArrayList<RecipeInfo>());
-			RecipeInfo recipeInfo = new RecipeInfo(null);
-			recipeInfo.setRecipeName("Test Recipe 1");
-			response.getRecipeList().add(recipeInfo );
-			RecipeInfo recipeInfo2 = new RecipeInfo(null);
-			recipeInfo2.setRecipeName("Test Recipe 2");
-			response.getRecipeList().add(recipeInfo2 );
-			this.fragmenNewsfeed.onRecipeFeedReceived(response);
+			// ResponseGetRecipeFeed response = new ResponseGetRecipeFeed(null);
+			// response.setRecipeList(new ArrayList<RecipeInfo>());
+			// RecipeInfo recipeInfo = new RecipeInfo(null);
+			// recipeInfo.setRecipeName("Test Recipe 1");
+			// response.getRecipeList().add(recipeInfo );
+			// RecipeInfo recipeInfo2 = new RecipeInfo(null);
+			// recipeInfo2.setRecipeName("Test Recipe 2");
+			// response.getRecipeList().add(recipeInfo2 );
+			this.fragmenNewsfeed.onRecipeFeedReceived((ResponseGetRecipeFeed) result);
 		}
 	}
 

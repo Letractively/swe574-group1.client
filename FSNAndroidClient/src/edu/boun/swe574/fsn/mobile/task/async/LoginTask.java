@@ -38,7 +38,7 @@ public class LoginTask<T extends Activity & ITaskListener> extends AsyncTask<Str
 	protected Boolean doInBackground(String... args) {
 		if (args != null && args.length == 2) {
 			if (StringUtil.hasText(args[0]) && StringUtil.hasText(args[1])) {
-				RequestLogIn request = new RequestLogIn(args[0], args[1]);
+				RequestLogIn request = new RequestLogIn(args[0], StringUtil.toMD5(args[1]));
 				ResponseLogin response = FSNServiceUtil.login(request);
 				if (response != null && response.getResultCode() == 0 && StringUtil.hasText(response.getToken())) {
 					FSNUserContext.getInstance(this.executor).setEmail(request.getEmail());

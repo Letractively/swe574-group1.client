@@ -1,7 +1,9 @@
 package edu.boun.swe574.fsn.mobile.util;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
@@ -9,9 +11,13 @@ import org.ksoap2.serialization.SoapPrimitive;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+import edu.boun.swe574.fsn.mobile.LoginActivity;
+import edu.boun.swe574.fsn.mobile.context.FSNUserContext;
+import edu.boun.swe574.fsn.mobile.ws.dto.BaseDTO;
 
 public class AndroidUtil {
 
@@ -30,17 +36,17 @@ public class AndroidUtil {
 	}
 
 	public static boolean checkLoggedIn(Activity activity) {
-		// FSNUserContext fsnContext = FSNUserContext.getInstance(activity.getApplicationContext());
-		// if (fsnContext != null && !fsnContext.isLoggedIn()) {
-		// activity.startActivity(new Intent(activity, LoginActivity.class));
-		// return false;
-		// }
+		FSNUserContext fsnContext = FSNUserContext.getInstance(activity.getApplicationContext());
+		if (fsnContext != null && !fsnContext.isLoggedIn()) {
+			activity.startActivity(new Intent(activity, LoginActivity.class));
+			return false;
+		}
 		return true;
 	}
 
 	@SuppressLint("SimpleDateFormat")
 	@SuppressWarnings("unchecked")
-	public static <T> T getSoapObjectProperty(SoapObject object, String propertyPath, Class<T> clas) {
+	public static <T> T convertSoapObjectToPrimitive(SoapObject object, String propertyPath, Class<T> clas) {
 		Object property = null;
 		try {
 			if (object != null && StringUtil.hasText(propertyPath)) {
@@ -51,7 +57,7 @@ public class AndroidUtil {
 						property = object.getProperty(name);
 						if (property instanceof SoapObject) {
 							if (i + 1 < path.length) {
-								return getSoapObjectProperty((SoapObject) property, propertyPath.replaceFirst(name.concat("."), ""), clas);
+								return convertSoapObjectToPrimitive((SoapObject) property, propertyPath.replaceFirst(name.concat("."), ""), clas);
 							} else {
 								return (T) property;
 							}
@@ -80,6 +86,31 @@ public class AndroidUtil {
 		return null;
 	}
 
+	public static <T extends BaseDTO> List<T> convertSoapObjectToList(SoapObject object, String propertyPath, Class<T> clas) {
+		List<T> list = new ArrayList<T>();
+		SoapObject property = null;
+		try {
+			if (object != null && StringUtil.hasText(propertyPath)) {
+				if (propertyPath.contains(".")) {
+					property = convertSoapObjectToPrimitive(object, propertyPath.substring(0, propertyPath.lastIndexOf(".")), SoapObject.class);
+				}
+				String propertyName = propertyPath.substring(propertyPath.lastIndexOf("."));
+				if (property != null && StringUtil.hasText(propertyName)) {
+					for (int i = 0; i < property.getPropertyCount(); i++) {
+						SoapObject item;
+						Object itemObject = object.getProperty(i);
+						if (itemObject != null && itemObject instanceof SoapObject && propertyName.equals((item = (SoapObject) itemObject).getName())) {
+							list.add(clas.getConstructor(SoapObject.class).newInstance(item));
+						}
+					}
+				}
+			}
+		} catch (Exception e) {
+			return list;
+		}
+		return list;
+	}
+
 	public static void showToastShort(Context applicationContext, String string) {
 		Toast toast = Toast.makeText(applicationContext, string, Toast.LENGTH_SHORT);
 		toast.show();
@@ -89,4 +120,5 @@ public class AndroidUtil {
 		Toast toast = Toast.makeText(applicationContext, string, Toast.LENGTH_LONG);
 		toast.show();
 	}
+
 }

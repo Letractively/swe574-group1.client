@@ -4,16 +4,16 @@ import org.ksoap2.serialization.SoapObject;
 
 import edu.boun.swe574.fsn.mobile.util.AndroidUtil;
 
-public class IngredientInfo {
+public class IngredientInfo extends BaseDTO {
 	private Double amount;
 	private String unit;
 	private FoodInfo food;
 
 	public IngredientInfo(SoapObject object) {
 		if (object != null) {
-			this.amount = AndroidUtil.getSoapObjectProperty(object, "amount", Double.class);
-			this.unit = AndroidUtil.getSoapObjectProperty(object, "unit", String.class);
-			this.food = new FoodInfo(AndroidUtil.getSoapObjectProperty(object, "food", SoapObject.class));
+			this.amount = AndroidUtil.convertSoapObjectToPrimitive(object, "amount", Double.class);
+			this.unit = AndroidUtil.convertSoapObjectToPrimitive(object, "unit", String.class);
+			this.food = new FoodInfo(AndroidUtil.convertSoapObjectToPrimitive(object, "food", SoapObject.class));
 		}
 	}
 

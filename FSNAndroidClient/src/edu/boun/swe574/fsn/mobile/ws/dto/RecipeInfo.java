@@ -7,7 +7,7 @@ import org.ksoap2.serialization.SoapObject;
 
 import edu.boun.swe574.fsn.mobile.util.AndroidUtil;
 
-public class RecipeInfo {
+public class RecipeInfo extends BaseDTO {
 	private List<IngredientInfo> ingredientList;
 	private Date createDate;
 	private String directions;
@@ -20,16 +20,15 @@ public class RecipeInfo {
 
 	public RecipeInfo(SoapObject object) {
 		if (object != null) {
-			this.createDate = AndroidUtil.getSoapObjectProperty(object, "return.createDate", Date.class);
-			this.directions = AndroidUtil.getSoapObjectProperty(object, "return.directions", String.class);
-			this.ownRating = AndroidUtil.getSoapObjectProperty(object, "return.ownRating", Integer.class);
-			this.ownerName = AndroidUtil.getSoapObjectProperty(object, "return.ownerName", String.class);
-			this.ownerSurname = AndroidUtil.getSoapObjectProperty(object, "return.ownerSurname", String.class);
-			this.rating = AndroidUtil.getSoapObjectProperty(object, "return.rating", Integer.class);
-			this.recipeId = AndroidUtil.getSoapObjectProperty(object, "return.recipeId", Long.class);
-			this.recipeName = AndroidUtil.getSoapObjectProperty(object, "return.recipeName", String.class);
-
-			AndroidUtil.getSoapObjectProperty(object, "return.food", List.class);
+			this.createDate = AndroidUtil.convertSoapObjectToPrimitive(object, "return.createDate", Date.class);
+			this.directions = AndroidUtil.convertSoapObjectToPrimitive(object, "return.directions", String.class);
+			this.ownRating = AndroidUtil.convertSoapObjectToPrimitive(object, "return.ownRating", Integer.class);
+			this.ownerName = AndroidUtil.convertSoapObjectToPrimitive(object, "return.ownerName", String.class);
+			this.ownerSurname = AndroidUtil.convertSoapObjectToPrimitive(object, "return.ownerSurname", String.class);
+			this.rating = AndroidUtil.convertSoapObjectToPrimitive(object, "return.rating", Integer.class);
+			this.recipeId = AndroidUtil.convertSoapObjectToPrimitive(object, "return.recipeId", Long.class);
+			this.recipeName = AndroidUtil.convertSoapObjectToPrimitive(object, "return.recipeName", String.class);
+			this.ingredientList = AndroidUtil.convertSoapObjectToList(object, "return.xxx", IngredientInfo.class);
 		}
 	}
 

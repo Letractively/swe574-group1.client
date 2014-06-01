@@ -8,8 +8,8 @@ public class BaseResponse {
 
 	protected BaseResponse(SoapObject object) {
 		if (object != null) {
-			this.resultCode = AndroidUtil.getSoapObjectProperty(object, "return.resultCode", Integer.class);
-			this.errorCode = AndroidUtil.getSoapObjectProperty(object, "return.errorCode", Integer.class);
+			this.resultCode = AndroidUtil.convertSoapObjectToPrimitive(object, "return.resultCode", Integer.class);
+			this.errorCode = AndroidUtil.convertSoapObjectToPrimitive(object, "return.errorCode", Integer.class);
 		}
 	}
 
