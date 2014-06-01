@@ -65,7 +65,7 @@ public class LoginActivity extends Activity implements ITaskListener {
 			FSNUserContext.getInstance(getApplicationContext()).setEmail(email.getText().toString());
 			startActivity(new Intent(this, MainActivity.class));
 		} else {
-
+			AndroidUtil.showToastlong(getApplicationContext(), "Login failed.");
 		}
 	}
 

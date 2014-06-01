@@ -1,6 +1,7 @@
 package edu.boun.swe574.fsn.mobile;
 
 import java.text.SimpleDateFormat;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
@@ -9,9 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import com.boun.swe.foodsocialnetwork.R;
+
 import edu.boun.swe574.fsn.mobile.context.FSNUserContext;
-import edu.boun.swe574.fsn.mobile.task.async.ShowProfileTask;
+import edu.boun.swe574.fsn.mobile.task.async.TaskGetProfile;
 import edu.boun.swe574.fsn.mobile.util.AndroidUtil;
 import edu.boun.swe574.fsn.mobile.ws.response.BaseResponse;
 import edu.boun.swe574.fsn.mobile.ws.response.ResponseGetProfileOfSelf;
@@ -38,7 +41,7 @@ public class ProfileFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
-		ShowProfileTask<MainActivity> task = new ShowProfileTask<MainActivity>((MainActivity) getActivity());
+		TaskGetProfile<MainActivity> task = new TaskGetProfile<MainActivity>((MainActivity) getActivity());
 		if (self) {
 			task.execute();
 		} else {
@@ -53,7 +56,7 @@ public class ProfileFragment extends Fragment {
 	}
 
 	@SuppressLint("SimpleDateFormat")
-	public void onProfileInformationReceived(BaseResponse result) {
+	public void onProfileInformationReceived(ResponseGetProfileOfSelf result) {
 		TextView textViewName = AndroidUtil.getView(getActivity(), R.id.textViewName);
 		TextView textViewEmail = AndroidUtil.getView(getActivity(), R.id.textViewEmail);
 		TextView textViewLocation = AndroidUtil.getView(getActivity(), R.id.textViewLocation);
@@ -71,4 +74,5 @@ public class ProfileFragment extends Fragment {
 			// TODO profiles of other people
 		}
 	}
+
 }

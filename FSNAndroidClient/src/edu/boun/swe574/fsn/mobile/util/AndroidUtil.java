@@ -6,13 +6,12 @@ import java.util.Date;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
 
-import edu.boun.swe574.fsn.mobile.LoginActivity;
-import edu.boun.swe574.fsn.mobile.context.FSNUserContext;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Intent;
+import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class AndroidUtil {
 
@@ -21,16 +20,21 @@ public class AndroidUtil {
 		return (T) activity.findViewById(id);
 	}
 
+	@SuppressWarnings("unchecked")
+	public static <T extends View> T getView(View view, int id) {
+		return (T) view.findViewById(id);
+	}
+
 	public static <T extends TextView> boolean hasText(T view) {
 		return view != null && view.getText() != null && StringUtil.hasText(view.getText().toString());
 	}
 
 	public static boolean checkLoggedIn(Activity activity) {
-		FSNUserContext fsnContext = FSNUserContext.getInstance(activity.getApplicationContext());
-		if (fsnContext != null && !fsnContext.isLoggedIn()) {
-			activity.startActivity(new Intent(activity, LoginActivity.class));
-			return false;
-		}
+		// FSNUserContext fsnContext = FSNUserContext.getInstance(activity.getApplicationContext());
+		// if (fsnContext != null && !fsnContext.isLoggedIn()) {
+		// activity.startActivity(new Intent(activity, LoginActivity.class));
+		// return false;
+		// }
 		return true;
 	}
 
@@ -48,6 +52,8 @@ public class AndroidUtil {
 						if (property instanceof SoapObject) {
 							if (i + 1 < path.length) {
 								return getSoapObjectProperty((SoapObject) property, propertyPath.replaceFirst(name.concat("."), ""), clas);
+							} else {
+								return (T) property;
 							}
 						} else if (property instanceof SoapPrimitive) {
 							String stringValue = object.getPropertyAsString(name);
@@ -72,5 +78,15 @@ public class AndroidUtil {
 			return null;
 		}
 		return null;
+	}
+
+	public static void showToastShort(Context applicationContext, String string) {
+		Toast toast = Toast.makeText(applicationContext, string, Toast.LENGTH_SHORT);
+		toast.show();
+	}
+
+	public static void showToastlong(Context applicationContext, String string) {
+		Toast toast = Toast.makeText(applicationContext, string, Toast.LENGTH_LONG);
+		toast.show();
 	}
 }

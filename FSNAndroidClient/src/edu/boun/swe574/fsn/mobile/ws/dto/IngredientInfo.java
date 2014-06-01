@@ -1,0 +1,44 @@
+package edu.boun.swe574.fsn.mobile.ws.dto;
+
+import org.ksoap2.serialization.SoapObject;
+
+import edu.boun.swe574.fsn.mobile.util.AndroidUtil;
+
+public class IngredientInfo {
+	private Double amount;
+	private String unit;
+	private FoodInfo food;
+
+	public IngredientInfo(SoapObject object) {
+		if (object != null) {
+			this.amount = AndroidUtil.getSoapObjectProperty(object, "amount", Double.class);
+			this.unit = AndroidUtil.getSoapObjectProperty(object, "unit", String.class);
+			this.food = new FoodInfo(AndroidUtil.getSoapObjectProperty(object, "food", SoapObject.class));
+		}
+	}
+
+	public Double getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Double amount) {
+		this.amount = amount;
+	}
+
+	public String getUnit() {
+		return unit;
+	}
+
+	public void setUnit(String unit) {
+		this.unit = unit;
+	}
+
+	public FoodInfo getFood() {
+		return food;
+	}
+
+	public void setFood(FoodInfo food) {
+		this.food = food;
+	}
+
+}

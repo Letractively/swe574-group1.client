@@ -1,5 +1,7 @@
 package edu.boun.swe574.fsn.mobile;
 
+import java.util.ArrayList;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentManager;
@@ -14,7 +16,9 @@ import edu.boun.swe574.fsn.mobile.context.FSNUserContext;
 import edu.boun.swe574.fsn.mobile.task.ITaskListener;
 import edu.boun.swe574.fsn.mobile.task.TaskResultType;
 import edu.boun.swe574.fsn.mobile.util.AndroidUtil;
+import edu.boun.swe574.fsn.mobile.ws.dto.RecipeInfo;
 import edu.boun.swe574.fsn.mobile.ws.response.ResponseGetProfileOfSelf;
+import edu.boun.swe574.fsn.mobile.ws.response.ResponseGetRecipeFeed;
 
 public class MainActivity extends Activity implements ITaskListener, NavigationDrawerFragment.NavigationDrawerCallbacks {
 
@@ -27,8 +31,8 @@ public class MainActivity extends Activity implements ITaskListener, NavigationD
 	 * Used to store the last screen title. For use in {@link #restoreActionBar()}.
 	 */
 	private String title;
-
-	private ProfileFragment profileFragment;
+	private ProfileFragment fragmentProfile;
+	private NewsfeedFragment fragmenNewsfeed;
 
 	/****************************************** LIFECYLCE **********************************************/
 
@@ -55,15 +59,23 @@ public class MainActivity extends Activity implements ITaskListener, NavigationD
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
 		// // update the main content by replacing fragments
-		if (position == 2) {
+		FragmentManager fragmentManager = getFragmentManager();
+		switch (position) {
+		case 0:
+			this.fragmenNewsfeed = NewsfeedFragment.newInstance(position + 1, true);
+			fragmentManager.beginTransaction().replace(R.id.container, this.fragmenNewsfeed).commit();
+			break;
+		case 1:
+			this.fragmentProfile = ProfileFragment.newInstance(position + 1, true);
+			fragmentManager.beginTransaction().replace(R.id.container, this.fragmentProfile).commit();
+			break;
+		case 2:
+		default:
 			FSNUserContext.getInstance(getApplicationContext()).setLoggedIn(false);
 			FSNUserContext.getInstance(getApplicationContext()).setEmail(null);
 			FSNUserContext.getInstance(getApplicationContext()).setToken(null);
 			AndroidUtil.checkLoggedIn(this);
-		} else {
-			FragmentManager fragmentManager = getFragmentManager();
-			this.profileFragment = ProfileFragment.newInstance(position + 1, true);
-			fragmentManager.beginTransaction().replace(R.id.container, this.profileFragment).commit();
+			break;
 		}
 	}
 
@@ -120,7 +132,17 @@ public class MainActivity extends Activity implements ITaskListener, NavigationD
 	@Override
 	public <T> void onTaskComplete(TaskResultType type, T result) {
 		if (type == TaskResultType.GET_PROFILE_OF_SELF) {
-			this.profileFragment.onProfileInformationReceived((ResponseGetProfileOfSelf) result);
+			this.fragmentProfile.onProfileInformationReceived((ResponseGetProfileOfSelf) result);
+		} else if (type == TaskResultType.GET_RECIPE_FEEDS) {
+			ResponseGetRecipeFeed response = new ResponseGetRecipeFeed(null);
+			response.setRecipeList(new ArrayList<RecipeInfo>());
+			RecipeInfo recipeInfo = new RecipeInfo(null);
+			recipeInfo.setRecipeName("Test Recipe 1");
+			response.getRecipeList().add(recipeInfo );
+			RecipeInfo recipeInfo2 = new RecipeInfo(null);
+			recipeInfo2.setRecipeName("Test Recipe 2");
+			response.getRecipeList().add(recipeInfo2 );
+			this.fragmenNewsfeed.onRecipeFeedReceived(response);
 		}
 	}
 

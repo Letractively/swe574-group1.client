@@ -10,7 +10,7 @@ import edu.boun.swe574.fsn.mobile.util.FSNServiceUtil;
 import edu.boun.swe574.fsn.mobile.ws.request.BaseRequest;
 import edu.boun.swe574.fsn.mobile.ws.response.BaseResponse;
 
-public class ShowProfileTask<T extends Activity & ITaskListener> extends AsyncTask<String, Void, BaseResponse> {
+public class TaskGetProfile<T extends Activity & ITaskListener> extends AsyncTask<String, Void, BaseResponse> {
 
 	private T executor;
 	private ProgressDialog progressDialog;
@@ -18,7 +18,7 @@ public class ShowProfileTask<T extends Activity & ITaskListener> extends AsyncTa
 	/**
 	 * @param executor the activity and the listener which executes this task.
 	 */
-	public ShowProfileTask(T executor) {
+	public TaskGetProfile(T executor) {
 		if (executor != null) {
 			this.executor = executor;
 			this.progressDialog = new ProgressDialog(executor);
