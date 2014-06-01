@@ -1,8 +1,10 @@
 
 package edu.boun.swe574.fsn.common.client.search;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -49,7 +51,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "recipeId",
     "recipeName"
 })
-public class RecipeInfo {
+public class RecipeInfo implements Serializable {
 
     protected XMLGregorianCalendar createDate;
     protected String directions;

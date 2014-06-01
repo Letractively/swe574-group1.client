@@ -21,6 +21,7 @@ import tr.edu.boun.swe574.fsn.web.wicket.home.HomePage;
 import tr.edu.boun.swe574.fsn.web.wicket.profile.followingUsers.FollowedUsers;
 import tr.edu.boun.swe574.fsn.web.wicket.profile.myProfile.MyProfile;
 import tr.edu.boun.swe574.fsn.web.wicket.profile.recipeFeeds.RecipeFeeds;
+import tr.edu.boun.swe574.fsn.web.wicket.profile.searchRecipe.SearchRecipe;
 import tr.edu.boun.swe574.fsn.web.wicket.profile.searchUsers.SearchUsers;
 
 public class BasePage extends EasyPage {
@@ -158,7 +159,7 @@ public class BasePage extends EasyPage {
 
             public void onClick()
             {
-            	setResponsePage(HomePage.class);
+            	setResponsePage(SearchRecipe.class);
             }
 
             private static final long serialVersionUID = 0x713963667c6fc27aL;

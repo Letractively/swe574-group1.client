@@ -11,7 +11,9 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.markup.html.form.TextField;
 
+import edu.boun.swe574.fsn.common.client.food.CreateRecipeResponse;
 import tr.edu.boun.swe574.fsn.web.common.FsnRoles;
+import tr.edu.boun.swe574.fsn.web.common.constants.ResultCode;
 import tr.edu.boun.swe574.fsn.web.common.info.IngredientForm;
 import tr.edu.boun.swe574.fsn.web.common.info.RecipeForm;
 import tr.edu.boun.swe574.fsn.web.common.ws.WSCaller;
@@ -21,6 +23,7 @@ import tr.edu.boun.swe574.fsn.web.wicket.FsnSession;
 import tr.edu.boun.swe574.fsn.web.wicket.common.BasePage;
 import tr.edu.boun.swe574.fsn.web.wicket.food.ingredientEntryAdd.CIngredientEntry;
 import tr.edu.boun.swe574.fsn.web.wicket.food.ingredientListEntry.CIngredientList;
+import tr.edu.boun.swe574.fsn.web.wicket.food.viewRecipe.ViewRecipe;
 import tr.edu.boun.swe574.fsn.web.wicket.home.HomePage;
 
 @AuthorizeInstantiation(value = {FsnRoles.USER})
@@ -127,7 +130,6 @@ public class CreateRecipe extends BasePage {
 
 		IngredientForm range = event.getTargetItem();
 
-//		ingredientInfoList.remove(range);
 		recipeForm.getIngredientFormList().remove(range);
 
 		event.getRequestTarget().add(msisdnRangeList);
@@ -135,10 +137,14 @@ public class CreateRecipe extends BasePage {
 	
 	 public void actionSend() {
 		 //TODO validation
-		 WSCaller.createRecipe(FsnSession.getInstance().getUser(), recipeForm);
+		 CreateRecipeResponse response = WSCaller.createRecipe(FsnSession.getInstance().getUser(), recipeForm);
 		 
+		 if(response.getResultCode() == ResultCode.SUCCESS.getCode()) {
+			 setResponsePage(new ViewRecipe(null, response.getCreatedRecipeId()));
+		 } else {
+			 setResponsePage(HomePage.class);
+		 }
 		 
-		 setResponsePage(HomePage.class);
 	 }
 
 }
