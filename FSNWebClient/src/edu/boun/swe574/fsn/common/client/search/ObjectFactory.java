@@ -30,19 +30,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link FoodInfo }
+     * Create an instance of {@link IngredientInfo }
      * 
      */
-    public FoodInfo createFoodInfo() {
-        return new FoodInfo();
-    }
-
-    /**
-     * Create an instance of {@link LongArray }
-     * 
-     */
-    public LongArray createLongArray() {
-        return new LongArray();
+    public IngredientInfo createIngredientInfo() {
+        return new IngredientInfo();
     }
 
     /**
@@ -54,6 +46,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link FoodInfo }
+     * 
+     */
+    public FoodInfo createFoodInfo() {
+        return new FoodInfo();
+    }
+
+    /**
      * Create an instance of {@link RecipeInfo }
      * 
      */
@@ -62,19 +62,19 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link LongArray }
+     * 
+     */
+    public LongArray createLongArray() {
+        return new LongArray();
+    }
+
+    /**
      * Create an instance of {@link BaseServiceResponse }
      * 
      */
     public BaseServiceResponse createBaseServiceResponse() {
         return new BaseServiceResponse();
-    }
-
-    /**
-     * Create an instance of {@link IngredientInfo }
-     * 
-     */
-    public IngredientInfo createIngredientInfo() {
-        return new IngredientInfo();
     }
 
 }

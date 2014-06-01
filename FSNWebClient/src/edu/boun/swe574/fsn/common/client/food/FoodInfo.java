@@ -1,6 +1,8 @@
 
 package edu.boun.swe574.fsn.common.client.food;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
@@ -33,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
     "foodId",
     "foodName"
 })
-public class FoodInfo {
+public class FoodInfo implements Serializable {
 
     protected String categoryName;
     protected long foodId;

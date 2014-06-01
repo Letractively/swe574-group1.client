@@ -104,7 +104,7 @@ public class StubCache {
 			URL uri;
 			try {
 				uri = new URL(url);
-				SearchService_Service service = new SearchService_Service(uri, new QName("http://ws.backend.fsn.swe574.boun.edu/", "FoodsServicePort"));
+				SearchService_Service service = new SearchService_Service(uri, new QName("http://ws.backend.fsn.swe574.boun.edu/", "SearchService"));
 				SearchService searchServicePort = service.getSearchServicePort();
 				searchStub.put(url, searchServicePort);
 				

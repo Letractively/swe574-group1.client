@@ -22,12 +22,15 @@ import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl
 import edu.boun.swe574.fsn.common.client.auth.AuthService;
 import edu.boun.swe574.fsn.common.client.food.BaseServiceResponse;
 import edu.boun.swe574.fsn.common.client.food.CreateNewVersionOfRecipeResponse;
+import edu.boun.swe574.fsn.common.client.food.CreateRecipeResponse;
 import edu.boun.swe574.fsn.common.client.food.FoodInfo;
 import edu.boun.swe574.fsn.common.client.food.FoodsService;
 import edu.boun.swe574.fsn.common.client.food.IngredientInfo;
 import edu.boun.swe574.fsn.common.client.food.RecipeInfo;
 import edu.boun.swe574.fsn.common.client.network.FoodList;
 import edu.boun.swe574.fsn.common.client.network.NetworkService;
+import edu.boun.swe574.fsn.common.client.search.GetRecipeFeedsResponse;
+import edu.boun.swe574.fsn.common.client.search.LongArray;
 import edu.boun.swe574.fsn.common.client.search.SearchService;
 
 public class WSCaller {
@@ -60,7 +63,7 @@ public class WSCaller {
 	 * @param recipeForm
 	 * @return
 	 */
-	public static BaseServiceResponse createRecipe(WebUser user, RecipeForm recipeForm) {
+	public static CreateRecipeResponse createRecipe(WebUser user, RecipeForm recipeForm) {
 		RecipeInfo recipe = new RecipeInfo();
 		
 		GregorianCalendar gregorianCalendar = new GregorianCalendar();
@@ -77,7 +80,7 @@ public class WSCaller {
 			recipe.getIngredientList().add(Validator.convertToIngredientInfo(ingredientForm));
 		}
 		
-		BaseServiceResponse response = getFoodService().createRecipe(user.getToken(), recipe);
+		CreateRecipeResponse response = getFoodService().createRecipe(user.getToken(), recipe);
 		
 		if(logger.isDebugEnabled()) {
 			logger.debug("Recipe creation result code:" + response.getResultCode() + " errorCode:" + response.getErrorCode());
@@ -197,5 +200,14 @@ public class WSCaller {
 		return response;
 	}
 	
-
+	public static GetRecipeFeedsResponse searchRecipes(String token, List<FoodInfo> ingredientsSelected) {
+		LongArray array = new LongArray();
+		for (FoodInfo foodInfo : ingredientsSelected) {
+			array.getItem().add(foodInfo.getFoodId());
+		}
+		System.out.println("Calling searchForRecipes. Parameters-> Token:" + token + " foodIds:" + array.getItem());
+		GetRecipeFeedsResponse response = getSearchService().searchForRecipes(token, array);
+		System.out.println("searchForRecipes service result code:" + response.getResultCode() + " errorCode:" + response.getErrorCode());
+		return response;
+	}
 }
