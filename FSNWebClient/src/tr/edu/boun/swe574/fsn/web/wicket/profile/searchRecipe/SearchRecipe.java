@@ -62,7 +62,7 @@ public class SearchRecipe extends BasePage {
 	private final HashMap<String, FoodInfo> ingredientsHash = new HashMap<String, FoodInfo>();
 	private final List<FoodInfo> ingredientsSelected = new ArrayList<FoodInfo>();
 	
-	private AjaxSubmitLink lnkSearch;
+	private SubmitLink lnkSearch;
 	
 	private Form<Void> form;
 	
@@ -173,15 +173,14 @@ public class SearchRecipe extends BasePage {
 			}
 		});
 
-		lnkSearch = new AjaxSubmitLink("lnkSearch") {
+		lnkSearch = new SubmitLink("lnkSearch") {
 
 			/**
 			 * 
 			 */
 			private static final long serialVersionUID = 4091528668903964731L;
 
-			@Override
-			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
+			public void onSubmit() {
 				// Call delete service
 				if (!ingredientsSelected.isEmpty()) {
 					System.out.println("Ingredient number to be sent to service:"+ingredientsSelected.size());
@@ -193,22 +192,16 @@ public class SearchRecipe extends BasePage {
 						recipeList.addAll(searchResult);
 					}
 					
-					
 					dataTable.setVisible(true);
 					ingredientsSelected.clear();
 					field.setDefaultModelObject("");
-					target.add(label);
-					target.add(field);
+//					target.add(label);
+//					target.add(label);
+//					target.add(dataTable);
 				}
 
 			}
 
-			@Override
-			protected void onError(AjaxRequestTarget target, Form<?> form) {
-				if (logger.isInfoEnabled()) {
-					logger.info("An error has been occurred on AddToBL delete button");
-				}
-			}
 		};
 
 		form.add(lnkSearch);

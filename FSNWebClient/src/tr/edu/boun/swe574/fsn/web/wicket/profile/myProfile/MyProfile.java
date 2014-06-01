@@ -55,7 +55,7 @@ public class MyProfile extends BasePage {
 	private final  List<FoodGroup> blackListCategorized;
 	
 
-	public MyProfile() {
+	public MyProfile(long id) {
 		
 		final GetProfileResponse profile = WSCaller.getNetworkService().getProfileOfSelf(FsnSession.getInstance().getUser().getToken());
 		
@@ -117,7 +117,7 @@ public class MyProfile extends BasePage {
 
 			@Override
             public void onClose(AjaxRequestTarget arg0) {
-                setResponsePage(MyProfile.class);
+                setResponsePage(new MyProfile(System.currentTimeMillis()));
             }
 
         });
@@ -140,7 +140,7 @@ public class MyProfile extends BasePage {
 
 			@Override
             public void onClose(AjaxRequestTarget arg0) {
-                setResponsePage(MyProfile.class);
+                setResponsePage(new MyProfile(System.currentTimeMillis()));
             }
 
         });
@@ -163,7 +163,7 @@ public class MyProfile extends BasePage {
 
 			@Override
             public void onClose(AjaxRequestTarget arg0) {
-                setResponsePage(MyProfile.class);
+                setResponsePage(new MyProfile(System.currentTimeMillis()));
             }
 
         });
@@ -186,7 +186,7 @@ public class MyProfile extends BasePage {
 
 			@Override
             public void onClose(AjaxRequestTarget arg0) {
-                setResponsePage(MyProfile.class);
+                setResponsePage(new MyProfile(System.currentTimeMillis()));
             }
 
         });
@@ -209,7 +209,7 @@ public class MyProfile extends BasePage {
 
 			@Override
             public void onClose(AjaxRequestTarget arg0) {
-                setResponsePage(MyProfile.class);
+                setResponsePage(new MyProfile(System.currentTimeMillis()));
             }
 
         });

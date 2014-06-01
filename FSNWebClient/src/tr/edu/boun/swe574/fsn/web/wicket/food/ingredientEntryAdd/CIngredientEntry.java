@@ -118,9 +118,32 @@ public class CIngredientEntry extends BasePanel implements IEasyWicket {
 		if(ingredientForm.getFood() == null){
 			
 			error("Food must be selected");
-			
+			System.out.println("Food must be selected");
 			return;
 		}
+		
+		if(ingredientForm.getUnit() == null) {
+			error("Unit must be given");
+			System.out.println("Unit must be given");
+			return;
+		}
+		
+		
+		if(ingredientForm.getAmount() == null) {
+			error("Amount must be given");
+			System.out.println("Amount must be given");
+			return;
+		}
+		
+		
+		try {
+			Double.parseDouble(ingredientForm.getAmount());
+		} catch (NumberFormatException e) {
+			error("Amount must be a valid double value");
+			System.out.println("Amount must be a valid double value");
+			return;
+		}
+		
 		
 		dispatchEvent(new IngredientSelectedEvent(this, AjaxRequestTarget.get(),
 				ingredientForm));

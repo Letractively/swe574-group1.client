@@ -21,4 +21,19 @@
     <filter-name>wicketfilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  
+  <filter>
+    <filter-name>cachefilter</filter-name>
+    <filter-class>tr.edu.boun.swe574.fsn.web.init.CacheControl</filter-class>
+    <init-param>
+      <param-name>message</param-name>
+      <param-value>Hello!</param-value>
+    </init-param>    
+  </filter>
+  
+  <filter-mapping>
+    <filter-name>cachefilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>  
+  
 </web-app>

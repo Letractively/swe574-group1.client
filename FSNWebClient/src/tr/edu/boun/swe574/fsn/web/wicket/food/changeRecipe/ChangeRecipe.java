@@ -217,6 +217,11 @@ public class ChangeRecipe extends BasePage {
 		}
 		
 		recipeForm.getIngredientFormList().addAll(ingredientListForNewIngredients);
+		
+		if(recipeForm.getIngredientFormList().isEmpty()) {
+			error("Your recipe must include at least one ingredient");
+			return;
+		}
 
 		CreateNewVersionOfRecipeResponse response = WSCaller
 				.createNewVersionOfRecipe(FsnSession.getInstance().getUser(),

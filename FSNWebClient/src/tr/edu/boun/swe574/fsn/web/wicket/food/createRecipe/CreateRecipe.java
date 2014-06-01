@@ -110,6 +110,7 @@ public class CreateRecipe extends BasePage {
 		for (IngredientForm ing : recipeForm.getIngredientFormList()) {
 			if (ing.getFood().getId() == ingredient.getFood().getId()) {
 				error("This food has already been added to the recipe!");
+				System.out.println("This food has already been added to the recipe!");
 				return;
 			}
 		}
@@ -136,7 +137,12 @@ public class CreateRecipe extends BasePage {
 	}
 	
 	 public void actionSend() {
-		 //TODO validation
+		 //validation
+		if (recipeForm.getIngredientFormList().isEmpty()) {
+			error("Your recipe must include at least one ingredient");
+			return;
+		}
+		 
 		 CreateRecipeResponse response = WSCaller.createRecipe(FsnSession.getInstance().getUser(), recipeForm);
 		 
 		 if(response.getResultCode() == ResultCode.SUCCESS.getCode()) {

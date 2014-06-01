@@ -17,7 +17,6 @@ import org.apache.wicket.model.PropertyModel;
 
 import tr.edu.boun.swe574.fsn.web.common.FsnRoles;
 import tr.edu.boun.swe574.fsn.web.common.info.UserInfoForm;
-import tr.edu.boun.swe574.fsn.web.common.info.WebUser;
 import tr.edu.boun.swe574.fsn.web.common.ws.WSCaller;
 import tr.edu.boun.swe574.fsn.web.wicket.FsnSession;
 import tr.edu.boun.swe574.fsn.web.wicket.common.BasePanel;
@@ -38,8 +37,6 @@ public class EditProfile extends BasePanel {
 	private AjaxSubmitLink lnkCancel;
 	private FeedbackPanel feedbackPanel = new FeedbackPanel("warnPanel");
 	
-	private TextField<String> name;
-	private TextField<String> surname;
 	private TextField<String> location;
 	private TextArea<String> profileMessage;
 	private DateTextField birthday;
@@ -50,18 +47,6 @@ public class EditProfile extends BasePanel {
 		super(id);
 		
 		form = new Form<Void>("form");
-		
-		WebUser user = FsnSession.getInstance().getUser();
-		
-		name = new TextField<String>("name", new PropertyModel<String>(formInfo, "firstName"));
-		name.setRequired(true);
-		name.setModelObject(user.getFirstName());
-		form.add(name);
-		
-		surname = new TextField<String>("surname", new PropertyModel<String>(formInfo, "lastName"));
-		surname.setRequired(true);
-		surname.setModelObject(user.getLastName());
-		form.add(surname);
 		
 		location = new TextField<String>("location", new PropertyModel<String>(formInfo, "location"));
 		location.setModelObject(profile.getLocation());
