@@ -35,6 +35,7 @@ import tr.edu.boun.swe574.fsn.web.common.constants.ResultCode;
 import tr.edu.boun.swe574.fsn.web.common.ws.WSCaller;
 import tr.edu.boun.swe574.fsn.web.wicket.FsnSession;
 import tr.edu.boun.swe574.fsn.web.wicket.common.BasePanel;
+import tr.edu.boun.swe574.fsn.web.wicket.common.ratingView.CRatingViewEntry;
 import tr.edu.boun.swe574.fsn.web.wicket.food.viewRecipe.ViewRecipe;
 import edu.boun.swe574.fsn.common.client.network.GetRecipeFeedsResponse;
 import edu.boun.swe574.fsn.common.client.network.RecipeInfo;
@@ -131,6 +132,9 @@ public class CRecipeListEntry extends BasePanel implements IEasyWicket {
 				frgUser.add(lblOwner);
 				
 				frgUser.add(lnkUser);
+				
+				CRatingViewEntry ratingViewEntery = new CRatingViewEntry("ratingViewEntery", recipe.getRating());
+				frgUser.add(ratingViewEntery);
 			}
 
 		});

@@ -19,6 +19,7 @@ import tr.edu.boun.swe574.fsn.web.common.util.Validator;
 import tr.edu.boun.swe574.fsn.web.common.ws.WSCaller;
 import tr.edu.boun.swe574.fsn.web.wicket.FsnSession;
 import tr.edu.boun.swe574.fsn.web.wicket.common.BasePanel;
+import tr.edu.boun.swe574.fsn.web.wicket.common.rating.CRatingEntry;
 import tr.edu.boun.swe574.fsn.web.wicket.food.changeRecipe.ChangeRecipe;
 import tr.edu.boun.swe574.fsn.web.wicket.food.revisionHistory.RevisionHistory;
 import edu.boun.swe574.fsn.common.client.food.GetRecipeResponse;
@@ -37,7 +38,9 @@ public class CRecipeEntry extends BasePanel implements IEasyWicket {
 	List<IngredientInfo> ingredientList;
 	
 	RecipeInfo recipeInfo;
-
+	
+	CRatingEntry ratingEntry;
+	
 
 	public CRecipeEntry(String id, final RecipeInfo recipeInfoArg, Long recipeId) {
 		super(id);
@@ -51,6 +54,9 @@ public class CRecipeEntry extends BasePanel implements IEasyWicket {
 				recipeInfo = Validator.convertRecipeInfo(response.getRecipe());
 			}
 		}
+		
+		CRatingEntry ratingEntry = new CRatingEntry("ratingEntry", recipeInfo.getRecipeId(), recipeInfo.getRating(), recipeInfo.getOwnRating());
+		add(ratingEntry);
 		
 		Label lblTitle = new Label("lblTitle", recipeInfo.getRecipeName());
 		add(lblTitle);
@@ -125,13 +131,15 @@ public class CRecipeEntry extends BasePanel implements IEasyWicket {
 
 	@Override
 	public void pack() {
-
+		super.pack();
+		
 	}
 
 	@Override
 	public void initComponent(EasyWicket arg0, MarkupContainer arg1) {
 
 	}
+
 
 
 }

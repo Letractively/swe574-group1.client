@@ -30,19 +30,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link SearchForUsersResponse }
+     * Create an instance of {@link BaseServiceResponse }
      * 
      */
-    public SearchForUsersResponse createSearchForUsersResponse() {
-        return new SearchForUsersResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetProfileResponse }
-     * 
-     */
-    public GetProfileResponse createGetProfileResponse() {
-        return new GetProfileResponse();
+    public BaseServiceResponse createBaseServiceResponse() {
+        return new BaseServiceResponse();
     }
 
     /**
@@ -54,27 +46,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link RecipeInfo }
+     * Create an instance of {@link FoodList }
      * 
      */
-    public RecipeInfo createRecipeInfo() {
-        return new RecipeInfo();
-    }
-
-    /**
-     * Create an instance of {@link BaseServiceResponse }
-     * 
-     */
-    public BaseServiceResponse createBaseServiceResponse() {
-        return new BaseServiceResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetRecipeFeedsResponse }
-     * 
-     */
-    public GetRecipeFeedsResponse createGetRecipeFeedsResponse() {
-        return new GetRecipeFeedsResponse();
+    public FoodList createFoodList() {
+        return new FoodList();
     }
 
     /**
@@ -86,6 +62,30 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetProfileResponse }
+     * 
+     */
+    public GetProfileResponse createGetProfileResponse() {
+        return new GetProfileResponse();
+    }
+
+    /**
+     * Create an instance of {@link SearchForUsersResponse }
+     * 
+     */
+    public SearchForUsersResponse createSearchForUsersResponse() {
+        return new SearchForUsersResponse();
+    }
+
+    /**
+     * Create an instance of {@link RecipeInfo }
+     * 
+     */
+    public RecipeInfo createRecipeInfo() {
+        return new RecipeInfo();
+    }
+
+    /**
      * Create an instance of {@link IngredientInfo }
      * 
      */
@@ -94,11 +94,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link FoodList }
+     * Create an instance of {@link GetRecipeFeedsResponse }
      * 
      */
-    public FoodList createFoodList() {
-        return new FoodList();
+    public GetRecipeFeedsResponse createGetRecipeFeedsResponse() {
+        return new GetRecipeFeedsResponse();
     }
 
 }

@@ -6,6 +6,8 @@ import java.util.List;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.apache.log4j.Logger;
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.image.Image;
@@ -22,6 +24,7 @@ import tr.edu.boun.swe574.fsn.web.common.util.Validator;
 import tr.edu.boun.swe574.fsn.web.common.ws.WSCaller;
 import tr.edu.boun.swe574.fsn.web.wicket.FsnSession;
 import tr.edu.boun.swe574.fsn.web.wicket.common.BasePage;
+import edu.boun.swe574.fsn.common.client.network.BaseServiceResponse;
 import edu.boun.swe574.fsn.common.client.network.FoodInfo;
 import edu.boun.swe574.fsn.common.client.network.GetProfileResponse;
 
@@ -38,7 +41,7 @@ public class UserProfile extends BasePage {
 	private final  List<FoodGroup> blackListCategorized;
 	
 
-	public UserProfile(String email) {
+	public UserProfile(final String email) {
 		
 		if(logger.isDebugEnabled()) {
 			logger.debug("Getting profile of the user with the email:" + email);
@@ -48,10 +51,40 @@ public class UserProfile extends BasePage {
 		List<FoodForm> blackList = convertToIngList(profile.getIngredientBlackList());
 		blackListCategorized = FoodGroup.categorize(blackList);
 		
+		final boolean followed = profile.isFollowed();
+		
 		Label lblName = new Label("lblName", profile.getName() + " " + profile.getSurname());
 		Label lblMessage = new Label("lblMessage", profile.getProfileMessage());
 		Label lblLocation = new Label("lblLocation", profile.getLocation());
 		
+		AjaxLink<Object> lnkFollow = new AjaxLink<Object>("lnkFollow") {
+			
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 6065483241723906271L;
+
+			@Override
+			public void onClick(AjaxRequestTarget arg0) {
+				BaseServiceResponse response = WSCaller.getNetworkService().follow(FsnSession.getInstance().getUser().getToken(), email);
+				
+				System.out.println("follow service resultCode:" + response.getResultCode() + " errorCode:" + response.getErrorCode());
+				
+				setResponsePage(new UserProfile(email));
+			}
+		};
+		add(lnkFollow);
+		
+		Label lblFollow = new Label("lblFollow", followed ? "Following":"Follow");
+		lnkFollow.add(lblFollow);
+		
+		if(followed) {
+			lnkFollow.setEnabled(false);
+		}
+		
+		if(FsnSession.getInstance().getUser().getEmail().trim().toUpperCase().equalsIgnoreCase(email.trim())) {
+			lnkFollow.setVisible(false);
+		}
 		
 		XMLGregorianCalendar dateOfBirth = profile.getDateOfBirth();
 		
@@ -133,8 +166,7 @@ public class UserProfile extends BasePage {
 		if(ingredientBlackList != null) {
 			for (FoodInfo iInfo : ingredientBlackList) {
 				info = new FoodForm();
-				//TODO
-				info.setCategoryName(Validator.fixNullCategory(null));
+				info.setCategoryName(Validator.fixNullCategory(iInfo.getCategoryName()));
 				info.setId(iInfo.getFoodId());
 				info.setFoodName(iInfo.getFoodName());
 				list.add(info);
