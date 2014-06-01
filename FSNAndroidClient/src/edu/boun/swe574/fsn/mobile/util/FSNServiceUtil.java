@@ -7,6 +7,7 @@ import org.ksoap2.transport.HttpTransportSE;
 
 import edu.boun.swe574.fsn.mobile.constants.FSNWSConstants;
 import edu.boun.swe574.fsn.mobile.ws.request.BaseRequest;
+import edu.boun.swe574.fsn.mobile.ws.request.RequestGetRecipe;
 import edu.boun.swe574.fsn.mobile.ws.request.RequestLogIn;
 import edu.boun.swe574.fsn.mobile.ws.response.ResponseGetRecipeFeed;
 import edu.boun.swe574.fsn.mobile.ws.response.ResponseGetProfileOfSelf;
@@ -46,6 +47,14 @@ public abstract class FSNServiceUtil {
 		Object soapResponse = callWebService(FSNWSConstants.URL_NETWORK_SERVICE, FSNWSConstants.NETWORK_SERVICE_OPERATION_NAME_GET_RECIPE_FEED, request.toSoapObject(FSNWSConstants.NETWORK_SERVICE_OPERATION_NAME_GET_RECIPE_FEED));
 		if (soapResponse instanceof SoapObject) {
 			return new ResponseGetRecipeFeed((SoapObject) soapResponse);
+		}
+		return null;
+	}
+
+	public static ResponseGetRecipe getRecipe(RequestGetRecipe request) {
+		Object soapResponse = callWebService(FSNWSConstants.URL_FOOD_SERVICE, FSNWSConstants.FOOD_SERVICE_OPERATION_NAME_GET_RECIPE, request.toSoapObject());
+		if (soapResponse instanceof SoapObject) {
+			return new ResponseGetRecipe((SoapObject) soapResponse);
 		}
 		return null;
 	}

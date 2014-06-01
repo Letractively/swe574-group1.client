@@ -29,7 +29,7 @@ public class MainActivity extends Activity implements ITaskListener, NavigationD
 	 */
 	private String title;
 	private ProfileFragment fragmentProfile;
-	private NewsfeedFragment fragmenNewsfeed;
+	private RecipeFeedFragment fragmenNewsfeed;
 
 	/****************************************** LIFECYLCE **********************************************/
 
@@ -59,7 +59,7 @@ public class MainActivity extends Activity implements ITaskListener, NavigationD
 		FragmentManager fragmentManager = getFragmentManager();
 		switch (position) {
 		case 0:
-			this.fragmenNewsfeed = NewsfeedFragment.newInstance(position + 1, true);
+			this.fragmenNewsfeed = RecipeFeedFragment.newInstance(position + 1, true);
 			fragmentManager.beginTransaction().replace(R.id.container, this.fragmenNewsfeed).commit();
 			break;
 		case 1:
@@ -131,14 +131,6 @@ public class MainActivity extends Activity implements ITaskListener, NavigationD
 		if (type == TaskResultType.GET_PROFILE_OF_SELF) {
 			this.fragmentProfile.onProfileInformationReceived((ResponseGetProfileOfSelf) result);
 		} else if (type == TaskResultType.GET_RECIPE_FEEDS) {
-			// ResponseGetRecipeFeed response = new ResponseGetRecipeFeed(null);
-			// response.setRecipeList(new ArrayList<RecipeInfo>());
-			// RecipeInfo recipeInfo = new RecipeInfo(null);
-			// recipeInfo.setRecipeName("Test Recipe 1");
-			// response.getRecipeList().add(recipeInfo );
-			// RecipeInfo recipeInfo2 = new RecipeInfo(null);
-			// recipeInfo2.setRecipeName("Test Recipe 2");
-			// response.getRecipeList().add(recipeInfo2 );
 			this.fragmenNewsfeed.onRecipeFeedReceived((ResponseGetRecipeFeed) result);
 		}
 	}

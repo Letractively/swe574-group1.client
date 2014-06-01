@@ -16,9 +16,10 @@ import com.boun.swe.foodsocialnetwork.R;
 import edu.boun.swe574.fsn.mobile.context.FSNUserContext;
 import edu.boun.swe574.fsn.mobile.task.async.TaskGetProfile;
 import edu.boun.swe574.fsn.mobile.util.AndroidUtil;
+import edu.boun.swe574.fsn.mobile.ws.response.BaseResponse;
 import edu.boun.swe574.fsn.mobile.ws.response.ResponseGetProfileOfSelf;
 
-public class ProfileFragment extends Fragment {
+public class RecipeFragment extends Fragment {
 	/**
 	 * The fragment argument representing the section number for this fragment.
 	 */
@@ -28,8 +29,8 @@ public class ProfileFragment extends Fragment {
 	/**
 	 * Returns a new instance of this fragment for the given section number.
 	 */
-	public static ProfileFragment newInstance(int sectionNumber, boolean self) {
-		ProfileFragment fragment = new ProfileFragment();
+	public static RecipeFragment newInstance(int sectionNumber, boolean self) {
+		RecipeFragment fragment = new RecipeFragment();
 		Bundle args = new Bundle();
 		args.putInt(ARG_SECTION_NUMBER, sectionNumber);
 		fragment.setArguments(args);

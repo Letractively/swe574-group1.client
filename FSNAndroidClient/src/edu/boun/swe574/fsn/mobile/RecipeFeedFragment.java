@@ -1,6 +1,7 @@
 package edu.boun.swe574.fsn.mobile;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.app.ListFragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,9 +15,10 @@ import com.boun.swe.foodsocialnetwork.R;
 
 import edu.boun.swe574.fsn.mobile.adapter.ListItemFeedAdapter;
 import edu.boun.swe574.fsn.mobile.task.async.TaskGetRecipeFeed;
+import edu.boun.swe574.fsn.mobile.ws.dto.RecipeInfo;
 import edu.boun.swe574.fsn.mobile.ws.response.ResponseGetRecipeFeed;
 
-public class NewsfeedFragment extends ListFragment {
+public class RecipeFeedFragment extends ListFragment {
 	/**
 	 * The fragment argument representing the section number for this fragment.
 	 */
@@ -26,8 +28,8 @@ public class NewsfeedFragment extends ListFragment {
 	/**
 	 * Returns a new instance of this fragment for the given section number.
 	 */
-	public static NewsfeedFragment newInstance(int sectionNumber, boolean self) {
-		NewsfeedFragment fragment = new NewsfeedFragment();
+	public static RecipeFeedFragment newInstance(int sectionNumber, boolean self) {
+		RecipeFeedFragment fragment = new RecipeFeedFragment();
 		Bundle args = new Bundle();
 		args.putInt(ARG_SECTION_NUMBER, sectionNumber);
 		fragment.setArguments(args);
@@ -61,7 +63,11 @@ public class NewsfeedFragment extends ListFragment {
 
 			listView.setOnItemClickListener(new OnItemClickListener() {
 				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+					RecipeInfo item = ((ListItemFeedAdapter) getListAdapter()).getValues().get(position);
+					if (item != null) {
+						FragmentManager fragmentManager = getFragmentManager();
+						fragmentManager.beginTransaction().replace(R.id.container, RecipeFragment.newInstance(position + 1, true)).commit();
+					}
 				}
 			});
 
