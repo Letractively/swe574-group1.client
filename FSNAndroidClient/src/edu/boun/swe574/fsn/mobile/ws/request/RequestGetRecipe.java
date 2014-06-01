@@ -13,4 +13,12 @@ public class RequestGetRecipe extends BaseRequest {
 		soapRequest.addProperty("recipeId", this.recipeId);
 		return soapRequest;
 	}
+
+	public Long getRecipeId() {
+		return recipeId;
+	}
+
+	public void setRecipeId(Long recipeId) {
+		this.recipeId = recipeId;
+	}
 }

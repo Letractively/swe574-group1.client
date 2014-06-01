@@ -1,7 +1,5 @@
 package edu.boun.swe574.fsn.mobile;
 
-import java.text.SimpleDateFormat;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
@@ -13,66 +11,61 @@ import android.widget.TextView;
 
 import com.boun.swe.foodsocialnetwork.R;
 
-import edu.boun.swe574.fsn.mobile.context.FSNUserContext;
-import edu.boun.swe574.fsn.mobile.task.async.TaskGetProfile;
+import edu.boun.swe574.fsn.mobile.task.async.TaskGetRecipe;
 import edu.boun.swe574.fsn.mobile.util.AndroidUtil;
-import edu.boun.swe574.fsn.mobile.ws.response.BaseResponse;
-import edu.boun.swe574.fsn.mobile.ws.response.ResponseGetProfileOfSelf;
+import edu.boun.swe574.fsn.mobile.util.ResponseGetRecipe;
+import edu.boun.swe574.fsn.mobile.ws.dto.IngredientInfo;
+import edu.boun.swe574.fsn.mobile.ws.dto.RecipeInfo;
 
 public class RecipeFragment extends Fragment {
-	/**
-	 * The fragment argument representing the section number for this fragment.
-	 */
-	private static final String ARG_SECTION_NUMBER = "section_number";
-	private boolean self;
+
+	private long recipeId;
 
 	/**
 	 * Returns a new instance of this fragment for the given section number.
 	 */
-	public static RecipeFragment newInstance(int sectionNumber, boolean self) {
+	public static RecipeFragment newInstance(long recipeId) {
 		RecipeFragment fragment = new RecipeFragment();
-		Bundle args = new Bundle();
-		args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-		fragment.setArguments(args);
-		fragment.self = self;
+		fragment.recipeId = recipeId;
 		return fragment;
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
-		TaskGetProfile<MainActivity> task = new TaskGetProfile<MainActivity>((MainActivity) getActivity());
-		if (self) {
-			task.execute();
-		} else {
-		}
+		View rootView = inflater.inflate(R.layout.fragment_recipe, container, false);
+		TaskGetRecipe<MainActivity> task = new TaskGetRecipe<MainActivity>((MainActivity) getActivity());
+		task.execute(recipeId);
 		return rootView;
 	}
 
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		((MainActivity) activity).onSectionAttached(getArguments().getInt(ARG_SECTION_NUMBER));
+		((MainActivity) activity).onSectionAttached(R.string.title_recipe);
 	}
 
 	@SuppressLint("SimpleDateFormat")
-	public void onProfileInformationReceived(ResponseGetProfileOfSelf result) {
-		TextView textViewName = AndroidUtil.getView(getActivity(), R.id.textViewName);
-		TextView textViewEmail = AndroidUtil.getView(getActivity(), R.id.textViewEmail);
-		TextView textViewLocation = AndroidUtil.getView(getActivity(), R.id.textViewLocation);
-		TextView textViewDateOfBirth = AndroidUtil.getView(getActivity(), R.id.textViewDateOfBirth);
-		TextView textViewProfileMessage = AndroidUtil.getView(getActivity(), R.id.textViewProfileMessage);
-		if (self && result != null && result instanceof ResponseGetProfileOfSelf) {
-			ResponseGetProfileOfSelf response = (ResponseGetProfileOfSelf) result;
-			FSNUserContext context = FSNUserContext.getInstance(getActivity());
-			textViewName.setText(context.getUserName() + " " + context.getUserSurname());
-			textViewEmail.setText(context.getUserEmail());
-			textViewLocation.setText(response.getLocation());
-			textViewDateOfBirth.setText(response.getDateOfBirt() != null ? new SimpleDateFormat("MM/dd/yyyy").format(response.getDateOfBirt()) : "N/A");
-			textViewProfileMessage.setText(response.getLocation());
-		} else {
-			// TODO profiles of other people
+	public void onRecipeReceived(ResponseGetRecipe result) {
+		if (result != null) {
+			TextView recipeHeader = AndroidUtil.getView(getActivity(), R.id.textViewRecipeHeader);
+			TextView recipeFooter = AndroidUtil.getView(getActivity(), R.id.textViewRecipeFooter);
+			TextView directions = AndroidUtil.getView(getActivity(), R.id.textViewDirectionsValue);
+			TextView ingredients = AndroidUtil.getView(getActivity(), R.id.textViewIngredientsValue);
+
+			RecipeInfo recipe = result.getRecipe();
+			if (recipe != null) {
+				recipeHeader.setText(result.getRecipe().getRecipeName());
+				recipeFooter.setText("by " + recipe.getOwnerName() + " " + recipe.getOwnerSurname() + " at " + recipe.getCreateDate());
+				directions.setText(recipe.getDirections());
+				if (recipe.getIngredientList() != null) {
+					String ingredientvalue = "";
+					for (IngredientInfo ingredient : recipe.getIngredientList()) {
+						ingredientvalue += ingredient.getAmount() + " " + ingredient.getUnit() + " " + ingredient.getFood().getFoodName() + "\r\n";
+					}
+					ingredients.setText(ingredientvalue);
+				}
+			}
+
 		}
 	}
-
 }

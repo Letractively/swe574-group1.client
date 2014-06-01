@@ -11,7 +11,7 @@ public class ResponseGetRecipe extends BaseResponse {
 	protected ResponseGetRecipe(SoapObject object) {
 		super(object);
 		if (object != null) {
-			this.recipe = new RecipeInfo(object);
+			this.recipe = new RecipeInfo(AndroidUtil.convertSoapObjectToPrimitive(object, "return.recipe", SoapObject.class));
 		}
 	}
 

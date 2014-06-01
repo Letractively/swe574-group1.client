@@ -1,7 +1,6 @@
 package edu.boun.swe574.fsn.mobile;
 
 import android.app.Activity;
-import android.app.FragmentManager;
 import android.app.ListFragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -20,20 +19,10 @@ import edu.boun.swe574.fsn.mobile.ws.response.ResponseGetRecipeFeed;
 
 public class RecipeFeedFragment extends ListFragment {
 	/**
-	 * The fragment argument representing the section number for this fragment.
-	 */
-	private static final String ARG_SECTION_NUMBER = "section_number";
-	private boolean self;
-
-	/**
 	 * Returns a new instance of this fragment for the given section number.
 	 */
-	public static RecipeFeedFragment newInstance(int sectionNumber, boolean self) {
+	public static RecipeFeedFragment newInstance() {
 		RecipeFeedFragment fragment = new RecipeFeedFragment();
-		Bundle args = new Bundle();
-		args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-		fragment.setArguments(args);
-		fragment.self = self;
 		return fragment;
 	}
 
@@ -41,17 +30,14 @@ public class RecipeFeedFragment extends ListFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_newsfeed, container, false);
 		TaskGetRecipeFeed<MainActivity> task = new TaskGetRecipeFeed<MainActivity>((MainActivity) getActivity());
-		if (self) {
-			task.execute();
-		} else {
-		}
+		task.execute();
 		return rootView;
 	}
 
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		((MainActivity) activity).onSectionAttached(getArguments().getInt(ARG_SECTION_NUMBER));
+		((MainActivity) activity).onSectionAttached(R.string.title_home);
 	}
 
 	public void onRecipeFeedReceived(ResponseGetRecipeFeed result) {
@@ -65,8 +51,9 @@ public class RecipeFeedFragment extends ListFragment {
 				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 					RecipeInfo item = ((ListItemFeedAdapter) getListAdapter()).getValues().get(position);
 					if (item != null) {
-						FragmentManager fragmentManager = getFragmentManager();
-						fragmentManager.beginTransaction().replace(R.id.container, RecipeFragment.newInstance(position + 1, true)).commit();
+						MainActivity activity = ((MainActivity) getActivity());
+						activity.setCurrentRecipeId(item.getRecipeId());
+						activity.onNavigationDrawerItemSelected(-1);
 					}
 				}
 			});

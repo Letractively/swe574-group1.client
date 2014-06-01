@@ -14,6 +14,7 @@ import edu.boun.swe574.fsn.mobile.context.FSNUserContext;
 import edu.boun.swe574.fsn.mobile.task.ITaskListener;
 import edu.boun.swe574.fsn.mobile.task.TaskResultType;
 import edu.boun.swe574.fsn.mobile.util.AndroidUtil;
+import edu.boun.swe574.fsn.mobile.util.ResponseGetRecipe;
 import edu.boun.swe574.fsn.mobile.ws.response.ResponseGetProfileOfSelf;
 import edu.boun.swe574.fsn.mobile.ws.response.ResponseGetRecipeFeed;
 
@@ -30,6 +31,9 @@ public class MainActivity extends Activity implements ITaskListener, NavigationD
 	private String title;
 	private ProfileFragment fragmentProfile;
 	private RecipeFeedFragment fragmenNewsfeed;
+	private RecipeFragment fragmentRecipe;
+
+	private long currentRecipeId;
 
 	/****************************************** LIFECYLCE **********************************************/
 
@@ -58,12 +62,16 @@ public class MainActivity extends Activity implements ITaskListener, NavigationD
 		// // update the main content by replacing fragments
 		FragmentManager fragmentManager = getFragmentManager();
 		switch (position) {
+		case -1:
+			this.fragmentRecipe = RecipeFragment.newInstance(currentRecipeId);
+			fragmentManager.beginTransaction().replace(R.id.container, this.fragmentRecipe).commit();
+			break;
 		case 0:
-			this.fragmenNewsfeed = RecipeFeedFragment.newInstance(position + 1, true);
+			this.fragmenNewsfeed = RecipeFeedFragment.newInstance();
 			fragmentManager.beginTransaction().replace(R.id.container, this.fragmenNewsfeed).commit();
 			break;
 		case 1:
-			this.fragmentProfile = ProfileFragment.newInstance(position + 1, true);
+			this.fragmentProfile = ProfileFragment.newInstance(true);
 			fragmentManager.beginTransaction().replace(R.id.container, this.fragmentProfile).commit();
 			break;
 		case 2:
@@ -105,18 +113,8 @@ public class MainActivity extends Activity implements ITaskListener, NavigationD
 
 	/****************************************** OTHER ********************************************/
 
-	public void onSectionAttached(int number) {
-		switch (number) {
-		case 1:
-			title = getString(R.string.title_home);
-			break;
-		case 2:
-			title = getString(R.string.title_profile);
-			break;
-		case 3:
-			title = getString(R.string.title_logout);
-			break;
-		}
+	public void onSectionAttached(int titleId) {
+		title = getString(titleId);
 	}
 
 	public void restoreActionBar() {
@@ -132,7 +130,19 @@ public class MainActivity extends Activity implements ITaskListener, NavigationD
 			this.fragmentProfile.onProfileInformationReceived((ResponseGetProfileOfSelf) result);
 		} else if (type == TaskResultType.GET_RECIPE_FEEDS) {
 			this.fragmenNewsfeed.onRecipeFeedReceived((ResponseGetRecipeFeed) result);
+		} else if (type == TaskResultType.GET_RECIPE) {
+			this.fragmentRecipe.onRecipeReceived((ResponseGetRecipe) result);
 		}
+	}
+
+	/****************************************** GETTER & SETTERS ********************************************/
+
+	public long getCurrentRecipeId() {
+		return currentRecipeId;
+	}
+
+	public void setCurrentRecipeId(long currentRecipeId) {
+		this.currentRecipeId = currentRecipeId;
 	}
 
 }
