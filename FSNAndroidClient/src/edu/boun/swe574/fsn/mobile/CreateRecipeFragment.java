@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 
 import com.boun.swe.foodsocialnetwork.R;
 
-import edu.boun.swe574.fsn.mobile.task.async.TaskCreateRecipe;
 
 public class CreateRecipeFragment extends Fragment {
 
@@ -24,8 +23,6 @@ public class CreateRecipeFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_create_recipe, container, false);
-		TaskCreateRecipe<MainActivity> task = new TaskCreateRecipe<MainActivity>((MainActivity) getActivity());
-        task.execute();
 		return rootView;
 	}
 
