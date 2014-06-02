@@ -85,7 +85,7 @@ public class DateUtil {
 	public static final String datePattern = "dd.MM.yyyy";
 	public static final String dateTimePattern = "dd.MM.yyyy HH:mm:ss";
 	public static final String DATE_FORMAT_DDMMYYYY = "dd-MM-yyyy";
-	public static final String DATE_FORMAT_MM_DD_YYYY = "MM-dd-yyyy";
+	public static final String DATE_FORMAT_MM_DD_YYYY = "MM-dd-yyyy HH:mm:ss";
 	
 	
 	public static XMLGregorianCalendar getXMLDate() throws DatatypeConfigurationException {
