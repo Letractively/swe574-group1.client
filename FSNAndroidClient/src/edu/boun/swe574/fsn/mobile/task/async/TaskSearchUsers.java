@@ -7,11 +7,11 @@ import edu.boun.swe574.fsn.mobile.context.FSNUserContext;
 import edu.boun.swe574.fsn.mobile.task.ITaskListener;
 import edu.boun.swe574.fsn.mobile.task.TaskResultType;
 import edu.boun.swe574.fsn.mobile.util.FSNServiceUtil;
-import edu.boun.swe574.fsn.mobile.ws.request.BaseRequest;
-import edu.boun.swe574.fsn.mobile.ws.request.RequestGetProfile;
-import edu.boun.swe574.fsn.mobile.ws.response.ResponseGetProfile;
+import edu.boun.swe574.fsn.mobile.util.StringUtil;
+import edu.boun.swe574.fsn.mobile.ws.request.RequestSearchForUsers;
+import edu.boun.swe574.fsn.mobile.ws.response.BaseResponse;
 
-public class TaskGetProfile<T extends Activity & ITaskListener> extends AsyncTask<Long, Void, ResponseGetProfile> {
+public class TaskSearchUsers<T extends Activity & ITaskListener> extends AsyncTask<String, Void, BaseResponse> {
 
 	private T executor;
 	private ProgressDialog progressDialog;
@@ -19,7 +19,7 @@ public class TaskGetProfile<T extends Activity & ITaskListener> extends AsyncTas
 	/**
 	 * @param executor the activity and the listener which executes this task.
 	 */
-	public TaskGetProfile(T executor) {
+	public TaskSearchUsers(T executor) {
 		if (executor != null) {
 			this.executor = executor;
 			this.progressDialog = new ProgressDialog(executor);
@@ -30,27 +30,24 @@ public class TaskGetProfile<T extends Activity & ITaskListener> extends AsyncTas
 
 	@Override
 	protected void onPreExecute() {
-		progressDialog.setMessage("Getting profile information...");
+		progressDialog.setMessage("Searching for users...");
 		progressDialog.show();
 	}
 
 	@Override
-	protected ResponseGetProfile doInBackground(Long... args) {
-		if (args == null || args.length == 0) {
-			BaseRequest request = new BaseRequest();
+	protected BaseResponse doInBackground(String... args) {
+		if (args != null && args.length == 1 && StringUtil.hasText(args[0]) && args[0].length() > 2) {
+			RequestSearchForUsers request = new RequestSearchForUsers();
 			request.setToken(FSNUserContext.getInstance(this.executor).getToken());
-			return FSNServiceUtil.getProfileOfSelf(request);
-		} else {
-			RequestGetProfile request = new RequestGetProfile();
-			request.setToken(FSNUserContext.getInstance(this.executor).getToken());
-			request.setUserId(args[0]);
-			return FSNServiceUtil.getProfileOfOther(request);
+			request.setQueryString(args[0]);
+			return FSNServiceUtil.searchForUsers(request);
 		}
+		return null;
 	}
 
 	@Override
-	protected void onPostExecute(ResponseGetProfile result) {
+	protected void onPostExecute(BaseResponse result) {
 		this.progressDialog.dismiss();
-		this.executor.onTaskComplete(TaskResultType.GET_PROFILE, result);
+		this.executor.onTaskComplete(TaskResultType.SEARCH_FOR_USERS, result);
 	}
 }

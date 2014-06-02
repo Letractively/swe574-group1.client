@@ -11,25 +11,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.boun.swe.foodsocialnetwork.R;
+import edu.boun.swe574.fsn.mobile.R;
 
-import edu.boun.swe574.fsn.mobile.context.FSNUserContext;
 import edu.boun.swe574.fsn.mobile.task.async.TaskGetProfile;
 import edu.boun.swe574.fsn.mobile.util.AndroidUtil;
-import edu.boun.swe574.fsn.mobile.ws.response.ResponseGetProfileOfSelf;
+import edu.boun.swe574.fsn.mobile.ws.response.ResponseGetProfile;
 
 public class ProfileFragment extends Fragment {
 	/**
 	 * The fragment argument representing the section number for this fragment.
 	 */
-	private boolean self;
+	private long currentUserId = -1;
 
 	/**
 	 * Returns a new instance of this fragment for the given section number.
 	 */
-	public static ProfileFragment newInstance(boolean self) {
+	public static ProfileFragment newInstance(long currentUserId) {
 		ProfileFragment fragment = new ProfileFragment();
-		fragment.self = self;
+		fragment.currentUserId = currentUserId;
 		return fragment;
 	}
 
@@ -37,9 +36,10 @@ public class ProfileFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
 		TaskGetProfile<MainActivity> task = new TaskGetProfile<MainActivity>((MainActivity) getActivity());
-		if (self) {
-			task.execute();
+		if (currentUserId > 0) {
+			task.execute(this.currentUserId);
 		} else {
+			task.execute();
 		}
 		return rootView;
 	}
@@ -51,23 +51,19 @@ public class ProfileFragment extends Fragment {
 	}
 
 	@SuppressLint("SimpleDateFormat")
-	public void onProfileInformationReceived(ResponseGetProfileOfSelf result) {
+	public void onProfileInformationReceived(ResponseGetProfile result) {
 		TextView textViewName = AndroidUtil.getView(getActivity(), R.id.textViewName);
 		TextView textViewEmail = AndroidUtil.getView(getActivity(), R.id.textViewEmail);
 		TextView textViewLocation = AndroidUtil.getView(getActivity(), R.id.textViewLocation);
 		TextView textViewDateOfBirth = AndroidUtil.getView(getActivity(), R.id.textViewDateOfBirth);
 		TextView textViewProfileMessage = AndroidUtil.getView(getActivity(), R.id.textViewProfileMessage);
-		if (self && result != null && result instanceof ResponseGetProfileOfSelf) {
-			ResponseGetProfileOfSelf response = (ResponseGetProfileOfSelf) result;
-			FSNUserContext context = FSNUserContext.getInstance(getActivity());
-			textViewName.setText(context.getUserName() + " " + context.getUserSurname());
-			textViewEmail.setText(context.getUserEmail());
+		if (result != null) {
+			ResponseGetProfile response = (ResponseGetProfile) result;
+			textViewName.setText(response.getName() + " " + response.getSurname());
+			textViewEmail.setText("");
 			textViewLocation.setText(response.getLocation());
-			textViewDateOfBirth.setText(response.getDateOfBirt() != null ? new SimpleDateFormat("MM/dd/yyyy").format(response.getDateOfBirt()) : "N/A");
-			textViewProfileMessage.setText(response.getLocation());
-		} else {
-			// TODO profiles of other people
+			textViewDateOfBirth.setText(response.getDateOfBirth() != null ? new SimpleDateFormat("MM/dd/yyyy").format(response.getDateOfBirth()) : "N/A");
+			textViewProfileMessage.setText(response.getProfileMessage());
 		}
 	}
-
 }

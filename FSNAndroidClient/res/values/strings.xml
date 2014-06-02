@@ -11,6 +11,7 @@
     <string name="title_home">Recipe Feed</string>
     <string name="title_recipe">Recipe Information</string>
     <string name="title_profile">My Profile</string>
+    <string name="title_searchusers">Search User</string>
     <string name="title_logout">Logout</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -21,5 +22,14 @@
     <string name="profile_message">Profile Message</string>
     <string name="place_holder">Loading...</string>
     <string name="foods_blacklist">Foods Blacklist</string>
-
+    <string name="user_search_hint">User Name</string>
+    <string name="recipe_title">Title</string>
+    <string name="recipe_ingredients">Ingredient(s)</string>
+    <string name="recipe_ingredient_amount">Amount</string>
+    <string name="recipe_ingredient_unit">Unit</string>
+    <string name="recipe_ingredient_food">Food</string>
+    <string name="recipe_directions">Directions</string>
+    <string name="create">Create</string>
+        <string name="title_recipe_create">- Create Recipe</string>
+    
 </resources>

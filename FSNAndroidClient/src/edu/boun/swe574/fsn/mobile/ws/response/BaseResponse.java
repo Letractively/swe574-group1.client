@@ -6,7 +6,7 @@ import edu.boun.swe574.fsn.mobile.util.AndroidUtil;
 
 public class BaseResponse {
 
-	protected BaseResponse(SoapObject object) {
+	public BaseResponse(SoapObject object) {
 		if (object != null) {
 			this.resultCode = AndroidUtil.convertSoapObjectToPrimitive(object, "return.resultCode", Integer.class);
 			this.errorCode = AndroidUtil.convertSoapObjectToPrimitive(object, "return.errorCode", Integer.class);

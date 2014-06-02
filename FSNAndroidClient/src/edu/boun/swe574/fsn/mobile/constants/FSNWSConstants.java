@@ -7,9 +7,12 @@ public interface FSNWSConstants {
 	String URL_SEARCH_SERVICE = "http://swe.cmpe.boun.edu.tr:8080/FSN_SERVER/fsnws_search?wsdl";
 	String URL_FOOD_SERVICE = "http://swe.cmpe.boun.edu.tr:8080/FSN_SERVER/fsnws_food?wsdl";
 	String AUTH_SERVICE_OPERATION_NAME_LOGIN = "login";
+	String FOOD_SERVICE_OPERATION_NAME_CREATE_RECIPE = "createRecipe";
 	String FOOD_SERVICE_OPERATION_NAME_GET_RECIPE = "getRecipe";
+	String NETWORK_SERVICE_OPERATION_NAME_GET_PROFILE_OF_OTHER = "getProfileOfOtherUser";
 	String NETWORK_SERVICE_OPERATION_NAME_GET_PROFILE_OF_SELF = "getProfileOfSelf";
 	String NETWORK_SERVICE_OPERATION_NAME_GET_RECIPE_FEED = "getRecipeFeeds";
+	String NETWORK_SERVICE_OPERATION_NAME_SEARCH_FOR_USERS = "searchForUsers";
 	String SEARCH_SERVICE_OPERATION_SEARCH_FOR_RECIPES = "searchForRecipes";
 
 }

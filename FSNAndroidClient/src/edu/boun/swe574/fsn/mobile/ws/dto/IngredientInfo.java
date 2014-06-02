@@ -11,6 +11,7 @@ public class IngredientInfo extends BaseDTO {
 	private FoodInfo food;
 
 	public IngredientInfo(SoapObject object) {
+		super(object);
 		if (object != null) {
 			this.amount = AndroidUtil.convertSoapObjectToPrimitive(object, "amount", Double.class);
 			this.unit = AndroidUtil.convertSoapObjectToPrimitive(object, "unit", String.class);
