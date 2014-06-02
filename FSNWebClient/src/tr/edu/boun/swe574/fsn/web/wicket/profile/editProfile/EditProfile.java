@@ -35,7 +35,7 @@ public class EditProfile extends BasePanel {
 	
 	private AjaxSubmitLink lnkUpdate;
 	private AjaxSubmitLink lnkCancel;
-	private FeedbackPanel feedbackPanel = new FeedbackPanel("warnPanel");
+	private FeedbackPanel feedbackPanel;
 	
 	private TextField<String> location;
 	private TextArea<String> profileMessage;
@@ -46,17 +46,18 @@ public class EditProfile extends BasePanel {
 	public EditProfile(String id, final ModalWindow mwEditProfile, final UserInfoForm profile) { 
 		super(id);
 		
+		feedbackPanel = new FeedbackPanel("warnPanel");
+		feedbackPanel.setOutputMarkupId(true);
+		
 		form = new Form<Void>("form");
 		
 		location = new TextField<String>("location", new PropertyModel<String>(formInfo, "location"));
 		location.setModelObject(profile.getLocation());
-		location.setRequired(true);
 		form.add(location);
 		
         birthday = DateTextField.forDatePattern("birthday", "yyyy-MM-dd");
         birthday.setModel(new PropertyModel<Date>(formInfo, "birthdate"));
         birthday.setModelObject(profile.getBirthdate());
-        birthday.setRequired(true);
         birthday.add(new DatePicker() {
 
             /**
@@ -74,7 +75,6 @@ public class EditProfile extends BasePanel {
 		
 		profileMessage = new TextArea<String>("profileMessage", new PropertyModel<String>(formInfo, "profileMessage"));
 		profileMessage.setModelObject(profile.getProfileMessage());
-		profileMessage.setRequired(true);
 		form.add(profileMessage);
 
 		lnkUpdate = new AjaxSubmitLink("lnkUpdate") {
@@ -86,6 +86,31 @@ public class EditProfile extends BasePanel {
 			
             @Override
             protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
+            	
+            	if(location.getModelObject() == null) {
+            		error("Location must be given");
+            		refreshErrorPanel(target);
+            		return;
+            	}
+            	
+            	if(birthday.getModelObject() == null) {
+            		error("Birthday must be given");
+            		refreshErrorPanel(target);
+            		return;
+            	}
+            	
+            	if(profileMessage.getModelObject() == null) {
+            		error("Birthday must be given");
+            		refreshErrorPanel(target);
+            		return;
+            	}
+            	
+            	if(profileMessage.getModelObject().length()>150) {
+            		error("Profile message can not be longer than 150 characters");
+            		refreshErrorPanel(target);
+            		return;
+            	}
+            	
             	WSCaller.updateProfile(FsnSession.getInstance().getUser().getToken(), formInfo);
 				mwEditProfile.close(target);
             }
@@ -121,8 +146,16 @@ public class EditProfile extends BasePanel {
 		form.add(lnkUpdate);
 		form.add(lnkCancel);
 		add(form);
-		form.add(feedbackPanel);
+		add(feedbackPanel);
 
+	}
+	
+	protected void refreshErrorPanel(AjaxRequestTarget ajaxRequestTarget) {
+		if ( ajaxRequestTarget != null ) {
+			if ( feedbackPanel.anyMessage()) {
+				ajaxRequestTarget.add(feedbackPanel);
+			}
+		}
 	}
 	
 }
