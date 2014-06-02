@@ -1,6 +1,6 @@
 package edu.boun.swe574.fsn.mobile;
 
-import com.boun.swe.foodsocialnetwork.R;
+import edu.boun.swe574.fsn.mobile.R;
 
 import android.app.Activity;
 import android.app.ActionBar;

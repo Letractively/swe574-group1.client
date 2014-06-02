@@ -14,21 +14,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-
-import com.boun.swe.foodsocialnetwork.R;
-
+import edu.boun.swe574.fsn.mobile.R;
 import edu.boun.swe574.fsn.mobile.context.FSNUserContext;
 import edu.boun.swe574.fsn.mobile.task.ITaskListener;
 import edu.boun.swe574.fsn.mobile.task.TaskResultType;
 import edu.boun.swe574.fsn.mobile.task.async.TaskCreateRecipe;
 import edu.boun.swe574.fsn.mobile.util.AndroidUtil;
-import edu.boun.swe574.fsn.mobile.util.ResponseGetRecipe;
-import edu.boun.swe574.fsn.mobile.util.ResponseSearchForUsers;
 import edu.boun.swe574.fsn.mobile.ws.dto.FoodInfo;
 import edu.boun.swe574.fsn.mobile.ws.dto.IngredientInfo;
 import edu.boun.swe574.fsn.mobile.ws.dto.RecipeInfo;
 import edu.boun.swe574.fsn.mobile.ws.response.ResponseGetProfile;
+import edu.boun.swe574.fsn.mobile.ws.response.ResponseGetRecipe;
 import edu.boun.swe574.fsn.mobile.ws.response.ResponseGetRecipeFeed;
+import edu.boun.swe574.fsn.mobile.ws.response.ResponseSearchForUsers;
 
 public class MainActivity extends Activity implements ITaskListener, NavigationDrawerFragment.NavigationDrawerCallbacks {
 

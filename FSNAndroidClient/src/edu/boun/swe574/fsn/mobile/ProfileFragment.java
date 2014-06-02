@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.boun.swe.foodsocialnetwork.R;
+import edu.boun.swe574.fsn.mobile.R;
 
 import edu.boun.swe574.fsn.mobile.task.async.TaskGetProfile;
 import edu.boun.swe574.fsn.mobile.util.AndroidUtil;

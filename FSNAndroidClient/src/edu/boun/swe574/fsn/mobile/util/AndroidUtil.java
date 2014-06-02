@@ -45,7 +45,7 @@ public class AndroidUtil {
 		return true;
 	}
 
-	@SuppressLint("SimpleDateFormat")
+	@SuppressLint({ "UseValueOf", "DefaultLocale", "SimpleDateFormat" })
 	@SuppressWarnings("unchecked")
 	public static <T> T convertSoapObjectToPrimitive(SoapObject object, String propertyPath, Class<T> clas) {
 		Object property = null;
@@ -75,6 +75,8 @@ public class AndroidUtil {
 								value = Double.parseDouble(stringValue);
 							} else if (clas == Date.class) {
 								value = new SimpleDateFormat("yyyy-MM-dd").parse(stringValue);
+							} else if (clas == Boolean.class) {
+								value = new Boolean(stringValue.toLowerCase());
 							}
 							return (T) value;
 						}

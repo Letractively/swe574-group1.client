@@ -1,14 +1,14 @@
-package edu.boun.swe574.fsn.mobile.util;
+package edu.boun.swe574.fsn.mobile.ws.response;
 
 import org.ksoap2.serialization.SoapObject;
 
+import edu.boun.swe574.fsn.mobile.util.AndroidUtil;
 import edu.boun.swe574.fsn.mobile.ws.dto.RecipeInfo;
-import edu.boun.swe574.fsn.mobile.ws.response.BaseResponse;
 
 public class ResponseGetRecipe extends BaseResponse {
 	protected RecipeInfo recipe;
 
-	protected ResponseGetRecipe(SoapObject object) {
+	public ResponseGetRecipe(SoapObject object) {
 		super(object);
 		if (object != null) {
 			this.recipe = new RecipeInfo(AndroidUtil.convertSoapObjectToPrimitive(object, "return.recipe", SoapObject.class));

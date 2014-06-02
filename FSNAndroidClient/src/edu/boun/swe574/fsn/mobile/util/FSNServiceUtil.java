@@ -8,13 +8,16 @@ import org.ksoap2.transport.HttpTransportSE;
 import edu.boun.swe574.fsn.mobile.constants.FSNWSConstants;
 import edu.boun.swe574.fsn.mobile.ws.request.BaseRequest;
 import edu.boun.swe574.fsn.mobile.ws.request.RequestCreateRecipe;
+import edu.boun.swe574.fsn.mobile.ws.request.RequestGetProfile;
 import edu.boun.swe574.fsn.mobile.ws.request.RequestGetRecipe;
 import edu.boun.swe574.fsn.mobile.ws.request.RequestLogIn;
 import edu.boun.swe574.fsn.mobile.ws.request.RequestSearchForUsers;
 import edu.boun.swe574.fsn.mobile.ws.response.BaseResponse;
 import edu.boun.swe574.fsn.mobile.ws.response.ResponseGetProfile;
+import edu.boun.swe574.fsn.mobile.ws.response.ResponseGetRecipe;
 import edu.boun.swe574.fsn.mobile.ws.response.ResponseGetRecipeFeed;
 import edu.boun.swe574.fsn.mobile.ws.response.ResponseLogin;
+import edu.boun.swe574.fsn.mobile.ws.response.ResponseSearchForUsers;
 
 public abstract class FSNServiceUtil {
 
@@ -46,8 +49,16 @@ public abstract class FSNServiceUtil {
 		return null;
 	}
 
+	public static ResponseGetProfile getProfileOfOther(RequestGetProfile request) {
+		Object soapResponse = callWebService(FSNWSConstants.URL_NETWORK_SERVICE, FSNWSConstants.NETWORK_SERVICE_OPERATION_NAME_GET_PROFILE_OF_OTHER, request.toSoapObject(FSNWSConstants.NETWORK_SERVICE_OPERATION_NAME_GET_PROFILE_OF_OTHER));
+		if (soapResponse instanceof SoapObject) {
+			return new ResponseGetProfile((SoapObject) soapResponse);
+		}
+		return null;
+	}
+
 	public static ResponseSearchForUsers searchForUsers(RequestSearchForUsers request) {
-		Object soapResponse = callWebService(FSNWSConstants.URL_NETWORK_SERVICE, FSNWSConstants.NETWORK_SERVICE_OPERATION_NAME_SEARCH_FOR_USERS, request.toSoapObject(FSNWSConstants.NETWORK_SERVICE_OPERATION_NAME_GET_PROFILE_OF_SELF));
+		Object soapResponse = callWebService(FSNWSConstants.URL_NETWORK_SERVICE, FSNWSConstants.NETWORK_SERVICE_OPERATION_NAME_SEARCH_FOR_USERS, request.toSoapObject(FSNWSConstants.NETWORK_SERVICE_OPERATION_NAME_SEARCH_FOR_USERS));
 		if (soapResponse instanceof SoapObject) {
 			return new ResponseSearchForUsers((SoapObject) soapResponse);
 		}
@@ -68,12 +79,13 @@ public abstract class FSNServiceUtil {
 			return new ResponseGetRecipe((SoapObject) soapResponse);
 		}
 		return null;
-	}	
+	}
+
 	public static BaseResponse createRecipe(RequestCreateRecipe request) {
 		Object soapResponse = callWebService(FSNWSConstants.URL_FOOD_SERVICE, FSNWSConstants.FOOD_SERVICE_OPERATION_NAME_CREATE_RECIPE, request.toSoapObject(FSNWSConstants.FOOD_SERVICE_OPERATION_NAME_CREATE_RECIPE));
 		if (soapResponse instanceof SoapObject) {
-			return new BaseResponse((SoapObject)soapResponse);
-			
+			return new BaseResponse((SoapObject) soapResponse);
+
 		}
 		return null;
 	}

@@ -10,7 +10,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-import com.boun.swe.foodsocialnetwork.R;
+import edu.boun.swe574.fsn.mobile.R;
 
 import edu.boun.swe574.fsn.mobile.adapter.RecipeFeedAdapter;
 import edu.boun.swe574.fsn.mobile.task.async.TaskGetRecipeFeed;

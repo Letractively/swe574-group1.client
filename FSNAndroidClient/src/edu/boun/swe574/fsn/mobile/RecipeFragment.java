@@ -10,14 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import com.boun.swe.foodsocialnetwork.R;
-
+import edu.boun.swe574.fsn.mobile.R;
 import edu.boun.swe574.fsn.mobile.task.async.TaskGetRecipe;
 import edu.boun.swe574.fsn.mobile.util.AndroidUtil;
-import edu.boun.swe574.fsn.mobile.util.ResponseGetRecipe;
 import edu.boun.swe574.fsn.mobile.ws.dto.IngredientInfo;
 import edu.boun.swe574.fsn.mobile.ws.dto.RecipeInfo;
+import edu.boun.swe574.fsn.mobile.ws.response.ResponseGetRecipe;
 
 public class RecipeFragment extends Fragment {
 

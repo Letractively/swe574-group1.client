@@ -9,13 +9,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-
-import com.boun.swe.foodsocialnetwork.R;
-
+import edu.boun.swe574.fsn.mobile.R;
 import edu.boun.swe574.fsn.mobile.adapter.UserSearchAdapter;
 import edu.boun.swe574.fsn.mobile.task.async.TaskSearchUsers;
-import edu.boun.swe574.fsn.mobile.util.ResponseSearchForUsers;
 import edu.boun.swe574.fsn.mobile.util.UserInfo;
+import edu.boun.swe574.fsn.mobile.ws.response.ResponseSearchForUsers;
 
 public class SearchUsersFragment extends ListFragment {
 

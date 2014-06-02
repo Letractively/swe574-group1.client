@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.boun.swe.foodsocialnetwork.R;
+import edu.boun.swe574.fsn.mobile.R;
 
 
 public class CreateRecipeFragment extends Fragment {

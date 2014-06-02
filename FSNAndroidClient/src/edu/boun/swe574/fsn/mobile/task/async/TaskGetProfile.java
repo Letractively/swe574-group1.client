@@ -8,9 +8,10 @@ import edu.boun.swe574.fsn.mobile.task.ITaskListener;
 import edu.boun.swe574.fsn.mobile.task.TaskResultType;
 import edu.boun.swe574.fsn.mobile.util.FSNServiceUtil;
 import edu.boun.swe574.fsn.mobile.ws.request.BaseRequest;
-import edu.boun.swe574.fsn.mobile.ws.response.BaseResponse;
+import edu.boun.swe574.fsn.mobile.ws.request.RequestGetProfile;
+import edu.boun.swe574.fsn.mobile.ws.response.ResponseGetProfile;
 
-public class TaskGetProfile<T extends Activity & ITaskListener> extends AsyncTask<Long, Void, BaseResponse> {
+public class TaskGetProfile<T extends Activity & ITaskListener> extends AsyncTask<Long, Void, ResponseGetProfile> {
 
 	private T executor;
 	private ProgressDialog progressDialog;
@@ -34,19 +35,21 @@ public class TaskGetProfile<T extends Activity & ITaskListener> extends AsyncTas
 	}
 
 	@Override
-	protected BaseResponse doInBackground(Long... args) {
+	protected ResponseGetProfile doInBackground(Long... args) {
 		if (args == null || args.length == 0) {
 			BaseRequest request = new BaseRequest();
 			request.setToken(FSNUserContext.getInstance(this.executor).getToken());
 			return FSNServiceUtil.getProfileOfSelf(request);
 		} else {
-			// TODO get other profiles
+			RequestGetProfile request = new RequestGetProfile();
+			request.setToken(FSNUserContext.getInstance(this.executor).getToken());
+			request.setUserId(args[0]);
+			return FSNServiceUtil.getProfileOfOther(request);
 		}
-		return null;
 	}
 
 	@Override
-	protected void onPostExecute(BaseResponse result) {
+	protected void onPostExecute(ResponseGetProfile result) {
 		this.progressDialog.dismiss();
 		this.executor.onTaskComplete(TaskResultType.GET_PROFILE, result);
 	}
