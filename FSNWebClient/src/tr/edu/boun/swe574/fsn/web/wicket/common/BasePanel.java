@@ -11,14 +11,20 @@ public abstract class BasePanel extends EasyPanel {
      */
     private static final long serialVersionUID = 6745129873547570177L;
 
-    public BasePanel(String id, IModel<?> model) {
-        super(id, model);
-    }
+	public BasePanel(String id) {
+		super(id);
+		
+		initPanel();
+	}
 
-    public BasePanel(String id) {
-        super(id);
-
-    }
-    
+	public BasePanel(String id, IModel<?> model) {
+		super(id, model);
+		
+		initPanel();
+	}
+	
+	private void initPanel() {
+		
+	}
 
 }

@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.authroles.authorization.strategies.role.metadata.MetaDataRoleAuthorizationStrategy;
+import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
@@ -33,6 +34,9 @@ public class BasePage extends EasyPage {
 	
     private static final Logger logger = Logger.getLogger(BasePage.class);
     protected FeedbackPanel feedbackPanel;
+    
+    ModalWindow warnModal;
+    
     WebMarkupContainer profileTab;
     WebMarkupContainer recipesTab;
     WebMarkupContainer recommendationTab;
@@ -64,6 +68,9 @@ public class BasePage extends EasyPage {
         recipesTab = new WebMarkupContainer("recipesTab");
         recommendationTab = new WebMarkupContainer("recommendationTab");
         logoutTab = new WebMarkupContainer("logoutTab");
+        
+		warnModal = new ModalWindow("warnModal");
+		add(warnModal);
         
         Link<Object> lnkSignOut = new Link<Object>("lnkSignOut") {
 
@@ -264,5 +271,24 @@ public class BasePage extends EasyPage {
                 feedbackPanel
             });
     }
+    
+	public void onAfterAjaxRequest(AjaxRequestTarget target) {
+		if ( logger.isInfoEnabled() ) {
+			logger.info("Ajax request after request=" + target);
+		}
+		
+		if ( getSession().getFeedbackMessages().size() >0 ) {
+			FeedbackPanel curPanel = new FeedbackPanel(warnModal.getContentId());
+			warnModal.setContent(curPanel);
+			warnModal.setInitialHeight(200);
+			warnModal.setInitialWidth(300);
+			warnModal.show(target);
+		}
+	}
+
+	public void onBeforeAjaxRequest(AjaxRequestTarget target) {
+	}
+	
+	
 
 }
