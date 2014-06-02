@@ -41,7 +41,7 @@ public class RecipeFeedFragment extends ListFragment {
 	}
 
 	public void onRecipeFeedReceived(ResponseGetRecipeFeed result) {
-		if (result != null && result.getRecipeList() != null) {
+		if (result != null && result.getRecipeList() != null && getActivity() != null) {
 			RecipeFeedAdapter adapter = new RecipeFeedAdapter(getActivity().getApplicationContext(), result.getRecipeList());
 			setListAdapter(adapter);
 			ListView listView = getListView();

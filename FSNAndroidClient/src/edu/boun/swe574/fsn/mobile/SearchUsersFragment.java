@@ -47,7 +47,7 @@ public class SearchUsersFragment extends ListFragment {
 	}
 
 	public void onSearchResultReceived(ResponseSearchForUsers result) {
-		if (result != null && result.getUserList() != null) {
+		if (result != null && result.getUserList() != null && getActivity() != null) {
 			UserSearchAdapter adapter = new UserSearchAdapter(getActivity().getApplicationContext(), result.getUserList());
 			setListAdapter(adapter);
 			ListView listView = getListView();
